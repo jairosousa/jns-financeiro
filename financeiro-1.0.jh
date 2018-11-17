@@ -1,0 +1,81 @@
+entity Lancamento {
+	data LocalDate required,
+    nome String required minlength(3),
+    descricao String,
+    valor BigDecimal,
+    tipo Tipo,
+    tipoPagamento TipoPagamento
+}
+
+entity Fornecedor {
+	nome String required minlength(3),
+    pessoa Pessoa,
+    cnpj String,
+    cpf String
+}
+
+entity Categoria {
+	nome String required,
+    descricao String
+}
+
+entity Endereco {
+	logradouro String required,
+	numero String,
+    complemento String,
+	bairro String,
+	cidade String required,
+    uf String
+}
+
+entity Pagamento {
+	vencimento LocalDate required,
+    diaPagamento LocalDate,
+    forma FormaPagamento,
+    juros BigDecimal,
+    quantidadeParcelas Long required,
+    status Status required,
+}
+
+enum Tipo {
+    DESPESA, RECEITA
+}
+
+enum Status {
+    PAGO, PENDENTE
+}
+
+enum TipoPagamento {
+    AVISTA, PARCELADO
+}
+
+enum FormaPagamento {
+    DINHEIRO, CARTAO, DEBITO
+}
+
+enum Pessoa {
+    FISICA, JURIDICA
+}
+
+relationship OneToOne {
+	Lancamento{fornecedor(nome)} to Fornecedor{lancamento(nome)},
+    Lancamento{categoria(nome)} to Categoria,
+    Fornecedor{endereco} to Endereco
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Lancamento{pagamento(forma)} to Pagamento{lancamento},
+        
+}
+
+// Set pagination options
+paginate Pagamento, Endereco  with infinite-scroll
+paginate Lancamento, Fornecedor, Categoria with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
