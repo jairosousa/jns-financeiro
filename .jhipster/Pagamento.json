@@ -1,0 +1,57 @@
+{
+    "name": "Pagamento",
+    "fields": [
+        {
+            "fieldName": "vencimento",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "diaPagamento",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "forma",
+            "fieldType": "FormaPagamento",
+            "fieldValues": "DINHEIRO,CARTAO,DEBITO"
+        },
+        {
+            "fieldName": "juros",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "quantidadeParcelas",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Status",
+            "fieldValues": "PAGO,PENDENTE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "lancamento",
+            "otherEntityName": "lancamento",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181117150929",
+    "entityTableName": "pagamento",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,10 @@
+{
+    "jnsFinanceiroApp": {
+        "FormaPagamento": {
+            "null": "",
+            "DINHEIRO": "DINHEIRO",
+            "CARTAO": "CARTAO",
+            "DEBITO": "DEBITO"
+        }
+    }
+}

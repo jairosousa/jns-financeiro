@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="lancamento">
+            <h2><span jhiTranslate="jnsFinanceiroApp.lancamento.detail.title">Lancamento</span> {{lancamento.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.data">Data</span></dt>
+                <dd>
+                    <span>{{lancamento.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.nome">Nome</span></dt>
+                <dd>
+                    <span>{{lancamento.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{lancamento.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.valor">Valor</span></dt>
+                <dd>
+                    <span>{{lancamento.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.tipo">Tipo</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jnsFinanceiroApp.Tipo.' + lancamento.tipo}}">{{lancamento.tipo}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.tipoPagamento">Tipo Pagamento</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jnsFinanceiroApp.TipoPagamento.' + lancamento.tipoPagamento}}">{{lancamento.tipoPagamento}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.fornecedor">Fornecedor</span></dt>
+                <dd>
+                    <div *ngIf="lancamento.fornecedorId">
+                        <a [routerLink]="['/fornecedor', lancamento.fornecedorId, 'view']">{{lancamento.fornecedorNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.categoria">Categoria</span></dt>
+                <dd>
+                    <div *ngIf="lancamento.categoriaId">
+                        <a [routerLink]="['/categoria', lancamento.categoriaId, 'view']">{{lancamento.categoriaNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/lancamento', lancamento.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+{
+    "jnsFinanceiroApp": {
+        "Status": {
+            "null": "",
+            "PAGO": "PAGO",
+            "PENDENTE": "PENDENTE"
+        }
+    }
+}

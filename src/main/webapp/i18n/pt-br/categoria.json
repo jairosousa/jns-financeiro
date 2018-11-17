@@ -1,0 +1,23 @@
+{
+    "jnsFinanceiroApp": {
+        "categoria": {
+            "home": {
+                "title": "Categorias",
+                "createLabel": "Criar novo Categoria",
+                "createOrEditLabel": "Criar ou editar Categoria",
+                "search": "Pesquisar por Categoria"
+            },
+            "created": "Um novo Categoria foi criado com o identificador {{ param }}",
+            "updated": "Um Categoria foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Categoria foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Categoria {{ id }}?"
+            },
+            "detail": {
+                "title": "Categoria"
+            },
+            "nome": "Nome",
+            "descricao": "Descricao"
+        }
+    }
+}

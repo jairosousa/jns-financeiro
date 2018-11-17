@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pagamento">
+            <h2><span jhiTranslate="jnsFinanceiroApp.pagamento.detail.title">Pagamento</span> {{pagamento.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.vencimento">Vencimento</span></dt>
+                <dd>
+                    <span>{{pagamento.vencimento}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.diaPagamento">Dia Pagamento</span></dt>
+                <dd>
+                    <span>{{pagamento.diaPagamento}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.forma">Forma</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + pagamento.forma}}">{{pagamento.forma}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.juros">Juros</span></dt>
+                <dd>
+                    <span>{{pagamento.juros}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas">Quantidade Parcelas</span></dt>
+                <dd>
+                    <span>{{pagamento.quantidadeParcelas}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jnsFinanceiroApp.Status.' + pagamento.status}}">{{pagamento.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.lancamento">Lancamento</span></dt>
+                <dd>
+                    <div *ngIf="pagamento.lancamentoId">
+                        <a [routerLink]="['/lancamento', pagamento.lancamentoId, 'view']">{{pagamento.lancamentoId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pagamento', pagamento.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
