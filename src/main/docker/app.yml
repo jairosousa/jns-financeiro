@@ -1,0 +1,20 @@
+version: '2'
+services:
+    jnsfinanceiro-app:
+        image: jnsfinanceiro
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://jnsfinanceiro-mysql:3306/jnsfinanceiro?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_JEST_URI=http://jnsfinanceiro-elasticsearch:9200
+        ports:
+            - 8080:8080
+    jnsfinanceiro-mysql:
+        extends:
+            file: mysql.yml
+            service: jnsfinanceiro-mysql
+    jnsfinanceiro-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: jnsfinanceiro-elasticsearch
