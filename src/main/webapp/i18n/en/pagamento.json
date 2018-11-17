@@ -1,0 +1,28 @@
+{
+    "jnsFinanceiroApp": {
+        "pagamento": {
+            "home": {
+                "title": "Pagamentos",
+                "createLabel": "Create a new Pagamento",
+                "createOrEditLabel": "Create or edit a Pagamento",
+                "search": "Search for Pagamento"
+            },
+            "created": "A new Pagamento is created with identifier {{ param }}",
+            "updated": "A Pagamento is updated with identifier {{ param }}",
+            "deleted": "A Pagamento is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Pagamento {{ id }}?"
+            },
+            "detail": {
+                "title": "Pagamento"
+            },
+            "vencimento": "Vencimento",
+            "diaPagamento": "Dia Pagamento",
+            "forma": "Forma",
+            "juros": "Juros",
+            "quantidadeParcelas": "Quantidade Parcelas",
+            "status": "Status",
+            "lancamento": "Lancamento"
+        }
+    }
+}

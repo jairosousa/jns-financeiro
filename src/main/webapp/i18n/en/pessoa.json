@@ -1,0 +1,9 @@
+{
+    "jnsFinanceiroApp": {
+        "Pessoa": {
+            "null": "",
+            "FISICA": "FISICA",
+            "JURIDICA": "JURIDICA"
+        }
+    }
+}

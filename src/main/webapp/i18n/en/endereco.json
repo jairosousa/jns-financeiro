@@ -1,0 +1,27 @@
+{
+    "jnsFinanceiroApp": {
+        "endereco": {
+            "home": {
+                "title": "Enderecos",
+                "createLabel": "Create a new Endereco",
+                "createOrEditLabel": "Create or edit a Endereco",
+                "search": "Search for Endereco"
+            },
+            "created": "A new Endereco is created with identifier {{ param }}",
+            "updated": "A Endereco is updated with identifier {{ param }}",
+            "deleted": "A Endereco is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Endereco {{ id }}?"
+            },
+            "detail": {
+                "title": "Endereco"
+            },
+            "logradouro": "Logradouro",
+            "numero": "Numero",
+            "complemento": "Complemento",
+            "bairro": "Bairro",
+            "cidade": "Cidade",
+            "uf": "Uf"
+        }
+    }
+}

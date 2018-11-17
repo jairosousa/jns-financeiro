@@ -1,0 +1,9 @@
+{
+    "jnsFinanceiroApp": {
+        "Tipo": {
+            "null": "",
+            "DESPESA": "DESPESA",
+            "RECEITA": "RECEITA"
+        }
+    }
+}
