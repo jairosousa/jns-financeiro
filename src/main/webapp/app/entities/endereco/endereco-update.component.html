@@ -10,6 +10,11 @@
                         [(ngModel)]="endereco.id" readonly />
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.endereco.cep" for="field_cep">Cep</label>
+                    <input type="text" class="form-control" name="cep" id="field_cep"
+                        [(ngModel)]="endereco.cep" />
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.endereco.logradouro" for="field_logradouro">Logradouro</label>
                     <input type="text" class="form-control" name="logradouro" id="field_logradouro"
                         [(ngModel)]="endereco.logradouro" required/>

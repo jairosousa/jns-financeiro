@@ -30,6 +30,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cep"><span jhiTranslate="jnsFinanceiroApp.endereco.cep">Cep</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="logradouro"><span jhiTranslate="jnsFinanceiroApp.endereco.logradouro">Logradouro</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="numero"><span jhiTranslate="jnsFinanceiroApp.endereco.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="complemento"><span jhiTranslate="jnsFinanceiroApp.endereco.complemento">Complemento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -42,6 +43,7 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let endereco of enderecos ;trackBy: trackId">
                 <td><a [routerLink]="['/endereco', endereco.id, 'view' ]">{{endereco.id}}</a></td>
+                <td>{{endereco.cep}}</td>
                 <td>{{endereco.logradouro}}</td>
                 <td>{{endereco.numero}}</td>
                 <td>{{endereco.complemento}}</td>

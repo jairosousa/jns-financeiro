@@ -1,5 +1,6 @@
 export interface IEndereco {
     id?: number;
+    cep?: string;
     logradouro?: string;
     numero?: string;
     complemento?: string;
@@ -11,6 +12,7 @@ export interface IEndereco {
 export class Endereco implements IEndereco {
     constructor(
         public id?: number,
+        public cep?: string,
         public logradouro?: string,
         public numero?: string,
         public complemento?: string,

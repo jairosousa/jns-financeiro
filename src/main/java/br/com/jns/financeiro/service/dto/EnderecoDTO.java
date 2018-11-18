@@ -11,6 +11,8 @@ public class EnderecoDTO implements Serializable {
 
     private Long id;
 
+    private String cep;
+
     @NotNull
     private String logradouro;
 
@@ -31,6 +33,14 @@ public class EnderecoDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public String getLogradouro() {
@@ -106,6 +116,7 @@ public class EnderecoDTO implements Serializable {
     public String toString() {
         return "EnderecoDTO{" +
             "id=" + getId() +
+            ", cep='" + getCep() + "'" +
             ", logradouro='" + getLogradouro() + "'" +
             ", numero='" + getNumero() + "'" +
             ", complemento='" + getComplemento() + "'" +
