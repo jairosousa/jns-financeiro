@@ -20,6 +20,7 @@ entity Categoria {
 }
 
 entity Endereco {
+	cep String,
 	logradouro String required,
 	numero String,
     complemento String,
