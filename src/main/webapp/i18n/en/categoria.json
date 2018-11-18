@@ -3,8 +3,9 @@
         "categoria": {
             "home": {
                 "title": "Categorias",
-                "createLabel": "Create a new Categoria",
-                "createOrEditLabel": "Create or edit a Categoria",
+                "adicionar": "Categoria",
+                "createLabel": "New Categoria",
+                "editLabel": "Edit a Categoria",
                 "search": "Search for Categoria"
             },
             "created": "A new Categoria is created with identifier {{ param }}",

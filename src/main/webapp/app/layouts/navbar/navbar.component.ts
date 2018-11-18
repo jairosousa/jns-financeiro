@@ -31,7 +31,8 @@ export class NavbarComponent implements OnInit {
         private profileService: ProfileService,
         private router: Router
     ) {
-        this.version = VERSION ? 'v' + VERSION : '';
+        // this.version = VERSION ? 'v' + VERSION : '';
+        this.version = '1.0';
         this.isNavbarCollapsed = true;
     }
 

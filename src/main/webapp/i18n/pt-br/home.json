@@ -1,7 +1,7 @@
 {
     "home": {
-        "title": "Bem vindo, Java Hipster!",
-        "subtitle": "Esta é  a página principal",
+        "title": "Bem vindo, ao Finansy$!",
+        "subtitle": "Sistema de Controle de Gastos",
         "logged": {
             "message": "Você está logado como \"{{username}}\"."
         },
