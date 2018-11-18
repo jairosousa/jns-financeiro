@@ -42,6 +42,11 @@ import {
     faHome
 } from '@fortawesome/free-solid-svg-icons';
 
+import 'jquery/dist/jquery.min';
+import 'popper.js';
+import 'bootstrap/dist/js/bootstrap.min';
+import 'toastr/toastr';
+
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faUser);
 library.add(faSort);

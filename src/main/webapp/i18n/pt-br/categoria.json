@@ -5,7 +5,7 @@
                 "title": "Categorias",
                 "adicionar": "Categoria",
                 "createLabel": "Criar Categoria",
-                "EditLabel": "Editar Categoria",
+                "editLabel": "Editar Categoria",
                 "search": "Pesquisar por Categoria"
             },
             "created": "Uma nova Categoria foi criado com o identificador {{ param }}",
