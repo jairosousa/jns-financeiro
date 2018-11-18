@@ -16,6 +16,7 @@
             "detail": {
                 "title": "Endereco"
             },
+            "cep": "Cep",
             "logradouro": "Logradouro",
             "numero": "Numero",
             "complemento": "Complemento",

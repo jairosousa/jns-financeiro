@@ -48,6 +48,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = JnsFinanceiroApp.class)
 public class EnderecoResourceIntTest {
 
+    private static final String DEFAULT_CEP = "AAAAAAAAAA";
+    private static final String UPDATED_CEP = "BBBBBBBBBB";
+
     private static final String DEFAULT_LOGRADOURO = "AAAAAAAAAA";
     private static final String UPDATED_LOGRADOURO = "BBBBBBBBBB";
 
@@ -118,6 +121,7 @@ public class EnderecoResourceIntTest {
      */
     public static Endereco createEntity(EntityManager em) {
         Endereco endereco = new Endereco()
+            .cep(DEFAULT_CEP)
             .logradouro(DEFAULT_LOGRADOURO)
             .numero(DEFAULT_NUMERO)
             .complemento(DEFAULT_COMPLEMENTO)
@@ -148,6 +152,7 @@ public class EnderecoResourceIntTest {
         List<Endereco> enderecoList = enderecoRepository.findAll();
         assertThat(enderecoList).hasSize(databaseSizeBeforeCreate + 1);
         Endereco testEndereco = enderecoList.get(enderecoList.size() - 1);
+        assertThat(testEndereco.getCep()).isEqualTo(DEFAULT_CEP);
         assertThat(testEndereco.getLogradouro()).isEqualTo(DEFAULT_LOGRADOURO);
         assertThat(testEndereco.getNumero()).isEqualTo(DEFAULT_NUMERO);
         assertThat(testEndereco.getComplemento()).isEqualTo(DEFAULT_COMPLEMENTO);
@@ -231,6 +236,7 @@ public class EnderecoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(endereco.getId().intValue())))
+            .andExpect(jsonPath("$.[*].cep").value(hasItem(DEFAULT_CEP.toString())))
             .andExpect(jsonPath("$.[*].logradouro").value(hasItem(DEFAULT_LOGRADOURO.toString())))
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO.toString())))
             .andExpect(jsonPath("$.[*].complemento").value(hasItem(DEFAULT_COMPLEMENTO.toString())))
@@ -250,6 +256,7 @@ public class EnderecoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(endereco.getId().intValue()))
+            .andExpect(jsonPath("$.cep").value(DEFAULT_CEP.toString()))
             .andExpect(jsonPath("$.logradouro").value(DEFAULT_LOGRADOURO.toString()))
             .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO.toString()))
             .andExpect(jsonPath("$.complemento").value(DEFAULT_COMPLEMENTO.toString()))
@@ -279,6 +286,7 @@ public class EnderecoResourceIntTest {
         // Disconnect from session so that the updates on updatedEndereco are not directly saved in db
         em.detach(updatedEndereco);
         updatedEndereco
+            .cep(UPDATED_CEP)
             .logradouro(UPDATED_LOGRADOURO)
             .numero(UPDATED_NUMERO)
             .complemento(UPDATED_COMPLEMENTO)
@@ -296,6 +304,7 @@ public class EnderecoResourceIntTest {
         List<Endereco> enderecoList = enderecoRepository.findAll();
         assertThat(enderecoList).hasSize(databaseSizeBeforeUpdate);
         Endereco testEndereco = enderecoList.get(enderecoList.size() - 1);
+        assertThat(testEndereco.getCep()).isEqualTo(UPDATED_CEP);
         assertThat(testEndereco.getLogradouro()).isEqualTo(UPDATED_LOGRADOURO);
         assertThat(testEndereco.getNumero()).isEqualTo(UPDATED_NUMERO);
         assertThat(testEndereco.getComplemento()).isEqualTo(UPDATED_COMPLEMENTO);
@@ -362,6 +371,7 @@ public class EnderecoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(endereco.getId().intValue())))
+            .andExpect(jsonPath("$.[*].cep").value(hasItem(DEFAULT_CEP)))
             .andExpect(jsonPath("$.[*].logradouro").value(hasItem(DEFAULT_LOGRADOURO)))
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO)))
             .andExpect(jsonPath("$.[*].complemento").value(hasItem(DEFAULT_COMPLEMENTO)))

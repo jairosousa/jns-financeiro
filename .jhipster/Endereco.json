@@ -2,6 +2,10 @@
     "name": "Endereco",
     "fields": [
         {
+            "fieldName": "cep",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "logradouro",
             "fieldType": "String",
             "fieldValidateRules": [

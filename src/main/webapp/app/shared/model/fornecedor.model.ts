@@ -1,3 +1,5 @@
+import { Endereco, IEndereco } from 'app/shared/model/endereco.model';
+
 export const enum Pessoa {
     FISICA = 'FISICA',
     JURIDICA = 'JURIDICA'
@@ -11,6 +13,7 @@ export interface IFornecedor {
     cpf?: string;
     enderecoId?: number;
     lancamentoId?: number;
+    endereco?: IEndereco;
 }
 
 export class Fornecedor implements IFornecedor {
@@ -21,6 +24,9 @@ export class Fornecedor implements IFornecedor {
         public cnpj?: string,
         public cpf?: string,
         public enderecoId?: number,
-        public lancamentoId?: number
-    ) {}
+        public lancamentoId?: number,
+        public endereco?: IEndereco
+    ) {
+        this.endereco = new Endereco();
+    }
 }

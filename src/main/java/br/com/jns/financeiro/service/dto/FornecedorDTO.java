@@ -24,6 +24,8 @@ public class FornecedorDTO implements Serializable {
 
     private Long enderecoId;
 
+    private EnderecoDTO endereco;
+
     public Long getId() {
         return id;
     }
@@ -70,6 +72,14 @@ public class FornecedorDTO implements Serializable {
 
     public void setEnderecoId(Long enderecoId) {
         this.enderecoId = enderecoId;
+    }
+
+    public EnderecoDTO getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoDTO endereco) {
+        this.endereco = endereco;
     }
 
     @Override

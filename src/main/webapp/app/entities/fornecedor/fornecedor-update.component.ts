@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IFornecedor } from 'app/shared/model/fornecedor.model';
 import { FornecedorService } from './fornecedor.service';
-import { IEndereco } from 'app/shared/model/endereco.model';
+import { Endereco, IEndereco } from 'app/shared/model/endereco.model';
 import { EnderecoService } from 'app/entities/endereco';
 import { ILancamento } from 'app/shared/model/lancamento.model';
 import { LancamentoService } from 'app/entities/lancamento';
@@ -17,33 +17,39 @@ import { LancamentoService } from 'app/entities/lancamento';
 })
 export class FornecedorUpdateComponent implements OnInit {
     fornecedor: IFornecedor;
+    endereco: IEndereco;
     isSaving: boolean;
 
     enderecos: IEndereco[];
 
     lancamentos: ILancamento[];
 
+    currentAction: string;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private fornecedorService: FornecedorService,
         private enderecoService: EnderecoService,
         private lancamentoService: LancamentoService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private router: Router
     ) {}
 
     ngOnInit() {
+        this.endereco = {};
         this.isSaving = false;
+        this.setCurrentyAction();
         this.activatedRoute.data.subscribe(({ fornecedor }) => {
             this.fornecedor = fornecedor;
         });
+
         this.enderecoService.query({ filter: 'fornecedor-is-null' }).subscribe(
             (res: HttpResponse<IEndereco[]>) => {
                 if (!this.fornecedor.enderecoId) {
-                    this.enderecos = res.body;
                 } else {
                     this.enderecoService.find(this.fornecedor.enderecoId).subscribe(
                         (subRes: HttpResponse<IEndereco>) => {
-                            this.enderecos = [subRes.body].concat(res.body);
+                            this.endereco = subRes.body;
                         },
                         (subRes: HttpErrorResponse) => this.onError(subRes.message)
                     );
@@ -65,6 +71,7 @@ export class FornecedorUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.fornecedor.endereco = this.endereco;
         if (this.fornecedor.id !== undefined) {
             this.subscribeToSaveResponse(this.fornecedorService.update(this.fornecedor));
         } else {
@@ -72,13 +79,17 @@ export class FornecedorUpdateComponent implements OnInit {
         }
     }
 
+    // METHODOS PRIVATES
+
     private subscribeToSaveResponse(result: Observable<HttpResponse<IFornecedor>>) {
-        result.subscribe((res: HttpResponse<IFornecedor>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+        result.subscribe((res: HttpResponse<IFornecedor>) => this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess() {
+    private onSaveSuccess(fornecedor: IFornecedor) {
         this.isSaving = false;
-        this.previousState();
+        this.router
+            .navigateByUrl('fornecedor', { skipLocationChange: true })
+            .then(() => this.router.navigate(['fornecedor', fornecedor.id, 'edit']));
     }
 
     private onSaveError() {
@@ -95,5 +106,13 @@ export class FornecedorUpdateComponent implements OnInit {
 
     trackLancamentoById(index: number, item: ILancamento) {
         return item.id;
+    }
+
+    private setCurrentyAction() {
+        if (this.activatedRoute.snapshot.url[1].path === 'new') {
+            this.currentAction = 'new';
+        } else {
+            this.currentAction = 'edit';
+        }
     }
 }

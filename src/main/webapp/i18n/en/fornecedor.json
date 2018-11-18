@@ -3,8 +3,9 @@
         "fornecedor": {
             "home": {
                 "title": "Fornecedors",
-                "createLabel": "Create a new Fornecedor",
-                "createOrEditLabel": "Create or edit a Fornecedor",
+                "adicionar": "Fornecedor",
+                "createLabel": "New Fornecedor",
+                "editLabel": "Edit a Fornecedor",
                 "search": "Search for Fornecedor"
             },
             "created": "A new Fornecedor is created with identifier {{ param }}",

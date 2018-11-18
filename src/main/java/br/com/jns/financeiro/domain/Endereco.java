@@ -25,6 +25,9 @@ public class Endereco implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "cep")
+    private String cep;
+
     @NotNull
     @Column(name = "logradouro", nullable = false)
     private String logradouro;
@@ -52,6 +55,17 @@ public class Endereco implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+    public Endereco cep(String cep) {
+        this.cep = cep;
+        return this;
+    }
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public String getLogradouro() {
@@ -157,6 +171,7 @@ public class Endereco implements Serializable {
     public String toString() {
         return "Endereco{" +
             "id=" + getId() +
+            ", cep='" + getCep() + "'" +
             ", logradouro='" + getLogradouro() + "'" +
             ", numero='" + getNumero() + "'" +
             ", complemento='" + getComplemento() + "'" +

@@ -7,6 +7,8 @@ import { SessionStorageService } from 'ngx-webstorage';
 import { VERSION } from 'app/app.constants';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from '../profiles/profile.service';
+import { faBoxOpen, faCheckSquare, faMoneyCheckAlt } from '@fortawesome/free-solid-svg-icons';
+import { faListAlt } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
     selector: 'jhi-navbar',
@@ -20,6 +22,10 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    faForn = faBoxOpen;
+    faCat = faListAlt;
+    faPay = faMoneyCheckAlt;
+    faLanc = faCheckSquare;
 
     constructor(
         private loginService: LoginService,
