@@ -29,7 +29,7 @@
             <!--<h2 id="jhi-fornecedor-heading" jhiTranslate="jnsFinanceiroApp.fornecedor.home.createOrEditLabel">Create or edit a Fornecedor</h2>-->
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!fornecedor.id">
+                <div class="form-group" [hidden]="true">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                            [(ngModel)]="fornecedor.id" readonly/>
