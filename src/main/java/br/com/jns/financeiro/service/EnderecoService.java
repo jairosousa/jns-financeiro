@@ -2,6 +2,7 @@ package br.com.jns.financeiro.service;
 
 import br.com.jns.financeiro.service.dto.EnderecoDTO;
 
+import br.com.jns.financeiro.service.exceptions.ViaCepException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -53,4 +54,6 @@ public interface EnderecoService {
      * @return the list of entities
      */
     Page<EnderecoDTO> search(String query, Pageable pageable);
+
+    EnderecoDTO findEnderecoByCep(String cep) throws ViaCepException;
 }

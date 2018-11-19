@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IFornecedor } from 'app/shared/model/fornecedor.model';
 import { FornecedorService } from './fornecedor.service';
-import { Endereco, IEndereco } from 'app/shared/model/endereco.model';
+import { IEndereco } from 'app/shared/model/endereco.model';
 import { EnderecoService } from 'app/entities/endereco';
 import { ILancamento } from 'app/shared/model/lancamento.model';
 import { LancamentoService } from 'app/entities/lancamento';
@@ -79,6 +79,19 @@ export class FornecedorUpdateComponent implements OnInit {
         }
     }
 
+    findEnderecoBy(cep: string) {
+        this.enderecoService.findEndereco(this.endereco.cep).subscribe(
+            (subRes: HttpResponse<IEndereco>) => {
+                this.endereco = subRes.body;
+            },
+            (subRes: HttpErrorResponse) => {
+                this.endereco = {};
+                console.log(subRes);
+                this.onErrorCep(subRes.message);
+            }
+        );
+    }
+
     // METHODOS PRIVATES
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IFornecedor>>) {
@@ -97,7 +110,12 @@ export class FornecedorUpdateComponent implements OnInit {
     }
 
     private onError(errorMessage: string) {
+        console.log(errorMessage);
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    private onErrorCep(errorMessage: string) {
+        this.jhiAlertService.error('Cep Não Encontrado', null, null);
     }
 
     trackEnderecoById(index: number, item: IEndereco) {

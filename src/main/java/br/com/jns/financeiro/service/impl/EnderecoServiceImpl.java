@@ -1,10 +1,12 @@
 package br.com.jns.financeiro.service.impl;
 
+import br.com.jns.financeiro.service.CepService;
 import br.com.jns.financeiro.service.EnderecoService;
 import br.com.jns.financeiro.domain.Endereco;
 import br.com.jns.financeiro.repository.EnderecoRepository;
 import br.com.jns.financeiro.repository.search.EnderecoSearchRepository;
 import br.com.jns.financeiro.service.dto.EnderecoDTO;
+import br.com.jns.financeiro.service.exceptions.ViaCepException;
 import br.com.jns.financeiro.service.mapper.EnderecoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,10 +35,13 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     private final EnderecoSearchRepository enderecoSearchRepository;
 
-    public EnderecoServiceImpl(EnderecoRepository enderecoRepository, EnderecoMapper enderecoMapper, EnderecoSearchRepository enderecoSearchRepository) {
+    private final CepService cepService;
+
+    public EnderecoServiceImpl(EnderecoRepository enderecoRepository, EnderecoMapper enderecoMapper, EnderecoSearchRepository enderecoSearchRepository, CepService cepService) {
         this.enderecoRepository = enderecoRepository;
         this.enderecoMapper = enderecoMapper;
         this.enderecoSearchRepository = enderecoSearchRepository;
+        this.cepService = cepService;
     }
 
     /**
@@ -110,5 +115,15 @@ public class EnderecoServiceImpl implements EnderecoService {
         log.debug("Request to search for a page of Enderecos for query {}", query);
         return enderecoSearchRepository.search(queryStringQuery(query), pageable)
             .map(enderecoMapper::toDto);
+    }
+
+    @Override
+    public EnderecoDTO findEnderecoByCep(String cep) throws ViaCepException{
+        try {
+            return cepService.buscarCep(cep);
+        } catch (ViaCepException e) {
+            e.printStackTrace();
+        }
+        throw new ViaCepException("Não foi possível encontrar o CEP", cep, ViaCepException.class.getName());
     }
 }
