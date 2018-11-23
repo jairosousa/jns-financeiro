@@ -32,13 +32,6 @@
             "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "fornecedor"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "lancamento",
-            "otherEntityName": "lancamento",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "fornecedor"
         }
     ],
     "changelogDate": "20181117150926",

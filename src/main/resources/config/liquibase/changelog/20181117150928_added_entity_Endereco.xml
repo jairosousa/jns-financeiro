@@ -25,6 +25,7 @@
             <column name="cep" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="logradouro" type="varchar(255)">
                 <constraints nullable="false" />
             </column>

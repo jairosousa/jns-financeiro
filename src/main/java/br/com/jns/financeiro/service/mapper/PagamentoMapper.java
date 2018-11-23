@@ -8,13 +8,12 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Pagamento and its DTO PagamentoDTO.
  */
-@Mapper(componentModel = "spring", uses = {LancamentoMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface PagamentoMapper extends EntityMapper<PagamentoDTO, Pagamento> {
 
-    @Mapping(source = "lancamento.id", target = "lancamentoId")
-    PagamentoDTO toDto(Pagamento pagamento);
 
-    @Mapping(source = "lancamentoId", target = "lancamento")
+    @Mapping(target = "parcelas", ignore = true)
+    @Mapping(target = "lancamento", ignore = true)
     Pagamento toEntity(PagamentoDTO pagamentoDTO);
 
     default Pagamento fromId(Long id) {

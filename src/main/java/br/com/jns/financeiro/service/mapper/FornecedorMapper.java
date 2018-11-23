@@ -15,7 +15,6 @@ public interface FornecedorMapper extends EntityMapper<FornecedorDTO, Fornecedor
     FornecedorDTO toDto(Fornecedor fornecedor);
 
     @Mapping(source = "enderecoId", target = "endereco")
-    @Mapping(target = "lancamento", ignore = true)
     Fornecedor toEntity(FornecedorDTO fornecedorDTO);
 
     default Fornecedor fromId(Long id) {

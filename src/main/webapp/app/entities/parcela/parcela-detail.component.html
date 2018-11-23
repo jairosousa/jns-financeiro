@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="parcela">
+            <h2><span jhiTranslate="jnsFinanceiroApp.parcela.detail.title">Parcela</span> {{parcela.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jnsFinanceiroApp.parcela.dataVencimento">Data Vencimento</span></dt>
+                <dd>
+                    <span>{{parcela.dataVencimento}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.parcela.dataPagamento">Data Pagamento</span></dt>
+                <dd>
+                    <span>{{parcela.dataPagamento}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.parcela.numero">Numero</span></dt>
+                <dd>
+                    <span>{{parcela.numero}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.parcela.valor">Valor</span></dt>
+                <dd>
+                    <span>{{parcela.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.parcela.juros">Juros</span></dt>
+                <dd>
+                    <span>{{parcela.juros}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.parcela.total">Total</span></dt>
+                <dd>
+                    <span>{{parcela.total}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.parcela.forma">Forma</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + parcela.forma}}">{{parcela.forma}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.parcela.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jnsFinanceiroApp.Status.' + parcela.status}}">{{parcela.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.parcela.pagamento">Pagamento</span></dt>
+                <dd>
+                    <div *ngIf="parcela.pagamentoId">
+                        <a [routerLink]="['/pagamento', parcela.pagamentoId, 'view']">{{parcela.pagamentoId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/parcela', parcela.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

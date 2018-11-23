@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { Endereco, IEndereco } from 'app/shared/model/endereco.model';
+import { IEndereco } from 'app/shared/model/endereco.model';
 
 type EntityResponseType = HttpResponse<IEndereco>;
 type EntityArrayResponseType = HttpResponse<IEndereco[]>;
@@ -40,9 +40,5 @@ export class EnderecoService {
     search(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IEndereco[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
-    }
-
-    findEndereco(cep: string): Observable<EntityResponseType> {
-        return this.http.get<IEndereco>(`${this.resourceUrl}/cep/${cep}`, { observe: 'response' });
     }
 }

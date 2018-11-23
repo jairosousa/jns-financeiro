@@ -21,10 +21,9 @@
             "descricao": "Descricao",
             "valor": "Valor",
             "tipo": "Tipo",
-            "tipoPagamento": "Tipo Pagamento",
+            "pagamento": "Pagamento",
             "fornecedor": "Fornecedor",
-            "categoria": "Categoria",
-            "pagamento": "Pagamento"
+            "categoria": "Categoria"
         }
     }
 }

@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 import br.com.jns.financeiro.domain.enumeration.Tipo;
-import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
 
 /**
  * A DTO for the Lancamento entity.
@@ -28,7 +27,9 @@ public class LancamentoDTO implements Serializable {
 
     private Tipo tipo;
 
-    private TipoPagamento tipoPagamento;
+    private Long pagamentoId;
+
+    private String pagamentoForma;
 
     private Long fornecedorId;
 
@@ -86,12 +87,20 @@ public class LancamentoDTO implements Serializable {
         this.tipo = tipo;
     }
 
-    public TipoPagamento getTipoPagamento() {
-        return tipoPagamento;
+    public Long getPagamentoId() {
+        return pagamentoId;
     }
 
-    public void setTipoPagamento(TipoPagamento tipoPagamento) {
-        this.tipoPagamento = tipoPagamento;
+    public void setPagamentoId(Long pagamentoId) {
+        this.pagamentoId = pagamentoId;
+    }
+
+    public String getPagamentoForma() {
+        return pagamentoForma;
+    }
+
+    public void setPagamentoForma(String pagamentoForma) {
+        this.pagamentoForma = pagamentoForma;
     }
 
     public Long getFornecedorId() {
@@ -156,7 +165,8 @@ public class LancamentoDTO implements Serializable {
             ", descricao='" + getDescricao() + "'" +
             ", valor=" + getValor() +
             ", tipo='" + getTipo() + "'" +
-            ", tipoPagamento='" + getTipoPagamento() + "'" +
+            ", pagamento=" + getPagamentoId() +
+            ", pagamento='" + getPagamentoForma() + "'" +
             ", fornecedor=" + getFornecedorId() +
             ", fornecedor='" + getFornecedorNome() + "'" +
             ", categoria=" + getCategoriaId() +

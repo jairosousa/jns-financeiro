@@ -89,11 +89,17 @@ public class PagamentoResource {
      * GET  /pagamentos : get all the pagamentos.
      *
      * @param pageable the pagination information
+     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of pagamentos in body
      */
     @GetMapping("/pagamentos")
     @Timed
-    public ResponseEntity<List<PagamentoDTO>> getAllPagamentos(Pageable pageable) {
+    public ResponseEntity<List<PagamentoDTO>> getAllPagamentos(Pageable pageable, @RequestParam(required = false) String filter) {
+        if ("lancamento-is-null".equals(filter)) {
+            log.debug("REST request to get all Pagamentos where lancamento is null");
+            return new ResponseEntity<>(pagamentoService.findAllWhereLancamentoIsNull(),
+                    HttpStatus.OK);
+        }
         log.debug("REST request to get a page of Pagamentos");
         Page<PagamentoDTO> page = pagamentoService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/pagamentos");

@@ -41,15 +41,17 @@
             <column name="tipo" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-
-            <column name="tipo_pagamento" type="varchar(255)">
-                <constraints nullable="true" />
+            <column name="pagamento_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_lancamento_pagamento_id" />
             </column>
             <column name="fornecedor_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_lancamento_fornecedor_id" />
-            </column>            <column name="categoria_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_lancamento_categoria_id" />
+                <constraints nullable="true" />
             </column>
+
+            <column name="categoria_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

@@ -7,6 +7,8 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { ILancamento } from 'app/shared/model/lancamento.model';
 import { LancamentoService } from './lancamento.service';
+import { IPagamento } from 'app/shared/model/pagamento.model';
+import { PagamentoService } from 'app/entities/pagamento';
 import { IFornecedor } from 'app/shared/model/fornecedor.model';
 import { FornecedorService } from 'app/entities/fornecedor';
 import { ICategoria } from 'app/shared/model/categoria.model';
@@ -20,6 +22,8 @@ export class LancamentoUpdateComponent implements OnInit {
     lancamento: ILancamento;
     isSaving: boolean;
 
+    pagamentos: IPagamento[];
+
     fornecedors: IFornecedor[];
 
     categorias: ICategoria[];
@@ -28,6 +32,7 @@ export class LancamentoUpdateComponent implements OnInit {
     constructor(
         private jhiAlertService: JhiAlertService,
         private lancamentoService: LancamentoService,
+        private pagamentoService: PagamentoService,
         private fornecedorService: FornecedorService,
         private categoriaService: CategoriaService,
         private activatedRoute: ActivatedRoute
@@ -38,14 +43,14 @@ export class LancamentoUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ lancamento }) => {
             this.lancamento = lancamento;
         });
-        this.fornecedorService.query({ filter: 'lancamento(nome)-is-null' }).subscribe(
-            (res: HttpResponse<IFornecedor[]>) => {
-                if (!this.lancamento.fornecedorId) {
-                    this.fornecedors = res.body;
+        this.pagamentoService.query({ filter: 'lancamento-is-null' }).subscribe(
+            (res: HttpResponse<IPagamento[]>) => {
+                if (!this.lancamento.pagamentoId) {
+                    this.pagamentos = res.body;
                 } else {
-                    this.fornecedorService.find(this.lancamento.fornecedorId).subscribe(
-                        (subRes: HttpResponse<IFornecedor>) => {
-                            this.fornecedors = [subRes.body].concat(res.body);
+                    this.pagamentoService.find(this.lancamento.pagamentoId).subscribe(
+                        (subRes: HttpResponse<IPagamento>) => {
+                            this.pagamentos = [subRes.body].concat(res.body);
                         },
                         (subRes: HttpErrorResponse) => this.onError(subRes.message)
                     );
@@ -53,18 +58,15 @@ export class LancamentoUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.categoriaService.query({ filter: 'lancamento-is-null' }).subscribe(
+        this.fornecedorService.query().subscribe(
+            (res: HttpResponse<IFornecedor[]>) => {
+                this.fornecedors = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.categoriaService.query().subscribe(
             (res: HttpResponse<ICategoria[]>) => {
-                if (!this.lancamento.categoriaId) {
-                    this.categorias = res.body;
-                } else {
-                    this.categoriaService.find(this.lancamento.categoriaId).subscribe(
-                        (subRes: HttpResponse<ICategoria>) => {
-                            this.categorias = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
-                }
+                this.categorias = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -98,6 +100,10 @@ export class LancamentoUpdateComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackPagamentoById(index: number, item: IPagamento) {
+        return item.id;
     }
 
     trackFornecedorById(index: number, item: IFornecedor) {

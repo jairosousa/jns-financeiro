@@ -13,14 +13,6 @@
                 <dd>
                     <span>{{pagamento.diaPagamento}}</span>
                 </dd>
-                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.forma">Forma</span></dt>
-                <dd>
-                    <span jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + pagamento.forma}}">{{pagamento.forma}}</span>
-                </dd>
-                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.juros">Juros</span></dt>
-                <dd>
-                    <span>{{pagamento.juros}}</span>
-                </dd>
                 <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas">Quantidade Parcelas</span></dt>
                 <dd>
                     <span>{{pagamento.quantidadeParcelas}}</span>
@@ -29,11 +21,9 @@
                 <dd>
                     <span jhiTranslate="{{'jnsFinanceiroApp.Status.' + pagamento.status}}">{{pagamento.status}}</span>
                 </dd>
-                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.lancamento">Lancamento</span></dt>
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento">Tipo Pagamento</span></dt>
                 <dd>
-                    <div *ngIf="pagamento.lancamentoId">
-                        <a [routerLink]="['/lancamento', pagamento.lancamentoId, 'view']">{{pagamento.lancamentoId}}</a>
-                    </div>
+                    <span jhiTranslate="{{'jnsFinanceiroApp.TipoPagamento.' + pagamento.tipoPagamento}}">{{pagamento.tipoPagamento}}</span>
                 </dd>
             </dl>
 

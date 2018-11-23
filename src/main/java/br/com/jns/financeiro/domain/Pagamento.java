@@ -1,6 +1,6 @@
 package br.com.jns.financeiro.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,13 +9,14 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
-import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
-
 import br.com.jns.financeiro.domain.enumeration.Status;
+
+import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
 
 /**
  * A Pagamento.
@@ -39,13 +40,6 @@ public class Pagamento implements Serializable {
     @Column(name = "dia_pagamento")
     private LocalDate diaPagamento;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "forma")
-    private FormaPagamento forma;
-
-    @Column(name = "juros", precision = 10, scale = 2)
-    private BigDecimal juros;
-
     @NotNull
     @Column(name = "quantidade_parcelas", nullable = false)
     private Long quantidadeParcelas;
@@ -55,8 +49,15 @@ public class Pagamento implements Serializable {
     @Column(name = "status", nullable = false)
     private Status status;
 
-    @ManyToOne
-    @JsonIgnoreProperties("pagamentos")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_pagamento")
+    private TipoPagamento tipoPagamento;
+
+    @OneToMany(mappedBy = "pagamento")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Parcela> parcelas = new HashSet<>();
+    @OneToOne(mappedBy = "pagamento")
+    @JsonIgnore
     private Lancamento lancamento;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -94,32 +95,6 @@ public class Pagamento implements Serializable {
         this.diaPagamento = diaPagamento;
     }
 
-    public FormaPagamento getForma() {
-        return forma;
-    }
-
-    public Pagamento forma(FormaPagamento forma) {
-        this.forma = forma;
-        return this;
-    }
-
-    public void setForma(FormaPagamento forma) {
-        this.forma = forma;
-    }
-
-    public BigDecimal getJuros() {
-        return juros;
-    }
-
-    public Pagamento juros(BigDecimal juros) {
-        this.juros = juros;
-        return this;
-    }
-
-    public void setJuros(BigDecimal juros) {
-        this.juros = juros;
-    }
-
     public Long getQuantidadeParcelas() {
         return quantidadeParcelas;
     }
@@ -144,6 +119,44 @@ public class Pagamento implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
+    }
+
+    public Pagamento tipoPagamento(TipoPagamento tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
+        return this;
+    }
+
+    public void setTipoPagamento(TipoPagamento tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
+    }
+
+    public Set<Parcela> getParcelas() {
+        return parcelas;
+    }
+
+    public Pagamento parcelas(Set<Parcela> parcelas) {
+        this.parcelas = parcelas;
+        return this;
+    }
+
+    public Pagamento addParcela(Parcela parcela) {
+        this.parcelas.add(parcela);
+        parcela.setPagamento(this);
+        return this;
+    }
+
+    public Pagamento removeParcela(Parcela parcela) {
+        this.parcelas.remove(parcela);
+        parcela.setPagamento(null);
+        return this;
+    }
+
+    public void setParcelas(Set<Parcela> parcelas) {
+        this.parcelas = parcelas;
     }
 
     public Lancamento getLancamento() {
@@ -186,10 +199,9 @@ public class Pagamento implements Serializable {
             "id=" + getId() +
             ", vencimento='" + getVencimento() + "'" +
             ", diaPagamento='" + getDiaPagamento() + "'" +
-            ", forma='" + getForma() + "'" +
-            ", juros=" + getJuros() +
             ", quantidadeParcelas=" + getQuantidadeParcelas() +
             ", status='" + getStatus() + "'" +
+            ", tipoPagamento='" + getTipoPagamento() + "'" +
             "}";
     }
 }

@@ -14,7 +14,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -70,6 +74,21 @@ public class PagamentoServiceImpl implements PagamentoService {
             .map(pagamentoMapper::toDto);
     }
 
+
+
+    /**
+     *  get all the pagamentos where Lancamento is null.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true) 
+    public List<PagamentoDTO> findAllWhereLancamentoIsNull() {
+        log.debug("Request to get all pagamentos where Lancamento is null");
+        return StreamSupport
+            .stream(pagamentoRepository.findAll().spliterator(), false)
+            .filter(pagamento -> pagamento.getLancamento() == null)
+            .map(pagamentoMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 
     /**
      * Get one pagamento by id.

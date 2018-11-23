@@ -27,7 +27,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Collections;
@@ -42,8 +41,8 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
 import br.com.jns.financeiro.domain.enumeration.Status;
+import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
 /**
  * Test class for the PagamentoResource REST controller.
  *
@@ -59,17 +58,14 @@ public class PagamentoResourceIntTest {
     private static final LocalDate DEFAULT_DIA_PAGAMENTO = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DIA_PAGAMENTO = LocalDate.now(ZoneId.systemDefault());
 
-    private static final FormaPagamento DEFAULT_FORMA = FormaPagamento.DINHEIRO;
-    private static final FormaPagamento UPDATED_FORMA = FormaPagamento.CARTAO;
-
-    private static final BigDecimal DEFAULT_JUROS = new BigDecimal(1);
-    private static final BigDecimal UPDATED_JUROS = new BigDecimal(2);
-
     private static final Long DEFAULT_QUANTIDADE_PARCELAS = 1L;
     private static final Long UPDATED_QUANTIDADE_PARCELAS = 2L;
 
     private static final Status DEFAULT_STATUS = Status.PAGO;
     private static final Status UPDATED_STATUS = Status.PENDENTE;
+
+    private static final TipoPagamento DEFAULT_TIPO_PAGAMENTO = TipoPagamento.AVISTA;
+    private static final TipoPagamento UPDATED_TIPO_PAGAMENTO = TipoPagamento.PARCELADO;
 
     @Autowired
     private PagamentoRepository pagamentoRepository;
@@ -125,10 +121,9 @@ public class PagamentoResourceIntTest {
         Pagamento pagamento = new Pagamento()
             .vencimento(DEFAULT_VENCIMENTO)
             .diaPagamento(DEFAULT_DIA_PAGAMENTO)
-            .forma(DEFAULT_FORMA)
-            .juros(DEFAULT_JUROS)
             .quantidadeParcelas(DEFAULT_QUANTIDADE_PARCELAS)
-            .status(DEFAULT_STATUS);
+            .status(DEFAULT_STATUS)
+            .tipoPagamento(DEFAULT_TIPO_PAGAMENTO);
         return pagamento;
     }
 
@@ -155,10 +150,9 @@ public class PagamentoResourceIntTest {
         Pagamento testPagamento = pagamentoList.get(pagamentoList.size() - 1);
         assertThat(testPagamento.getVencimento()).isEqualTo(DEFAULT_VENCIMENTO);
         assertThat(testPagamento.getDiaPagamento()).isEqualTo(DEFAULT_DIA_PAGAMENTO);
-        assertThat(testPagamento.getForma()).isEqualTo(DEFAULT_FORMA);
-        assertThat(testPagamento.getJuros()).isEqualTo(DEFAULT_JUROS);
         assertThat(testPagamento.getQuantidadeParcelas()).isEqualTo(DEFAULT_QUANTIDADE_PARCELAS);
         assertThat(testPagamento.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testPagamento.getTipoPagamento()).isEqualTo(DEFAULT_TIPO_PAGAMENTO);
 
         // Validate the Pagamento in Elasticsearch
         verify(mockPagamentoSearchRepository, times(1)).save(testPagamento);
@@ -257,10 +251,9 @@ public class PagamentoResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(pagamento.getId().intValue())))
             .andExpect(jsonPath("$.[*].vencimento").value(hasItem(DEFAULT_VENCIMENTO.toString())))
             .andExpect(jsonPath("$.[*].diaPagamento").value(hasItem(DEFAULT_DIA_PAGAMENTO.toString())))
-            .andExpect(jsonPath("$.[*].forma").value(hasItem(DEFAULT_FORMA.toString())))
-            .andExpect(jsonPath("$.[*].juros").value(hasItem(DEFAULT_JUROS.intValue())))
             .andExpect(jsonPath("$.[*].quantidadeParcelas").value(hasItem(DEFAULT_QUANTIDADE_PARCELAS.intValue())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].tipoPagamento").value(hasItem(DEFAULT_TIPO_PAGAMENTO.toString())));
     }
     
     @Test
@@ -276,10 +269,9 @@ public class PagamentoResourceIntTest {
             .andExpect(jsonPath("$.id").value(pagamento.getId().intValue()))
             .andExpect(jsonPath("$.vencimento").value(DEFAULT_VENCIMENTO.toString()))
             .andExpect(jsonPath("$.diaPagamento").value(DEFAULT_DIA_PAGAMENTO.toString()))
-            .andExpect(jsonPath("$.forma").value(DEFAULT_FORMA.toString()))
-            .andExpect(jsonPath("$.juros").value(DEFAULT_JUROS.intValue()))
             .andExpect(jsonPath("$.quantidadeParcelas").value(DEFAULT_QUANTIDADE_PARCELAS.intValue()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
+            .andExpect(jsonPath("$.tipoPagamento").value(DEFAULT_TIPO_PAGAMENTO.toString()));
     }
 
     @Test
@@ -305,10 +297,9 @@ public class PagamentoResourceIntTest {
         updatedPagamento
             .vencimento(UPDATED_VENCIMENTO)
             .diaPagamento(UPDATED_DIA_PAGAMENTO)
-            .forma(UPDATED_FORMA)
-            .juros(UPDATED_JUROS)
             .quantidadeParcelas(UPDATED_QUANTIDADE_PARCELAS)
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .tipoPagamento(UPDATED_TIPO_PAGAMENTO);
         PagamentoDTO pagamentoDTO = pagamentoMapper.toDto(updatedPagamento);
 
         restPagamentoMockMvc.perform(put("/api/pagamentos")
@@ -322,10 +313,9 @@ public class PagamentoResourceIntTest {
         Pagamento testPagamento = pagamentoList.get(pagamentoList.size() - 1);
         assertThat(testPagamento.getVencimento()).isEqualTo(UPDATED_VENCIMENTO);
         assertThat(testPagamento.getDiaPagamento()).isEqualTo(UPDATED_DIA_PAGAMENTO);
-        assertThat(testPagamento.getForma()).isEqualTo(UPDATED_FORMA);
-        assertThat(testPagamento.getJuros()).isEqualTo(UPDATED_JUROS);
         assertThat(testPagamento.getQuantidadeParcelas()).isEqualTo(UPDATED_QUANTIDADE_PARCELAS);
         assertThat(testPagamento.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testPagamento.getTipoPagamento()).isEqualTo(UPDATED_TIPO_PAGAMENTO);
 
         // Validate the Pagamento in Elasticsearch
         verify(mockPagamentoSearchRepository, times(1)).save(testPagamento);
@@ -388,10 +378,9 @@ public class PagamentoResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(pagamento.getId().intValue())))
             .andExpect(jsonPath("$.[*].vencimento").value(hasItem(DEFAULT_VENCIMENTO.toString())))
             .andExpect(jsonPath("$.[*].diaPagamento").value(hasItem(DEFAULT_DIA_PAGAMENTO.toString())))
-            .andExpect(jsonPath("$.[*].forma").value(hasItem(DEFAULT_FORMA.toString())))
-            .andExpect(jsonPath("$.[*].juros").value(hasItem(DEFAULT_JUROS.intValue())))
             .andExpect(jsonPath("$.[*].quantidadeParcelas").value(hasItem(DEFAULT_QUANTIDADE_PARCELAS.intValue())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].tipoPagamento").value(hasItem(DEFAULT_TIPO_PAGAMENTO.toString())));
     }
 
     @Test

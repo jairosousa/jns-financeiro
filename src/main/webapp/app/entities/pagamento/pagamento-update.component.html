@@ -36,19 +36,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.forma" for="field_forma">Forma</label>
-                    <select class="form-control" name="forma" [(ngModel)]="pagamento.forma" id="field_forma" >
-                        <option value="DINHEIRO">{{'jnsFinanceiroApp.FormaPagamento.DINHEIRO' | translate}}</option>
-                        <option value="CARTAO">{{'jnsFinanceiroApp.FormaPagamento.CARTAO' | translate}}</option>
-                        <option value="DEBITO">{{'jnsFinanceiroApp.FormaPagamento.DEBITO' | translate}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.juros" for="field_juros">Juros</label>
-                    <input type="number" class="form-control" name="juros" id="field_juros"
-                        [(ngModel)]="pagamento.juros" />
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas" for="field_quantidadeParcelas">Quantidade Parcelas</label>
                     <input type="number" class="form-control" name="quantidadeParcelas" id="field_quantidadeParcelas"
                         [(ngModel)]="pagamento.quantidadeParcelas" required/>
@@ -76,14 +63,14 @@
                         </small>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.lancamento" for="field_lancamento">Lancamento</label>
-                    <select class="form-control" id="field_lancamento" name="lancamento" [(ngModel)]="pagamento.lancamentoId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="lancamentoOption.id" *ngFor="let lancamentoOption of lancamentos; trackBy: trackLancamentoById">{{lancamentoOption.id}}</option>
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento" for="field_tipoPagamento">Tipo Pagamento</label>
+                    <select class="form-control" name="tipoPagamento" [(ngModel)]="pagamento.tipoPagamento" id="field_tipoPagamento" >
+                        <option value="AVISTA">{{'jnsFinanceiroApp.TipoPagamento.AVISTA' | translate}}</option>
+                        <option value="PARCELADO">{{'jnsFinanceiroApp.TipoPagamento.PARCELADO' | translate}}</option>
                     </select>
                 </div>
+
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

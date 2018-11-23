@@ -30,14 +30,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="forma" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="juros" type="decimal(10,2)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="quantidade_parcelas" type="bigint">
                 <constraints nullable="false" />
             </column>
@@ -46,7 +38,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="lancamento_id" type="bigint">
+            <column name="tipo_pagamento" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

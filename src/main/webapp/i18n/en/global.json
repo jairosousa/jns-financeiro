@@ -13,6 +13,7 @@
                 "categoria": "Categoria",
                 "endereco": "Endereco",
                 "pagamento": "Pagamento",
+                "parcela": "Parcela",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

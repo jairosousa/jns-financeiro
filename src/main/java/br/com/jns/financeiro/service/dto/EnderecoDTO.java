@@ -38,6 +38,7 @@ public class EnderecoDTO implements Serializable {
     public String getCep() {
         return cep;
     }
+
     public void setCep(String cep) {
         this.cep = cep;
     }
@@ -92,17 +93,18 @@ public class EnderecoDTO implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EnderecoDTO that = (EnderecoDTO) o;
-        return Objects.equals(id, that.id) &&
-            Objects.equals(cep, that.cep) &&
-            Objects.equals(logradouro, that.logradouro) &&
-            Objects.equals(numero, that.numero) &&
-            Objects.equals(complemento, that.complemento) &&
-            Objects.equals(bairro, that.bairro) &&
-            Objects.equals(cidade, that.cidade) &&
-            Objects.equals(uf, that.uf);
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        EnderecoDTO enderecoDTO = (EnderecoDTO) o;
+        if (enderecoDTO.getId() == null || getId() == null) {
+            return false;
+        }
+        return Objects.equals(getId(), enderecoDTO.getId());
     }
 
     @Override

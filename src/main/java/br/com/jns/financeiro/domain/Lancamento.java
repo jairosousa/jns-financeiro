@@ -1,6 +1,6 @@
 package br.com.jns.financeiro.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -11,13 +11,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 import br.com.jns.financeiro.domain.enumeration.Tipo;
-
-import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
 
 /**
  * A Lancamento.
@@ -53,19 +49,17 @@ public class Lancamento implements Serializable {
     @Column(name = "tipo")
     private Tipo tipo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_pagamento")
-    private TipoPagamento tipoPagamento;
-
     @OneToOne    @JoinColumn(unique = true)
+    private Pagamento pagamento;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
     private Fornecedor fornecedor;
 
-    @OneToOne    @JoinColumn(unique = true)
+    @ManyToOne
+    @JsonIgnoreProperties("")
     private Categoria categoria;
 
-    @OneToMany(mappedBy = "lancamento")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Pagamento> pagamentos = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -140,17 +134,17 @@ public class Lancamento implements Serializable {
         this.tipo = tipo;
     }
 
-    public TipoPagamento getTipoPagamento() {
-        return tipoPagamento;
+    public Pagamento getPagamento() {
+        return pagamento;
     }
 
-    public Lancamento tipoPagamento(TipoPagamento tipoPagamento) {
-        this.tipoPagamento = tipoPagamento;
+    public Lancamento pagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
         return this;
     }
 
-    public void setTipoPagamento(TipoPagamento tipoPagamento) {
-        this.tipoPagamento = tipoPagamento;
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 
     public Fornecedor getFornecedor() {
@@ -177,31 +171,6 @@ public class Lancamento implements Serializable {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
-    }
-
-    public Set<Pagamento> getPagamentos() {
-        return pagamentos;
-    }
-
-    public Lancamento pagamentos(Set<Pagamento> pagamentos) {
-        this.pagamentos = pagamentos;
-        return this;
-    }
-
-    public Lancamento addPagamento(Pagamento pagamento) {
-        this.pagamentos.add(pagamento);
-        pagamento.setLancamento(this);
-        return this;
-    }
-
-    public Lancamento removePagamento(Pagamento pagamento) {
-        this.pagamentos.remove(pagamento);
-        pagamento.setLancamento(null);
-        return this;
-    }
-
-    public void setPagamentos(Set<Pagamento> pagamentos) {
-        this.pagamentos = pagamentos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -234,7 +203,6 @@ public class Lancamento implements Serializable {
             ", descricao='" + getDescricao() + "'" +
             ", valor=" + getValor() +
             ", tipo='" + getTipo() + "'" +
-            ", tipoPagamento='" + getTipoPagamento() + "'" +
             "}";
     }
 }
