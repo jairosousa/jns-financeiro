@@ -3,9 +3,8 @@
         "fornecedor": {
             "home": {
                 "title": "Fornecedors",
-                "adicionar": "Fornecedor",
-                "createLabel": "New Fornecedor",
-                "editLabel": "Edit a Fornecedor",
+                "createLabel": "Create a new Fornecedor",
+                "createOrEditLabel": "Create or edit a Fornecedor",
                 "search": "Search for Fornecedor"
             },
             "created": "A new Fornecedor is created with identifier {{ param }}",
@@ -21,8 +20,7 @@
             "pessoa": "Pessoa",
             "cnpj": "Cnpj",
             "cpf": "Cpf",
-            "endereco": "Endereco",
-            "lancamento": "Lancamento"
+            "endereco": "Endereco"
         }
     }
 }

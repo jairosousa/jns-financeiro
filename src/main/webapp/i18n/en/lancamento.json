@@ -3,28 +3,27 @@
         "lancamento": {
             "home": {
                 "title": "Lancamentos",
-                "createLabel": "Create a new Lançamento",
-                "createOrEditLabel": "Create or edit a Lançamento",
-                "search": "Search for Lançamento"
+                "createLabel": "Create a new Lancamento",
+                "createOrEditLabel": "Create or edit a Lancamento",
+                "search": "Search for Lancamento"
             },
-            "created": "A new Lançamento is created with identifier {{ param }}",
-            "updated": "A Lançamento is updated with identifier {{ param }}",
-            "deleted": "A Lançamento is deleted with identifier {{ param }}",
+            "created": "A new Lancamento is created with identifier {{ param }}",
+            "updated": "A Lancamento is updated with identifier {{ param }}",
+            "deleted": "A Lancamento is deleted with identifier {{ param }}",
             "delete": {
                 "question": "Are you sure you want to delete Lancamento {{ id }}?"
             },
             "detail": {
-                "title": "Lançamento"
+                "title": "Lancamento"
             },
             "data": "Data",
             "nome": "Nome",
-            "descricao": "Descrição",
+            "descricao": "Descricao",
             "valor": "Valor",
             "tipo": "Tipo",
-
+            "pagamento": "Pagamento",
             "fornecedor": "Fornecedor",
-            "categoria": "Categoria",
-            "pagamento": "Pagamento"
+            "categoria": "Categoria"
         }
     }
 }

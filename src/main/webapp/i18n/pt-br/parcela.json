@@ -1,0 +1,30 @@
+{
+    "jnsFinanceiroApp": {
+        "parcela": {
+            "home": {
+                "title": "Parcelas",
+                "createLabel": "Criar novo Parcela",
+                "createOrEditLabel": "Criar ou editar Parcela",
+                "search": "Pesquisar por Parcela"
+            },
+            "created": "Um novo Parcela foi criado com o identificador {{ param }}",
+            "updated": "Um Parcela foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Parcela foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Parcela {{ id }}?"
+            },
+            "detail": {
+                "title": "Parcela"
+            },
+            "dataVencimento": "Data Vencimento",
+            "dataPagamento": "Data Pagamento",
+            "numero": "Numero",
+            "valor": "Valor",
+            "juros": "Juros",
+            "total": "Total",
+            "forma": "Forma",
+            "status": "Status",
+            "pagamento": "Pagamento"
+        }
+    }
+}

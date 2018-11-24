@@ -45,6 +45,7 @@ public interface ParcelaService {
      * Search for the parcela corresponding to the query.
      *
      * @param query the query of the search
+     * 
      * @return the list of entities
      */
     List<ParcelaDTO> search(String query);

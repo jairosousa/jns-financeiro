@@ -7,7 +7,7 @@ import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { LancamentoService } from 'app/entities/lancamento/lancamento.service';
-import { ILancamento, Lancamento, Tipo, TipoPagamento } from 'app/shared/model/lancamento.model';
+import { ILancamento, Lancamento, Tipo } from 'app/shared/model/lancamento.model';
 
 describe('Service Tests', () => {
     describe('Lancamento Service', () => {
@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Lancamento(0, currentDate, 'AAAAAAA', 'AAAAAAA', 0, Tipo.DESPESA, TipoPagamento.AVISTA);
+            elemDefault = new Lancamento(0, currentDate, 'AAAAAAA', 'AAAAAAA', 0, Tipo.DESPESA);
         });
 
         describe('Service methods', async () => {
@@ -74,8 +74,7 @@ describe('Service Tests', () => {
                         nome: 'BBBBBB',
                         descricao: 'BBBBBB',
                         valor: 1,
-                        tipo: 'BBBBBB',
-                        tipoPagamento: 'BBBBBB'
+                        tipo: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -101,8 +100,7 @@ describe('Service Tests', () => {
                         nome: 'BBBBBB',
                         descricao: 'BBBBBB',
                         valor: 1,
-                        tipo: 'BBBBBB',
-                        tipoPagamento: 'BBBBBB'
+                        tipo: 'BBBBBB'
                     },
                     elemDefault
                 );

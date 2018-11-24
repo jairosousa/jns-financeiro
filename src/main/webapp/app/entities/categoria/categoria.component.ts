@@ -10,8 +10,6 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { CategoriaService } from './categoria.service';
 
-import { faListAlt } from '@fortawesome/free-regular-svg-icons';
-
 @Component({
     selector: 'jhi-categoria',
     templateUrl: './categoria.component.html'
@@ -32,8 +30,6 @@ export class CategoriaComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-
-    faCat = faListAlt;
 
     constructor(
         private categoriaService: CategoriaService,

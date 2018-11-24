@@ -1,10 +1,10 @@
 package br.com.jns.financeiro.web.rest;
 
+import com.codahale.metrics.annotation.Timed;
 import br.com.jns.financeiro.service.ParcelaService;
-import br.com.jns.financeiro.service.dto.ParcelaDTO;
 import br.com.jns.financeiro.web.rest.errors.BadRequestAlertException;
 import br.com.jns.financeiro.web.rest.util.HeaderUtil;
-import com.codahale.metrics.annotation.Timed;
+import br.com.jns.financeiro.service.dto.ParcelaDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Parcela.

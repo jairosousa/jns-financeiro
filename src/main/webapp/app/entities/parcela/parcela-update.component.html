@@ -7,7 +7,7 @@
                 <div class="form-group" [hidden]="!parcela.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="parcela.id" readonly />
+                        [(ngModel)]="parcela.id" readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.dataVencimento" for="field_dataVencimento">Data Vencimento</label>
@@ -32,22 +32,22 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.numero" for="field_numero">Numero</label>
                     <input type="number" class="form-control" name="numero" id="field_numero"
-                           [(ngModel)]="parcela.numero" />
+                        [(ngModel)]="parcela.numero" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.valor" for="field_valor">Valor</label>
                     <input type="number" class="form-control" name="valor" id="field_valor"
-                           [(ngModel)]="parcela.valor" />
+                        [(ngModel)]="parcela.valor" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.juros" for="field_juros">Juros</label>
                     <input type="number" class="form-control" name="juros" id="field_juros"
-                           [(ngModel)]="parcela.juros" />
+                        [(ngModel)]="parcela.juros" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.total" for="field_total">Total</label>
                     <input type="number" class="form-control" name="total" id="field_total"
-                           [(ngModel)]="parcela.total" />
+                        [(ngModel)]="parcela.total" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.forma" for="field_forma">Forma</label>
@@ -64,6 +64,7 @@
                         <option value="PENDENTE">{{'jnsFinanceiroApp.Status.PENDENTE' | translate}}</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.pagamento" for="field_pagamento">Pagamento</label>
                     <select class="form-control" id="field_pagamento" name="pagamento" [(ngModel)]="parcela.pagamentoId" >

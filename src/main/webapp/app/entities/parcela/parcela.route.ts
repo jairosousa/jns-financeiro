@@ -11,9 +11,11 @@ import { ParcelaDetailComponent } from './parcela-detail.component';
 import { ParcelaUpdateComponent } from './parcela-update.component';
 import { ParcelaDeletePopupComponent } from './parcela-delete-dialog.component';
 import { IParcela } from 'app/shared/model/parcela.model';
+
 @Injectable({ providedIn: 'root' })
 export class ParcelaResolve implements Resolve<IParcela> {
     constructor(private service: ParcelaService) {}
+
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Parcela> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
@@ -25,6 +27,7 @@ export class ParcelaResolve implements Resolve<IParcela> {
         return of(new Parcela());
     }
 }
+
 export const parcelaRoute: Routes = [
     {
         path: 'parcela',
@@ -72,6 +75,7 @@ export const parcelaRoute: Routes = [
         canActivate: [UserRouteAccessService]
     }
 ];
+
 export const parcelaPopupRoute: Routes = [
     {
         path: 'parcela/:id/delete',

@@ -6,6 +6,7 @@ import { JnsFinanceiroCategoriaModule } from './categoria/categoria.module';
 import { JnsFinanceiroEnderecoModule } from './endereco/endereco.module';
 import { JnsFinanceiroPagamentoModule } from './pagamento/pagamento.module';
 import { JnsFinanceiroParcelaModule } from 'app/entities/parcela/parcela.module';
+import { JnsFinanceiroParcelaModule } from './parcela/parcela.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({

@@ -1,13 +1,14 @@
 package br.com.jns.financeiro.service.impl;
 
+import br.com.jns.financeiro.service.ParcelaService;
 import br.com.jns.financeiro.domain.Parcela;
 import br.com.jns.financeiro.repository.ParcelaRepository;
 import br.com.jns.financeiro.repository.search.ParcelaSearchRepository;
-import br.com.jns.financeiro.service.ParcelaService;
 import br.com.jns.financeiro.service.dto.ParcelaDTO;
 import br.com.jns.financeiro.service.mapper.ParcelaMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing Parcela.

@@ -3,9 +3,11 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+
 import { IParcela } from 'app/shared/model/parcela.model';
 import { Principal } from 'app/core';
 import { ParcelaService } from './parcela.service';
+
 @Component({
     selector: 'jhi-parcela',
     templateUrl: './parcela.component.html'
@@ -15,6 +17,7 @@ export class ParcelaComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     currentSearch: string;
+
     constructor(
         private parcelaService: ParcelaService,
         private jhiAlertService: JhiAlertService,
@@ -27,6 +30,7 @@ export class ParcelaComponent implements OnInit, OnDestroy {
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
     }
+
     loadAll() {
         if (this.currentSearch) {
             this.parcelaService
@@ -47,6 +51,7 @@ export class ParcelaComponent implements OnInit, OnDestroy {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     search(query) {
         if (!query) {
             return this.clear();
@@ -54,10 +59,12 @@ export class ParcelaComponent implements OnInit, OnDestroy {
         this.currentSearch = query;
         this.loadAll();
     }
+
     clear() {
         this.currentSearch = '';
         this.loadAll();
     }
+
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then(account => {
@@ -65,15 +72,19 @@ export class ParcelaComponent implements OnInit, OnDestroy {
         });
         this.registerChangeInParcelas();
     }
+
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
+
     trackId(index: number, item: IParcela) {
         return item.id;
     }
+
     registerChangeInParcelas() {
         this.eventSubscriber = this.eventManager.subscribe('parcelaListModification', response => this.loadAll());
     }
+
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }

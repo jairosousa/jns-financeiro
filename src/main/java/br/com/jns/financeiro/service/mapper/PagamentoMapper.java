@@ -1,9 +1,9 @@
 package br.com.jns.financeiro.service.mapper;
 
-import br.com.jns.financeiro.domain.Pagamento;
+import br.com.jns.financeiro.domain.*;
 import br.com.jns.financeiro.service.dto.PagamentoDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+
+import org.mapstruct.*;
 
 /**
  * Mapper for the entity Pagamento and its DTO PagamentoDTO.

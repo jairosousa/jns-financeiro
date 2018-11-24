@@ -60,10 +60,12 @@ public class Endereco implements Serializable {
     public String getCep() {
         return cep;
     }
+
     public Endereco cep(String cep) {
         this.cep = cep;
         return this;
     }
+
     public void setCep(String cep) {
         this.cep = cep;
     }

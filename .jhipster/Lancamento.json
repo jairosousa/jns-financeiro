@@ -36,7 +36,7 @@
             "relationshipType": "one-to-one",
             "relationshipName": "pagamento",
             "otherEntityName": "pagamento",
-            "otherEntityField": "forma",
+            "otherEntityField": "tipoPagamento",
             "ownerSide": true,
             "otherEntityRelationshipName": "lancamento"
         },

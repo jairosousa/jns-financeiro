@@ -35,7 +35,6 @@
                         </span>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas" for="field_quantidadeParcelas">Quantidade Parcelas</label>
                     <input type="number" class="form-control" name="quantidadeParcelas" id="field_quantidadeParcelas"
@@ -64,7 +63,6 @@
                         </small>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento" for="field_tipoPagamento">Tipo Pagamento</label>
                     <select class="form-control" name="tipoPagamento" [(ngModel)]="pagamento.tipoPagamento" id="field_tipoPagamento" >
@@ -72,6 +70,7 @@
                         <option value="PARCELADO">{{'jnsFinanceiroApp.TipoPagamento.PARCELADO' | translate}}</option>
                     </select>
                 </div>
+
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

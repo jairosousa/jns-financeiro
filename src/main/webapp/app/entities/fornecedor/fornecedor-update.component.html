@@ -1,174 +1,60 @@
 <div class="row justify-content-center">
-    <div class="container">
-        <nav class="mb-5">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
-                <li class="breadcrumb-item"><a [routerLink]="['/fornecedor']">Fornecedores</a></li>
-                <li class="breadcrumb-item active">
-                    <span *ngIf="currentAction == 'new'" jhiTranslate="jnsFinanceiroApp.fornecedor.home.createLabel">Create or edit a fornecedor</span>
-                    <span *ngIf="currentAction == 'edit'" jhiTranslate="jnsFinanceiroApp.fornecedor.home.editLabel">Create or edit a fornecedor</span>
-                </li>
-            </ol>
-        </nav>
-
-        <jhi-alert></jhi-alert>
-
-        <div class="row mb-4">
-            <div class="col-md">
-                <h1 class="h2 border-left pl-2">
-                    <h2 *ngIf="currentAction == 'edit'" id="jhi-fornecedor-heading-e"
-                        jhiTranslate="jnsFinanceiroApp.fornecedor.home.editLabel">Create or edit a fornecedor</h2>
-                    <h2 *ngIf="currentAction == 'new'" id="jhi-fornecedor-heading-c"
-                        jhiTranslate="jnsFinanceiroApp.fornecedor.home.createLabel">Create or edit a fornecedor</h2>
-                </h1>
-            </div>
-
-        </div>
-
+    <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <!--<h2 id="jhi-fornecedor-heading" jhiTranslate="jnsFinanceiroApp.fornecedor.home.createOrEditLabel">Create or edit a Fornecedor</h2>-->
+            <h2 id="jhi-fornecedor-heading" jhiTranslate="jnsFinanceiroApp.fornecedor.home.createOrEditLabel">Create or edit a Fornecedor</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="true">
+                <div class="form-group" [hidden]="!fornecedor.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="fornecedor.id" readonly/>
+                        [(ngModel)]="fornecedor.id" readonly />
                 </div>
-
-                <div class="form-row">
-                    <div class="col-12 col-md-10">
-                        <div class=" form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.nome"
-                                   for="field_nome">Nome</label>
-                            <input type="text" class="form-control" name="nome" id="field_nome"
-                                   [(ngModel)]="fornecedor.nome" required minlength="3"/>
-                            <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.nome?.errors?.required"
-                                       jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.nome?.errors?.minlength"
-                                       jhiTranslate="entity.validation.minlength" translateValues="{ min: 3 }">
-                                    This field is required to be at least 3 characters.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-2">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.pessoa"
-                                   for="field_pessoa">Pessoa</label>
-                            <select class="form-control" name="pessoa" [(ngModel)]="fornecedor.pessoa"
-                                    id="field_pessoa">
-                                <option value="FISICA">{{'jnsFinanceiroApp.Pessoa.FISICA' | translate}}</option>
-                                <option value="JURIDICA">{{'jnsFinanceiroApp.Pessoa.JURIDICA' | translate}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group" *ngIf="fornecedor.pessoa == 'JURIDICA'">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.cnpj" for="field_cnpj">Cnpj</label>
-                    <input type="text" class="form-control" name="cnpj" id="field_cnpj"
-                           [(ngModel)]="fornecedor.cnpj"/>
-                </div>
-                <div class="form-group" *ngIf="fornecedor.pessoa == 'FISICA'">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.cpf"
-                           for="field_cpf">Cpf</label>
-                    <input type="text" class="form-control" name="cpf" id="field_cpf"
-                           [(ngModel)]="fornecedor.cpf"/>
-                </div>
-
-                <!--ENDEREÇO-->
-                <div class="form-row">
-                    <div class="form-group col-sm-12 col-md-2">
-                        <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.endereco.cep" for="field_cep">Cep</label>
-                        <input type="text" class="form-control" name="cep" id="field_cep"
-                               [(ngModel)]="endereco.cep" required (change)="findEnderecoBy()"/>
-                        <div
-                            [hidden]="!(editForm.controls.cep?.dirty && editForm.controls.cep?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!editForm.controls.cep?.errors?.required"
-                                   jhiTranslate="entity.validation.required">
-                                This field is required.
-                            </small>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.endereco.logradouro"
-                                   for="field_logradouro">Logradouro</label>
-                            <input type="text" class="form-control" name="logradouro" id="field_logradouro"
-                                   [(ngModel)]="endereco.logradouro" required/>
-                            <div
-                                [hidden]="!(editForm.controls.logradouro?.dirty && editForm.controls.logradouro?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.logradouro?.errors?.required"
-                                       jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-2">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.endereco.numero"
-                                   for="field_numero">Numero</label>
-                            <input type="text" class="form-control" name="numero" id="field_numero"
-                                   [(ngModel)]="endereco.numero"/>
-                        </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                        [(ngModel)]="fornecedor.nome" required minlength="3"/>
+                    <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nome?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nome?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 3 }">
+                        This field is required to be at least 3 characters.
+                        </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.endereco.complemento"
-                           for="field_complemento">Complemento</label>
-                    <input type="text" class="form-control" name="complemento" id="field_complemento"
-                           [(ngModel)]="endereco.complemento"/>
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.pessoa" for="field_pessoa">Pessoa</label>
+                    <select class="form-control" name="pessoa" [(ngModel)]="fornecedor.pessoa" id="field_pessoa" >
+                        <option value="FISICA">{{'jnsFinanceiroApp.Pessoa.FISICA' | translate}}</option>
+                        <option value="JURIDICA">{{'jnsFinanceiroApp.Pessoa.JURIDICA' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.cnpj" for="field_cnpj">Cnpj</label>
+                    <input type="text" class="form-control" name="cnpj" id="field_cnpj"
+                        [(ngModel)]="fornecedor.cnpj" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.cpf" for="field_cpf">Cpf</label>
+                    <input type="text" class="form-control" name="cpf" id="field_cpf"
+                        [(ngModel)]="fornecedor.cpf" />
                 </div>
 
-                <div class="form-row">
-
-                    <div class="col-12 col-md-5">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.endereco.bairro"
-                                   for="field_bairro">Bairro</label>
-                            <input type="text" class="form-control" name="bairro" id="field_bairro"
-                                   [(ngModel)]="endereco.bairro"/>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-5">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.endereco.cidade"
-                                   for="field_cidade">Cidade</label>
-                            <input type="text" class="form-control" name="cidade" id="field_cidade"
-                                   [(ngModel)]="endereco.cidade" required/>
-                            <div [hidden]="!(editForm.controls.cidade?.dirty && editForm.controls.cidade?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.cidade?.errors?.required"
-                                       jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-2">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.endereco.uf"
-                                   for="field_uf">Uf</label>
-                            <input type="text" class="form-control" name="uf" id="field_uf"
-                                   [(ngModel)]="endereco.uf"/>
-                        </div>
-                    </div>
-
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.endereco" for="field_endereco">Endereco</label>
+                    <select class="form-control" id="field_endereco" name="endereco" [(ngModel)]="fornecedor.enderecoId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="enderecoOption.id" *ngFor="let enderecoOption of enderecos; trackBy: trackEnderecoById">{{enderecoOption.id}}</option>
+                    </select>
                 </div>
             </div>
             <div>
-                <!--<button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">-->
-                <!--<fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>-->
-                <!--</button>-->
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
-                        class="btn btn-primary btn-lg float-right">
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

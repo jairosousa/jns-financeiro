@@ -20,7 +20,9 @@
             "diaPagamento": "Dia Pagamento",
             "quantidadeParcelas": "Quantidade Parcelas",
             "status": "Status",
-            "lancamento": "Lançamento"
+            "tipoPagamento": "Tipo Pagamento",
+            "parcela": "Parcela",
+            "lancamento": "Lancamento"
         }
     }
 }
