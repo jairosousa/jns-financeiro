@@ -1,14 +1,8 @@
 import { Moment } from 'moment';
-import { IPagamento } from 'app/shared/model//pagamento.model';
 
 export const enum Tipo {
     DESPESA = 'DESPESA',
     RECEITA = 'RECEITA'
-}
-
-export const enum TipoPagamento {
-    AVISTA = 'AVISTA',
-    PARCELADO = 'PARCELADO'
 }
 
 export interface ILancamento {
@@ -18,12 +12,12 @@ export interface ILancamento {
     descricao?: string;
     valor?: number;
     tipo?: Tipo;
-    tipoPagamento?: TipoPagamento;
+    pagamentoForma?: string;
+    pagamentoId?: number;
     fornecedorNome?: string;
     fornecedorId?: number;
     categoriaNome?: string;
     categoriaId?: number;
-    pagamentos?: IPagamento[];
 }
 
 export class Lancamento implements ILancamento {
@@ -34,11 +28,11 @@ export class Lancamento implements ILancamento {
         public descricao?: string,
         public valor?: number,
         public tipo?: Tipo,
-        public tipoPagamento?: TipoPagamento,
+        public pagamentoForma?: string,
+        public pagamentoId?: number,
         public fornecedorNome?: string,
         public fornecedorId?: number,
         public categoriaNome?: string,
-        public categoriaId?: number,
-        public pagamentos?: IPagamento[]
+        public categoriaId?: number
     ) {}
 }

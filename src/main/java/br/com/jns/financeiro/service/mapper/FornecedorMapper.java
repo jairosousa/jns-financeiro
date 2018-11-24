@@ -1,9 +1,9 @@
 package br.com.jns.financeiro.service.mapper;
 
-import br.com.jns.financeiro.domain.*;
+import br.com.jns.financeiro.domain.Fornecedor;
 import br.com.jns.financeiro.service.dto.FornecedorDTO;
-
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * Mapper for the entity Fornecedor and its DTO FornecedorDTO.
@@ -15,7 +15,6 @@ public interface FornecedorMapper extends EntityMapper<FornecedorDTO, Fornecedor
     FornecedorDTO toDto(Fornecedor fornecedor);
 
     @Mapping(source = "enderecoId", target = "endereco")
-    @Mapping(target = "lancamento", ignore = true)
     Fornecedor toEntity(FornecedorDTO fornecedorDTO);
 
     default Fornecedor fromId(Long id) {

@@ -13,15 +13,6 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "forma",
-            "fieldType": "FormaPagamento",
-            "fieldValues": "DINHEIRO,CARTAO,DEBITO"
-        },
-        {
-            "fieldName": "juros",
-            "fieldType": "BigDecimal"
-        },
-        {
             "fieldName": "quantidadeParcelas",
             "fieldType": "Long",
             "fieldValidateRules": [
@@ -35,14 +26,26 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "tipoPagamento",
+            "fieldType": "TipoPagamento",
+            "fieldValues": "AVISTA,PARCELADO"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
+            "relationshipName": "parcela",
+            "otherEntityName": "parcela",
+            "otherEntityRelationshipName": "pagamento"
+        },
+        {
+            "relationshipType": "one-to-one",
             "relationshipName": "lancamento",
             "otherEntityName": "lancamento",
-            "otherEntityField": "id"
+            "ownerSide": false,
+            "otherEntityRelationshipName": "pagamento"
         }
     ],
     "changelogDate": "20181117150929",

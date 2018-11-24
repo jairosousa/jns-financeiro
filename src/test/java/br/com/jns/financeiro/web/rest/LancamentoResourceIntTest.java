@@ -43,7 +43,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import br.com.jns.financeiro.domain.enumeration.Tipo;
-import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
 /**
  * Test class for the LancamentoResource REST controller.
  *
@@ -67,9 +66,6 @@ public class LancamentoResourceIntTest {
 
     private static final Tipo DEFAULT_TIPO = Tipo.DESPESA;
     private static final Tipo UPDATED_TIPO = Tipo.RECEITA;
-
-    private static final TipoPagamento DEFAULT_TIPO_PAGAMENTO = TipoPagamento.AVISTA;
-    private static final TipoPagamento UPDATED_TIPO_PAGAMENTO = TipoPagamento.PARCELADO;
 
     @Autowired
     private LancamentoRepository lancamentoRepository;
@@ -127,8 +123,7 @@ public class LancamentoResourceIntTest {
             .nome(DEFAULT_NOME)
             .descricao(DEFAULT_DESCRICAO)
             .valor(DEFAULT_VALOR)
-            .tipo(DEFAULT_TIPO)
-            .tipoPagamento(DEFAULT_TIPO_PAGAMENTO);
+            .tipo(DEFAULT_TIPO);
         return lancamento;
     }
 
@@ -158,7 +153,6 @@ public class LancamentoResourceIntTest {
         assertThat(testLancamento.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
         assertThat(testLancamento.getValor()).isEqualTo(DEFAULT_VALOR);
         assertThat(testLancamento.getTipo()).isEqualTo(DEFAULT_TIPO);
-        assertThat(testLancamento.getTipoPagamento()).isEqualTo(DEFAULT_TIPO_PAGAMENTO);
 
         // Validate the Lancamento in Elasticsearch
         verify(mockLancamentoSearchRepository, times(1)).save(testLancamento);
@@ -240,10 +234,9 @@ public class LancamentoResourceIntTest {
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME.toString())))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO.toString())))
             .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())))
-            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())))
-            .andExpect(jsonPath("$.[*].tipoPagamento").value(hasItem(DEFAULT_TIPO_PAGAMENTO.toString())));
+            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getLancamento() throws Exception {
@@ -259,8 +252,7 @@ public class LancamentoResourceIntTest {
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME.toString()))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO.toString()))
             .andExpect(jsonPath("$.valor").value(DEFAULT_VALOR.intValue()))
-            .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO.toString()))
-            .andExpect(jsonPath("$.tipoPagamento").value(DEFAULT_TIPO_PAGAMENTO.toString()));
+            .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO.toString()));
     }
 
     @Test
@@ -288,8 +280,7 @@ public class LancamentoResourceIntTest {
             .nome(UPDATED_NOME)
             .descricao(UPDATED_DESCRICAO)
             .valor(UPDATED_VALOR)
-            .tipo(UPDATED_TIPO)
-            .tipoPagamento(UPDATED_TIPO_PAGAMENTO);
+            .tipo(UPDATED_TIPO);
         LancamentoDTO lancamentoDTO = lancamentoMapper.toDto(updatedLancamento);
 
         restLancamentoMockMvc.perform(put("/api/lancamentos")
@@ -306,7 +297,6 @@ public class LancamentoResourceIntTest {
         assertThat(testLancamento.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
         assertThat(testLancamento.getValor()).isEqualTo(UPDATED_VALOR);
         assertThat(testLancamento.getTipo()).isEqualTo(UPDATED_TIPO);
-        assertThat(testLancamento.getTipoPagamento()).isEqualTo(UPDATED_TIPO_PAGAMENTO);
 
         // Validate the Lancamento in Elasticsearch
         verify(mockLancamentoSearchRepository, times(1)).save(testLancamento);
@@ -371,8 +361,7 @@ public class LancamentoResourceIntTest {
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
             .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())))
-            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())))
-            .andExpect(jsonPath("$.[*].tipoPagamento").value(hasItem(DEFAULT_TIPO_PAGAMENTO.toString())));
+            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())));
     }
 
     @Test

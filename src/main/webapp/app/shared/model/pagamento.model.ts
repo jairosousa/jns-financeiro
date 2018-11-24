@@ -1,24 +1,24 @@
 import { Moment } from 'moment';
-
-export const enum FormaPagamento {
-    DINHEIRO = 'DINHEIRO',
-    CARTAO = 'CARTAO',
-    DEBITO = 'DEBITO'
-}
+import { IParcela } from 'app/shared/model//parcela.model';
 
 export const enum Status {
     PAGO = 'PAGO',
     PENDENTE = 'PENDENTE'
 }
 
+export const enum TipoPagamento {
+    AVISTA = 'AVISTA',
+    PARCELADO = 'PARCELADO'
+}
+
 export interface IPagamento {
     id?: number;
     vencimento?: Moment;
     diaPagamento?: Moment;
-    forma?: FormaPagamento;
-    juros?: number;
     quantidadeParcelas?: number;
     status?: Status;
+    tipoPagamento?: TipoPagamento;
+    parcelas?: IParcela[];
     lancamentoId?: number;
 }
 
@@ -27,10 +27,10 @@ export class Pagamento implements IPagamento {
         public id?: number,
         public vencimento?: Moment,
         public diaPagamento?: Moment,
-        public forma?: FormaPagamento,
-        public juros?: number,
         public quantidadeParcelas?: number,
         public status?: Status,
+        public tipoPagamento?: TipoPagamento,
+        public parcelas?: IParcela[],
         public lancamentoId?: number
     ) {}
 }

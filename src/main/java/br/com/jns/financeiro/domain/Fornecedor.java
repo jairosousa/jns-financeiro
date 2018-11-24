@@ -1,6 +1,5 @@
 package br.com.jns.financeiro.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -45,10 +44,6 @@ public class Fornecedor implements Serializable {
 
     @OneToOne    @JoinColumn(unique = true)
     private Endereco endereco;
-
-    @OneToOne(mappedBy = "fornecedor")
-    @JsonIgnore
-    private Lancamento lancamento;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -122,19 +117,6 @@ public class Fornecedor implements Serializable {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
-    }
-
-    public Lancamento getLancamento() {
-        return lancamento;
-    }
-
-    public Fornecedor lancamento(Lancamento lancamento) {
-        this.lancamento = lancamento;
-        return this;
-    }
-
-    public void setLancamento(Lancamento lancamento) {
-        this.lancamento = lancamento;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

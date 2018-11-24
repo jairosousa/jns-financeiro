@@ -12,7 +12,6 @@ export interface IFornecedor {
     cnpj?: string;
     cpf?: string;
     enderecoId?: number;
-    lancamentoId?: number;
     endereco?: IEndereco;
 }
 
@@ -24,7 +23,6 @@ export class Fornecedor implements IFornecedor {
         public cnpj?: string,
         public cpf?: string,
         public enderecoId?: number,
-        public lancamentoId?: number,
         public endereco?: IEndereco
     ) {
         this.endereco = new Endereco();

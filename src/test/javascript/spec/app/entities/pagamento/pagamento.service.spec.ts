@@ -7,7 +7,7 @@ import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { PagamentoService } from 'app/entities/pagamento/pagamento.service';
-import { IPagamento, Pagamento, FormaPagamento, Status } from 'app/shared/model/pagamento.model';
+import { IPagamento, Pagamento, Status, TipoPagamento } from 'app/shared/model/pagamento.model';
 
 describe('Service Tests', () => {
     describe('Pagamento Service', () => {
@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Pagamento(0, currentDate, currentDate, FormaPagamento.DINHEIRO, 0, 0, Status.PAGO);
+            elemDefault = new Pagamento(0, currentDate, currentDate, 0, Status.PAGO, TipoPagamento.AVISTA);
         });
 
         describe('Service methods', async () => {
@@ -75,10 +75,9 @@ describe('Service Tests', () => {
                     {
                         vencimento: currentDate.format(DATE_FORMAT),
                         diaPagamento: currentDate.format(DATE_FORMAT),
-                        forma: 'BBBBBB',
-                        juros: 1,
                         quantidadeParcelas: 1,
-                        status: 'BBBBBB'
+                        status: 'BBBBBB',
+                        tipoPagamento: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -103,10 +102,9 @@ describe('Service Tests', () => {
                     {
                         vencimento: currentDate.format(DATE_FORMAT),
                         diaPagamento: currentDate.format(DATE_FORMAT),
-                        forma: 'BBBBBB',
-                        juros: 1,
                         quantidadeParcelas: 1,
-                        status: 'BBBBBB'
+                        status: 'BBBBBB',
+                        tipoPagamento: 'BBBBBB'
                     },
                     elemDefault
                 );

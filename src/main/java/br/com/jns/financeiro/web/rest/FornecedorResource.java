@@ -1,11 +1,11 @@
 package br.com.jns.financeiro.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import br.com.jns.financeiro.service.FornecedorService;
+import br.com.jns.financeiro.service.dto.FornecedorDTO;
 import br.com.jns.financeiro.web.rest.errors.BadRequestAlertException;
 import br.com.jns.financeiro.web.rest.util.HeaderUtil;
 import br.com.jns.financeiro.web.rest.util.PaginationUtil;
-import br.com.jns.financeiro.service.dto.FornecedorDTO;
+import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Fornecedor.
@@ -89,17 +85,11 @@ public class FornecedorResource {
      * GET  /fornecedors : get all the fornecedors.
      *
      * @param pageable the pagination information
-     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of fornecedors in body
      */
     @GetMapping("/fornecedors")
     @Timed
-    public ResponseEntity<List<FornecedorDTO>> getAllFornecedors(Pageable pageable, @RequestParam(required = false) String filter) {
-        if ("lancamento-is-null".equals(filter)) {
-            log.debug("REST request to get all Fornecedors where lancamento is null");
-            return new ResponseEntity<>(fornecedorService.findAllWhereLancamentoIsNull(),
-                    HttpStatus.OK);
-        }
+    public ResponseEntity<List<FornecedorDTO>> getAllFornecedors(Pageable pageable) {
         log.debug("REST request to get a page of Fornecedors");
         Page<FornecedorDTO> page = fornecedorService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/fornecedors");
@@ -138,7 +128,7 @@ public class FornecedorResource {
      * SEARCH  /_search/fornecedors?query=:query : search for the fornecedor corresponding
      * to the query.
      *
-     * @param query the query of the fornecedor search
+     * @param query    the query of the fornecedor search
      * @param pageable the pagination information
      * @return the result of the search
      */

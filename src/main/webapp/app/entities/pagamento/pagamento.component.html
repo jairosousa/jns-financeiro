@@ -29,15 +29,13 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="vencimento"><span jhiTranslate="jnsFinanceiroApp.pagamento.vencimento">Vencimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="diaPagamento"><span jhiTranslate="jnsFinanceiroApp.pagamento.diaPagamento">Dia Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="forma"><span jhiTranslate="jnsFinanceiroApp.pagamento.forma">Forma</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="juros"><span jhiTranslate="jnsFinanceiroApp.pagamento.juros">Juros</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="quantidadeParcelas"><span jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas">Quantidade Parcelas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.pagamento.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lancamentoId"><span jhiTranslate="jnsFinanceiroApp.pagamento.lancamento">Lancamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="vencimento"><span jhiTranslate="jnsFinanceiroApp.pagamento.vencimento">Vencimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="diaPagamento"><span jhiTranslate="jnsFinanceiroApp.pagamento.diaPagamento">Dia Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="quantidadeParcelas"><span jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas">Quantidade Parcelas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.pagamento.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="tipoPagamento"><span jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento">Tipo Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th></th>
             </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
@@ -45,15 +43,9 @@
                 <td><a [routerLink]="['/pagamento', pagamento.id, 'view' ]">{{pagamento.id}}</a></td>
                 <td>{{pagamento.vencimento | date:'mediumDate'}}</td>
                 <td>{{pagamento.diaPagamento | date:'mediumDate'}}</td>
-                <td jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + pagamento.forma}}">{{pagamento.forma}}</td>
-                <td>{{pagamento.juros}}</td>
                 <td>{{pagamento.quantidadeParcelas}}</td>
                 <td jhiTranslate="{{'jnsFinanceiroApp.Status.' + pagamento.status}}">{{pagamento.status}}</td>
-                <td>
-                    <div *ngIf="pagamento.lancamentoId">
-                        <a [routerLink]="['../lancamento', pagamento.lancamentoId , 'view' ]" >{{pagamento.lancamentoId}}</a>
-                    </div>
-                </td>
+                <td jhiTranslate="{{'jnsFinanceiroApp.TipoPagamento.' + pagamento.tipoPagamento}}">{{pagamento.tipoPagamento}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

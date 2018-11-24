@@ -35,7 +35,7 @@
             <th jhiSortBy="descricao"><span jhiTranslate="jnsFinanceiroApp.lancamento.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="valor"><span jhiTranslate="jnsFinanceiroApp.lancamento.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="tipo"><span jhiTranslate="jnsFinanceiroApp.lancamento.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="tipoPagamento"><span jhiTranslate="jnsFinanceiroApp.lancamento.tipoPagamento">Tipo Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pagamentoForma"><span jhiTranslate="jnsFinanceiroApp.lancamento.pagamento">Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fornecedorNome"><span jhiTranslate="jnsFinanceiroApp.lancamento.fornecedor">Fornecedor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="categoriaNome"><span jhiTranslate="jnsFinanceiroApp.lancamento.categoria">Categoria</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -49,7 +49,11 @@
                 <td>{{lancamento.descricao}}</td>
                 <td>{{lancamento.valor}}</td>
                 <td jhiTranslate="{{'jnsFinanceiroApp.Tipo.' + lancamento.tipo}}">{{lancamento.tipo}}</td>
-                <td jhiTranslate="{{'jnsFinanceiroApp.TipoPagamento.' + lancamento.tipoPagamento}}">{{lancamento.tipoPagamento}}</td>
+                <td>
+                    <div *ngIf="lancamento.pagamentoId">
+                        <a [routerLink]="['../pagamento', lancamento.pagamentoId , 'view' ]" >{{lancamento.pagamentoForma}}</a>
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="lancamento.fornecedorId">
                         <a [routerLink]="['../fornecedor', lancamento.fornecedorId , 'view' ]" >{{lancamento.fornecedorNome}}</a>

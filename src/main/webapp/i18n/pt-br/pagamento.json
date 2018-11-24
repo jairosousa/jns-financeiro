@@ -18,11 +18,9 @@
             },
             "vencimento": "Vencimento",
             "diaPagamento": "Dia Pagamento",
-            "forma": "Forma",
-            "juros": "Juros",
             "quantidadeParcelas": "Quantidade Parcelas",
             "status": "Status",
-            "lancamento": "Lancamento"
+            "lancamento": "Lançamento"
         }
     }
 }

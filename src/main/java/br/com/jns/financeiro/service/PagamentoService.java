@@ -1,10 +1,10 @@
 package br.com.jns.financeiro.service;
 
 import br.com.jns.financeiro.service.dto.PagamentoDTO;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,6 +28,12 @@ public interface PagamentoService {
      */
     Page<PagamentoDTO> findAll(Pageable pageable);
 
+    /**
+     * Get all the PagamentoDTO where Lancamento is null.
+     *
+     * @return the list of entities
+     */
+    List<PagamentoDTO> findAllWhereLancamentoIsNull();
 
     /**
      * Get the "id" pagamento.
@@ -47,8 +53,7 @@ public interface PagamentoService {
     /**
      * Search for the pagamento corresponding to the query.
      *
-     * @param query the query of the search
-     * 
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */

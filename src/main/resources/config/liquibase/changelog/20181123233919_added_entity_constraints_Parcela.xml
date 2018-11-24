@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Parcela.
+    -->
+    <changeSet id="20181123233919-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="pagamento_id"
+                                 baseTableName="parcela"
+                                 constraintName="fk_parcela_pagamento_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pagamento"/>
+
+    </changeSet>
+</databaseChangeLog>

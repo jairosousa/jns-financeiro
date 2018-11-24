@@ -29,35 +29,28 @@
             "fieldName": "tipo",
             "fieldType": "Tipo",
             "fieldValues": "DESPESA,RECEITA"
-        },
-        {
-            "fieldName": "tipoPagamento",
-            "fieldType": "TipoPagamento",
-            "fieldValues": "AVISTA,PARCELADO"
         }
     ],
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "fornecedor",
-            "otherEntityName": "fornecedor",
-            "otherEntityField": "nome",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "lancamento(nome)"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "categoria",
-            "otherEntityName": "categoria",
-            "otherEntityField": "nome",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "lancamento"
-        },
-        {
-            "relationshipType": "one-to-many",
             "relationshipName": "pagamento",
             "otherEntityName": "pagamento",
+            "otherEntityField": "forma",
+            "ownerSide": true,
             "otherEntityRelationshipName": "lancamento"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "fornecedor",
+            "otherEntityName": "fornecedor",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "categoria",
+            "otherEntityName": "categoria",
+            "otherEntityField": "nome"
         }
     ],
     "changelogDate": "20181117150925",

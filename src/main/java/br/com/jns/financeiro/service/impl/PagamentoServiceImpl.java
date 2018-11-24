@@ -1,22 +1,25 @@
 package br.com.jns.financeiro.service.impl;
 
-import br.com.jns.financeiro.service.PagamentoService;
 import br.com.jns.financeiro.domain.Pagamento;
 import br.com.jns.financeiro.repository.PagamentoRepository;
 import br.com.jns.financeiro.repository.search.PagamentoSearchRepository;
+import br.com.jns.financeiro.service.PagamentoService;
 import br.com.jns.financeiro.service.dto.PagamentoDTO;
 import br.com.jns.financeiro.service.mapper.PagamentoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing Pagamento.
@@ -72,6 +75,21 @@ public class PagamentoServiceImpl implements PagamentoService {
 
 
     /**
+     * get all the pagamentos where Lancamento is null.
+     *
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public List<PagamentoDTO> findAllWhereLancamentoIsNull() {
+        log.debug("Request to get all pagamentos where Lancamento is null");
+        return StreamSupport
+            .stream(pagamentoRepository.findAll().spliterator(), false)
+            .filter(pagamento -> pagamento.getLancamento() == null)
+            .map(pagamentoMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    /**
      * Get one pagamento by id.
      *
      * @param id the id of the entity
@@ -100,7 +118,7 @@ public class PagamentoServiceImpl implements PagamentoService {
     /**
      * Search for the pagamento corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */

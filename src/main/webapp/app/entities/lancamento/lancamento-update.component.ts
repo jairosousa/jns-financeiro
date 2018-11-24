@@ -20,6 +20,8 @@ export class LancamentoUpdateComponent implements OnInit {
     lancamento: ILancamento;
     isSaving: boolean;
 
+    pagamentos: IPagamento[];
+
     fornecedors: IFornecedor[];
 
     categorias: ICategoria[];
@@ -29,6 +31,7 @@ export class LancamentoUpdateComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private lancamentoService: LancamentoService,
         private fornecedorService: FornecedorService,
+        private pagamentoService: PagamentoService,
         private categoriaService: CategoriaService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -46,6 +49,21 @@ export class LancamentoUpdateComponent implements OnInit {
                     this.fornecedorService.find(this.lancamento.fornecedorId).subscribe(
                         (subRes: HttpResponse<IFornecedor>) => {
                             this.fornecedors = [subRes.body].concat(res.body);
+                        },
+                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                    );
+                }
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.pagamentoService.query({ filter: 'lancamento-is-null' }).subscribe(
+            (res: HttpResponse<IPagamento[]>) => {
+                if (!this.lancamento.pagamentoId) {
+                    this.pagamentos = res.body;
+                } else {
+                    this.pagamentoService.find(this.lancamento.pagamentoId).subscribe(
+                        (subRes: HttpResponse<IPagamento>) => {
+                            this.pagamentos = [subRes.body].concat(res.body);
                         },
                         (subRes: HttpErrorResponse) => this.onError(subRes.message)
                     );
@@ -81,6 +99,10 @@ export class LancamentoUpdateComponent implements OnInit {
         } else {
             this.subscribeToSaveResponse(this.lancamentoService.create(this.lancamento));
         }
+    }
+
+    trackPagamentoById(index: number, item: IPagamento) {
+        return item.id;
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<ILancamento>>) {

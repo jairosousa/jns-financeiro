@@ -1,12 +1,12 @@
 package br.com.jns.financeiro.service.dto;
 
-import java.time.LocalDate;
-import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Objects;
-import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
 import br.com.jns.financeiro.domain.enumeration.Status;
+import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
+
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * A DTO for the Pagamento entity.
@@ -20,17 +20,13 @@ public class PagamentoDTO implements Serializable {
 
     private LocalDate diaPagamento;
 
-    private FormaPagamento forma;
-
-    private BigDecimal juros;
-
     @NotNull
     private Long quantidadeParcelas;
 
     @NotNull
     private Status status;
 
-    private Long lancamentoId;
+    private TipoPagamento tipoPagamento;
 
     public Long getId() {
         return id;
@@ -56,22 +52,6 @@ public class PagamentoDTO implements Serializable {
         this.diaPagamento = diaPagamento;
     }
 
-    public FormaPagamento getForma() {
-        return forma;
-    }
-
-    public void setForma(FormaPagamento forma) {
-        this.forma = forma;
-    }
-
-    public BigDecimal getJuros() {
-        return juros;
-    }
-
-    public void setJuros(BigDecimal juros) {
-        this.juros = juros;
-    }
-
     public Long getQuantidadeParcelas() {
         return quantidadeParcelas;
     }
@@ -88,12 +68,12 @@ public class PagamentoDTO implements Serializable {
         this.status = status;
     }
 
-    public Long getLancamentoId() {
-        return lancamentoId;
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
     }
 
-    public void setLancamentoId(Long lancamentoId) {
-        this.lancamentoId = lancamentoId;
+    public void setTipoPagamento(TipoPagamento tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
     }
 
     @Override
@@ -123,11 +103,9 @@ public class PagamentoDTO implements Serializable {
             "id=" + getId() +
             ", vencimento='" + getVencimento() + "'" +
             ", diaPagamento='" + getDiaPagamento() + "'" +
-            ", forma='" + getForma() + "'" +
-            ", juros=" + getJuros() +
             ", quantidadeParcelas=" + getQuantidadeParcelas() +
             ", status='" + getStatus() + "'" +
-            ", lancamento=" + getLancamentoId() +
+            ", tipoPagamento='" + getTipoPagamento() + "'" +
             "}";
     }
 }

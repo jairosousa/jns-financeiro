@@ -1,20 +1,19 @@
 package br.com.jns.financeiro.service.mapper;
 
-import br.com.jns.financeiro.domain.*;
+import br.com.jns.financeiro.domain.Pagamento;
 import br.com.jns.financeiro.service.dto.PagamentoDTO;
-
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * Mapper for the entity Pagamento and its DTO PagamentoDTO.
  */
-@Mapper(componentModel = "spring", uses = {LancamentoMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface PagamentoMapper extends EntityMapper<PagamentoDTO, Pagamento> {
 
-    @Mapping(source = "lancamento.id", target = "lancamentoId")
-    PagamentoDTO toDto(Pagamento pagamento);
 
-    @Mapping(source = "lancamentoId", target = "lancamento")
+    @Mapping(target = "parcelas", ignore = true)
+    @Mapping(target = "lancamento", ignore = true)
     Pagamento toEntity(PagamentoDTO pagamentoDTO);
 
     default Pagamento fromId(Long id) {

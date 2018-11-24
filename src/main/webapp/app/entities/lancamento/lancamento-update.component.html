@@ -58,10 +58,10 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.tipoPagamento" for="field_tipoPagamento">Tipo Pagamento</label>
-                    <select class="form-control" name="tipoPagamento" [(ngModel)]="lancamento.tipoPagamento" id="field_tipoPagamento" >
-                        <option value="AVISTA">{{'jnsFinanceiroApp.TipoPagamento.AVISTA' | translate}}</option>
-                        <option value="PARCELADO">{{'jnsFinanceiroApp.TipoPagamento.PARCELADO' | translate}}</option>
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.pagamento" for="field_pagamento">Pagamento</label>
+                    <select class="form-control" id="field_pagamento" name="pagamento" [(ngModel)]="lancamento.pagamentoId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="pagamentoOption.id" *ngFor="let pagamentoOption of pagamentos; trackBy: trackPagamentoById">{{pagamentoOption.forma}}</option>
                     </select>
                 </div>
 

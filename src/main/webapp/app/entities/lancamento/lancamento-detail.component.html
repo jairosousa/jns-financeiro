@@ -25,7 +25,11 @@
                 <dd>
                     <span jhiTranslate="{{'jnsFinanceiroApp.Tipo.' + lancamento.tipo}}">{{lancamento.tipo}}</span>
                 </dd>
-                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.tipoPagamento">Tipo Pagamento</span></dt>
+                <dt>
+                    <div *ngIf="lancamento.pagamentoId">
+                        <a [routerLink]="['/pagamento', lancamento.pagamentoId, 'view']">{{lancamento.pagamentoForma}}</a>
+                    </div>
+                </dt>
                 <dd>
                     <span jhiTranslate="{{'jnsFinanceiroApp.TipoPagamento.' + lancamento.tipoPagamento}}">{{lancamento.tipoPagamento}}</span>
                 </dd>
