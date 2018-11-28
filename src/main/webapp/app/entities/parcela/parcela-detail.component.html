@@ -37,6 +37,12 @@
                 <dd>
                     <span jhiTranslate="{{'jnsFinanceiroApp.Status.' + parcela.status}}">{{parcela.status}}</span>
                 </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.parcela.cartao">Cartao</span></dt>
+                <dd>
+                    <div *ngIf="parcela.cartaoId">
+                        <a [routerLink]="['/cartao', parcela.cartaoId, 'view']">{{parcela.cartaoNome}}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="jnsFinanceiroApp.parcela.pagamento">Pagamento</span></dt>
                 <dd>
                     <div *ngIf="parcela.pagamentoId">
@@ -44,11 +50,13 @@
                     </div>
                 </dd>
             </dl>
+
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
+
             <button type="button"
                     [routerLink]="['/parcela', parcela.id, 'edit']"
                     class="btn btn-primary">

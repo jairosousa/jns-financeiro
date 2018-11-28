@@ -57,6 +57,7 @@
                         <option value="RECEITA">{{'jnsFinanceiroApp.Tipo.RECEITA' | translate}}</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.pagamento" for="field_pagamento">Pagamento</label>
                     <select class="form-control" id="field_pagamento" name="pagamento" [(ngModel)]="lancamento.pagamentoId">
@@ -64,17 +65,16 @@
                         <option [ngValue]="pagamentoOption.id" *ngFor="let pagamentoOption of pagamentos; trackBy: trackPagamentoById">{{pagamentoOption.tipoPagamento}}</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.fornecedor" for="field_fornecedor">Fornecedor</label>
-                    <select class="form-control" id="field_fornecedor" name="fornecedor" [(ngModel)]="lancamento.fornecedorId">
+                    <select class="form-control" id="field_fornecedor" name="fornecedor" [(ngModel)]="lancamento.fornecedorId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="fornecedorOption.id" *ngFor="let fornecedorOption of fornecedors; trackBy: trackFornecedorById">{{fornecedorOption.nome}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.categoria" for="field_categoria">Categoria</label>
-                    <select class="form-control" id="field_categoria" name="categoria" [(ngModel)]="lancamento.categoriaId">
+                    <select class="form-control" id="field_categoria" name="categoria" [(ngModel)]="lancamento.categoriaId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="categoriaOption.id" *ngFor="let categoriaOption of categorias; trackBy: trackCategoriaById">{{categoriaOption.nome}}</option>
                     </select>

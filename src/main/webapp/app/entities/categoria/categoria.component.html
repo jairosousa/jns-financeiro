@@ -1,10 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span class="text-primary"><fa-icon [icon]="faCat" class="fa"></fa-icon></span>
         <span jhiTranslate="jnsFinanceiroApp.categoria.home.title">Categorias</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-categoria" [routerLink]="['/categoria/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="jnsFinanceiroApp.categoria.home.adicionar">
+            <span class="hidden-sm-down"  jhiTranslate="jnsFinanceiroApp.categoria.home.createLabel">
             Create new Categoria
             </span>
         </button>
@@ -30,7 +29,7 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nome"><span jhiTranslate="jnsFinanceiroApp.categoria.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="descricao"><span jhiTranslate="jnsFinanceiroApp.categoria.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -38,7 +37,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let categoria of categorias ;trackBy: trackId">
-                <!--<td><a [routerLink]="['/categoria', categoria.id, 'view' ]">{{categoria.id}}</a></td>-->
+                <td><a [routerLink]="['/categoria', categoria.id, 'view' ]">{{categoria.id}}</a></td>
                 <td>{{categoria.nome}}</td>
                 <td>{{categoria.descricao}}</td>
                 <td class="text-right">

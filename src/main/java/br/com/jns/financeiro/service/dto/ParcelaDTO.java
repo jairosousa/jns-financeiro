@@ -30,6 +30,10 @@ public class ParcelaDTO implements Serializable {
 
     private Status status;
 
+    private Long cartaoId;
+
+    private String cartaoNome;
+
     private Long pagamentoId;
 
     public Long getId() {
@@ -104,6 +108,22 @@ public class ParcelaDTO implements Serializable {
         this.status = status;
     }
 
+    public Long getCartaoId() {
+        return cartaoId;
+    }
+
+    public void setCartaoId(Long cartaoId) {
+        this.cartaoId = cartaoId;
+    }
+
+    public String getCartaoNome() {
+        return cartaoNome;
+    }
+
+    public void setCartaoNome(String cartaoNome) {
+        this.cartaoNome = cartaoNome;
+    }
+
     public Long getPagamentoId() {
         return pagamentoId;
     }
@@ -145,6 +165,8 @@ public class ParcelaDTO implements Serializable {
             ", total=" + getTotal() +
             ", forma='" + getForma() + "'" +
             ", status='" + getStatus() + "'" +
+            ", cartao=" + getCartaoId() +
+            ", cartao='" + getCartaoNome() + "'" +
             ", pagamento=" + getPagamentoId() +
             "}";
     }

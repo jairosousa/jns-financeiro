@@ -2,10 +2,9 @@
     "jnsFinanceiroApp": {
         "fornecedor": {
             "home": {
-                "title": "Fornecedores",
-                "adicionar": "Fornecedor",
-                "createLabel": "Criar Fornecedor",
-                "editLabel": "Editar Fornecedor",
+                "title": "Fornecedors",
+                "createLabel": "Criar novo Fornecedor",
+                "createOrEditLabel": "Criar ou editar Fornecedor",
                 "search": "Pesquisar por Fornecedor"
             },
             "created": "Um novo Fornecedor foi criado com o identificador {{ param }}",
@@ -18,11 +17,13 @@
                 "title": "Fornecedor"
             },
             "nome": "Nome",
+            "razaoSocial": "Razao Social",
+            "telefoneFixo": "Telefone Fixo",
+            "telefoneCel": "Telefone Cel",
             "pessoa": "Pessoa",
             "cnpj": "Cnpj",
             "cpf": "Cpf",
-            "endereco": "Endereço",
-            "lancamento": "Lançamento"
+            "endereco": "Endereco"
         }
     }
 }

@@ -1,0 +1,80 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jnsFinanceiroApp.cartao.home.title">Cartaos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cartao" [routerLink]="['/cartao/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="jnsFinanceiroApp.cartao.home.createLabel">
+            Create new Cartao
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jnsFinanceiroApp.cartao.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="cartaos">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="jnsFinanceiroApp.cartao.nome">Nome</span></th>
+            <th><span jhiTranslate="jnsFinanceiroApp.cartao.bandeira">Bandeira</span></th>
+            <th><span jhiTranslate="jnsFinanceiroApp.cartao.numero">Numero</span></th>
+            <th><span jhiTranslate="jnsFinanceiroApp.cartao.logotipo">Logotipo</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let cartao of cartaos ;trackBy: trackId">
+                <td><a [routerLink]="['/cartao', cartao.id, 'view' ]">{{cartao.id}}</a></td>
+                <td>{{cartao.nome}}</td>
+                <td jhiTranslate="{{'jnsFinanceiroApp.Bandeira.' + cartao.bandeira}}">{{cartao.bandeira}}</td>
+                <td>{{cartao.numero}}</td>
+                <td>
+                    <a *ngIf="cartao.logotipo" (click)="openFile(cartao.logotipoContentType, cartao.logotipo)">
+                        <img [src]="'data:' + cartao.logotipoContentType + ';base64,' + cartao.logotipo" style="max-height: 30px;" alt="cartao image"/>
+                    </a>
+                    <span *ngIf="cartao.logotipo">{{cartao.logotipoContentType}}, {{byteSize(cartao.logotipo)}}</span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/cartao', cartao.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/cartao', cartao.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'cartao/'+ cartao.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

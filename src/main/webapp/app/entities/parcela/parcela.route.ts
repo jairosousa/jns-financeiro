@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
+import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -11,9 +12,11 @@ import { ParcelaDetailComponent } from './parcela-detail.component';
 import { ParcelaUpdateComponent } from './parcela-update.component';
 import { ParcelaDeletePopupComponent } from './parcela-delete-dialog.component';
 import { IParcela } from 'app/shared/model/parcela.model';
+
 @Injectable({ providedIn: 'root' })
 export class ParcelaResolve implements Resolve<IParcela> {
     constructor(private service: ParcelaService) {}
+
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Parcela> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
@@ -25,12 +28,17 @@ export class ParcelaResolve implements Resolve<IParcela> {
         return of(new Parcela());
     }
 }
+
 export const parcelaRoute: Routes = [
     {
         path: 'parcela',
         component: ParcelaComponent,
+        resolve: {
+            pagingParams: JhiResolvePagingParams
+        },
         data: {
             authorities: ['ROLE_USER'],
+            defaultSort: 'id,asc',
             pageTitle: 'jnsFinanceiroApp.parcela.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -72,6 +80,7 @@ export const parcelaRoute: Routes = [
         canActivate: [UserRouteAccessService]
     }
 ];
+
 export const parcelaPopupRoute: Routes = [
     {
         path: 'parcela/:id/delete',

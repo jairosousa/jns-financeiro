@@ -11,6 +11,7 @@
     <include file="config/liquibase/changelog/20181117150928_added_entity_Endereco.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181117150929_added_entity_Pagamento.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181123233919_added_entity_Parcela.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181128221455_added_entity_Cartao.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20181117150925_added_entity_constraints_Lancamento.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181117150926_added_entity_constraints_Fornecedor.xml" relativeToChangelogFile="false"/>

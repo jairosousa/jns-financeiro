@@ -11,6 +11,18 @@
             "fieldValidateRulesMinlength": 3
         },
         {
+            "fieldName": "razaoSocial",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telefoneFixo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telefoneCel",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "pessoa",
             "fieldType": "Pessoa",
             "fieldValues": "FISICA,JURIDICA"

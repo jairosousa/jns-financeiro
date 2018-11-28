@@ -66,7 +66,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Transactional(readOnly = true)
     public Page<CategoriaDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Categorias");
-        return categoriaRepository.findAllByOrderByNomeAsc(pageable)
+        return categoriaRepository.findAll(pageable)
             .map(categoriaMapper::toDto);
     }
 

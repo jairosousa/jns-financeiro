@@ -1,19 +1,22 @@
 package br.com.jns.financeiro.service.mapper;
 
-import br.com.jns.financeiro.domain.Parcela;
+import br.com.jns.financeiro.domain.*;
 import br.com.jns.financeiro.service.dto.ParcelaDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+
+import org.mapstruct.*;
 
 /**
  * Mapper for the entity Parcela and its DTO ParcelaDTO.
  */
-@Mapper(componentModel = "spring", uses = {PagamentoMapper.class})
+@Mapper(componentModel = "spring", uses = {CartaoMapper.class, PagamentoMapper.class})
 public interface ParcelaMapper extends EntityMapper<ParcelaDTO, Parcela> {
 
+    @Mapping(source = "cartao.id", target = "cartaoId")
+    @Mapping(source = "cartao.nome", target = "cartaoNome")
     @Mapping(source = "pagamento.id", target = "pagamentoId")
     ParcelaDTO toDto(Parcela parcela);
 
+    @Mapping(source = "cartaoId", target = "cartao")
     @Mapping(source = "pagamentoId", target = "pagamento")
     Parcela toEntity(ParcelaDTO parcelaDTO);
 

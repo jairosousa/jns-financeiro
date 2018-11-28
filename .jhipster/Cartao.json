@@ -1,0 +1,33 @@
+{
+    "name": "Cartao",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bandeira",
+            "fieldType": "Bandeira",
+            "fieldValues": "AMERICAN,CIELO,ELO,MASTERCARD,VISA,OUTROS"
+        },
+        {
+            "fieldName": "numero",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "logotipo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181128221455",
+    "entityTableName": "cartao",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

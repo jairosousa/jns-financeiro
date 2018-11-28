@@ -53,14 +53,16 @@
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-
+            <column name="cartao_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_parcela_cartao_id" />
+            </column>
             <column name="pagamento_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

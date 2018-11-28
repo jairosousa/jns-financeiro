@@ -51,7 +51,7 @@
     "changelogDate": "20181117150929",
     "entityTableName": "pagamento",
     "dto": "mapstruct",
-    "pagination": "infinite-scroll",
+    "pagination": "pagination",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

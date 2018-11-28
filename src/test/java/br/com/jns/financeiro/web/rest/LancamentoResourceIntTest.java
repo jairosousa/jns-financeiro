@@ -236,7 +236,7 @@ public class LancamentoResourceIntTest {
             .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())))
             .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getLancamento() throws Exception {

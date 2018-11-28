@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
+import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -32,8 +33,12 @@ export const pagamentoRoute: Routes = [
     {
         path: 'pagamento',
         component: PagamentoComponent,
+        resolve: {
+            pagingParams: JhiResolvePagingParams
+        },
         data: {
             authorities: ['ROLE_USER'],
+            defaultSort: 'id,asc',
             pageTitle: 'jnsFinanceiroApp.pagamento.home.title'
         },
         canActivate: [UserRouteAccessService]

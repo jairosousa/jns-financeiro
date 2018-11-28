@@ -52,6 +52,15 @@ public class FornecedorResourceIntTest {
     private static final String DEFAULT_NOME = "AAAAAAAAAA";
     private static final String UPDATED_NOME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_RAZAO_SOCIAL = "AAAAAAAAAA";
+    private static final String UPDATED_RAZAO_SOCIAL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_TELEFONE_FIXO = "AAAAAAAAAA";
+    private static final String UPDATED_TELEFONE_FIXO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_TELEFONE_CEL = "AAAAAAAAAA";
+    private static final String UPDATED_TELEFONE_CEL = "BBBBBBBBBB";
+
     private static final Pessoa DEFAULT_PESSOA = Pessoa.FISICA;
     private static final Pessoa UPDATED_PESSOA = Pessoa.JURIDICA;
 
@@ -114,6 +123,9 @@ public class FornecedorResourceIntTest {
     public static Fornecedor createEntity(EntityManager em) {
         Fornecedor fornecedor = new Fornecedor()
             .nome(DEFAULT_NOME)
+            .razaoSocial(DEFAULT_RAZAO_SOCIAL)
+            .telefoneFixo(DEFAULT_TELEFONE_FIXO)
+            .telefoneCel(DEFAULT_TELEFONE_CEL)
             .pessoa(DEFAULT_PESSOA)
             .cnpj(DEFAULT_CNPJ)
             .cpf(DEFAULT_CPF);
@@ -142,6 +154,9 @@ public class FornecedorResourceIntTest {
         assertThat(fornecedorList).hasSize(databaseSizeBeforeCreate + 1);
         Fornecedor testFornecedor = fornecedorList.get(fornecedorList.size() - 1);
         assertThat(testFornecedor.getNome()).isEqualTo(DEFAULT_NOME);
+        assertThat(testFornecedor.getRazaoSocial()).isEqualTo(DEFAULT_RAZAO_SOCIAL);
+        assertThat(testFornecedor.getTelefoneFixo()).isEqualTo(DEFAULT_TELEFONE_FIXO);
+        assertThat(testFornecedor.getTelefoneCel()).isEqualTo(DEFAULT_TELEFONE_CEL);
         assertThat(testFornecedor.getPessoa()).isEqualTo(DEFAULT_PESSOA);
         assertThat(testFornecedor.getCnpj()).isEqualTo(DEFAULT_CNPJ);
         assertThat(testFornecedor.getCpf()).isEqualTo(DEFAULT_CPF);
@@ -204,6 +219,9 @@ public class FornecedorResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(fornecedor.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME.toString())))
+            .andExpect(jsonPath("$.[*].razaoSocial").value(hasItem(DEFAULT_RAZAO_SOCIAL.toString())))
+            .andExpect(jsonPath("$.[*].telefoneFixo").value(hasItem(DEFAULT_TELEFONE_FIXO.toString())))
+            .andExpect(jsonPath("$.[*].telefoneCel").value(hasItem(DEFAULT_TELEFONE_CEL.toString())))
             .andExpect(jsonPath("$.[*].pessoa").value(hasItem(DEFAULT_PESSOA.toString())))
             .andExpect(jsonPath("$.[*].cnpj").value(hasItem(DEFAULT_CNPJ.toString())))
             .andExpect(jsonPath("$.[*].cpf").value(hasItem(DEFAULT_CPF.toString())));
@@ -221,6 +239,9 @@ public class FornecedorResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(fornecedor.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME.toString()))
+            .andExpect(jsonPath("$.razaoSocial").value(DEFAULT_RAZAO_SOCIAL.toString()))
+            .andExpect(jsonPath("$.telefoneFixo").value(DEFAULT_TELEFONE_FIXO.toString()))
+            .andExpect(jsonPath("$.telefoneCel").value(DEFAULT_TELEFONE_CEL.toString()))
             .andExpect(jsonPath("$.pessoa").value(DEFAULT_PESSOA.toString()))
             .andExpect(jsonPath("$.cnpj").value(DEFAULT_CNPJ.toString()))
             .andExpect(jsonPath("$.cpf").value(DEFAULT_CPF.toString()));
@@ -248,6 +269,9 @@ public class FornecedorResourceIntTest {
         em.detach(updatedFornecedor);
         updatedFornecedor
             .nome(UPDATED_NOME)
+            .razaoSocial(UPDATED_RAZAO_SOCIAL)
+            .telefoneFixo(UPDATED_TELEFONE_FIXO)
+            .telefoneCel(UPDATED_TELEFONE_CEL)
             .pessoa(UPDATED_PESSOA)
             .cnpj(UPDATED_CNPJ)
             .cpf(UPDATED_CPF);
@@ -263,6 +287,9 @@ public class FornecedorResourceIntTest {
         assertThat(fornecedorList).hasSize(databaseSizeBeforeUpdate);
         Fornecedor testFornecedor = fornecedorList.get(fornecedorList.size() - 1);
         assertThat(testFornecedor.getNome()).isEqualTo(UPDATED_NOME);
+        assertThat(testFornecedor.getRazaoSocial()).isEqualTo(UPDATED_RAZAO_SOCIAL);
+        assertThat(testFornecedor.getTelefoneFixo()).isEqualTo(UPDATED_TELEFONE_FIXO);
+        assertThat(testFornecedor.getTelefoneCel()).isEqualTo(UPDATED_TELEFONE_CEL);
         assertThat(testFornecedor.getPessoa()).isEqualTo(UPDATED_PESSOA);
         assertThat(testFornecedor.getCnpj()).isEqualTo(UPDATED_CNPJ);
         assertThat(testFornecedor.getCpf()).isEqualTo(UPDATED_CPF);
@@ -327,6 +354,9 @@ public class FornecedorResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(fornecedor.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
+            .andExpect(jsonPath("$.[*].razaoSocial").value(hasItem(DEFAULT_RAZAO_SOCIAL)))
+            .andExpect(jsonPath("$.[*].telefoneFixo").value(hasItem(DEFAULT_TELEFONE_FIXO)))
+            .andExpect(jsonPath("$.[*].telefoneCel").value(hasItem(DEFAULT_TELEFONE_CEL)))
             .andExpect(jsonPath("$.[*].pessoa").value(hasItem(DEFAULT_PESSOA.toString())))
             .andExpect(jsonPath("$.[*].cnpj").value(hasItem(DEFAULT_CNPJ)))
             .andExpect(jsonPath("$.[*].cpf").value(hasItem(DEFAULT_CPF)));

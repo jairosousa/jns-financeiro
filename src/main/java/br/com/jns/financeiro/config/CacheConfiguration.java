@@ -46,6 +46,7 @@ public class CacheConfiguration {
             cm.createCache(br.com.jns.financeiro.domain.Pagamento.class.getName(), jcacheConfiguration);
             cm.createCache(br.com.jns.financeiro.domain.Pagamento.class.getName() + ".parcelas", jcacheConfiguration);
             cm.createCache(br.com.jns.financeiro.domain.Parcela.class.getName(), jcacheConfiguration);
+            cm.createCache(br.com.jns.financeiro.domain.Cartao.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

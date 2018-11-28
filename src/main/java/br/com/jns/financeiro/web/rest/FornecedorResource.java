@@ -1,11 +1,11 @@
 package br.com.jns.financeiro.web.rest;
 
+import com.codahale.metrics.annotation.Timed;
 import br.com.jns.financeiro.service.FornecedorService;
-import br.com.jns.financeiro.service.dto.FornecedorDTO;
 import br.com.jns.financeiro.web.rest.errors.BadRequestAlertException;
 import br.com.jns.financeiro.web.rest.util.HeaderUtil;
 import br.com.jns.financeiro.web.rest.util.PaginationUtil;
-import com.codahale.metrics.annotation.Timed;
+import br.com.jns.financeiro.service.dto.FornecedorDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +19,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Fornecedor.
@@ -128,7 +132,7 @@ public class FornecedorResource {
      * SEARCH  /_search/fornecedors?query=:query : search for the fornecedor corresponding
      * to the query.
      *
-     * @param query    the query of the fornecedor search
+     * @param query the query of the fornecedor search
      * @param pageable the pagination information
      * @return the result of the search
      */

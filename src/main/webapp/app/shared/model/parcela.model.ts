@@ -1,13 +1,16 @@
 import { Moment } from 'moment';
+
 export const enum FormaPagamento {
     DINHEIRO = 'DINHEIRO',
     CARTAO = 'CARTAO',
     DEBITO = 'DEBITO'
 }
+
 export const enum Status {
     PAGO = 'PAGO',
     PENDENTE = 'PENDENTE'
 }
+
 export interface IParcela {
     id?: number;
     dataVencimento?: Moment;
@@ -18,8 +21,11 @@ export interface IParcela {
     total?: number;
     forma?: FormaPagamento;
     status?: Status;
+    cartaoNome?: string;
+    cartaoId?: number;
     pagamentoId?: number;
 }
+
 export class Parcela implements IParcela {
     constructor(
         public id?: number,
@@ -31,6 +37,8 @@ export class Parcela implements IParcela {
         public total?: number,
         public forma?: FormaPagamento,
         public status?: Status,
+        public cartaoNome?: string,
+        public cartaoId?: number,
         public pagamentoId?: number
     ) {}
 }

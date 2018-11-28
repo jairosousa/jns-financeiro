@@ -1,6 +1,7 @@
 package br.com.jns.financeiro.service;
 
 import br.com.jns.financeiro.service.dto.FornecedorDTO;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,6 +28,7 @@ public interface FornecedorService {
      */
     Page<FornecedorDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" fornecedor.
      *
@@ -45,7 +47,8 @@ public interface FornecedorService {
     /**
      * Search for the fornecedor corresponding to the query.
      *
-     * @param query    the query of the search
+     * @param query the query of the search
+     * 
      * @param pageable the pagination information
      * @return the list of entities
      */

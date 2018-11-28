@@ -255,7 +255,7 @@ public class PagamentoResourceIntTest {
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].tipoPagamento").value(hasItem(DEFAULT_TIPO_PAGAMENTO.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getPagamento() throws Exception {

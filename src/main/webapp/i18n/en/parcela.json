@@ -24,6 +24,7 @@
             "total": "Total",
             "forma": "Forma",
             "status": "Status",
+            "cartao": "Cartao",
             "pagamento": "Pagamento"
         }
     }

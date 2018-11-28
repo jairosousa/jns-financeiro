@@ -16,6 +16,12 @@ public class FornecedorDTO implements Serializable {
     @Size(min = 3)
     private String nome;
 
+    private String razaoSocial;
+
+    private String telefoneFixo;
+
+    private String telefoneCel;
+
     private Pessoa pessoa;
 
     private String cnpj;
@@ -23,8 +29,6 @@ public class FornecedorDTO implements Serializable {
     private String cpf;
 
     private Long enderecoId;
-
-    private EnderecoDTO endereco;
 
     public Long getId() {
         return id;
@@ -40,6 +44,30 @@ public class FornecedorDTO implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public String getTelefoneFixo() {
+        return telefoneFixo;
+    }
+
+    public void setTelefoneFixo(String telefoneFixo) {
+        this.telefoneFixo = telefoneFixo;
+    }
+
+    public String getTelefoneCel() {
+        return telefoneCel;
+    }
+
+    public void setTelefoneCel(String telefoneCel) {
+        this.telefoneCel = telefoneCel;
     }
 
     public Pessoa getPessoa() {
@@ -74,14 +102,6 @@ public class FornecedorDTO implements Serializable {
         this.enderecoId = enderecoId;
     }
 
-    public EnderecoDTO getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(EnderecoDTO endereco) {
-        this.endereco = endereco;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -108,6 +128,9 @@ public class FornecedorDTO implements Serializable {
         return "FornecedorDTO{" +
             "id=" + getId() +
             ", nome='" + getNome() + "'" +
+            ", razaoSocial='" + getRazaoSocial() + "'" +
+            ", telefoneFixo='" + getTelefoneFixo() + "'" +
+            ", telefoneCel='" + getTelefoneCel() + "'" +
             ", pessoa='" + getPessoa() + "'" +
             ", cnpj='" + getCnpj() + "'" +
             ", cpf='" + getCpf() + "'" +

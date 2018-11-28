@@ -85,6 +85,16 @@ describe('Component Tests', () => {
             expect(comp.pagamentos[0]).toEqual(jasmine.objectContaining({ id: 123 }));
         });
 
+        it('should not load a page is the page is the same as the previous page', () => {
+            spyOn(service, 'query').and.callThrough();
+
+            // WHEN
+            comp.loadPage(0);
+
+            // THEN
+            expect(service.query).toHaveBeenCalledTimes(0);
+        });
+
         it('should re-initialize the page', () => {
             // GIVEN
             const headers = new HttpHeaders().append('link', 'link;link');
@@ -99,7 +109,7 @@ describe('Component Tests', () => {
 
             // WHEN
             comp.loadPage(1);
-            comp.reset();
+            comp.clear();
 
             // THEN
             expect(comp.page).toEqual(0);
@@ -111,7 +121,7 @@ describe('Component Tests', () => {
             const result = comp.sort();
 
             // THEN
-            expect(result).toEqual(['id,asc']);
+            expect(result).toEqual(['id,desc']);
         });
 
         it('should calculate the sort attribute for a non-id attribute', () => {
@@ -122,7 +132,7 @@ describe('Component Tests', () => {
             const result = comp.sort();
 
             // THEN
-            expect(result).toEqual(['name,asc', 'id']);
+            expect(result).toEqual(['name,desc', 'id']);
         });
     });
 });

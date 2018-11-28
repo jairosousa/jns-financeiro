@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cartao-heading" jhiTranslate="jnsFinanceiroApp.cartao.home.createOrEditLabel">Create or edit a Cartao</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cartao.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cartao.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.cartao.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                        [(ngModel)]="cartao.nome" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.cartao.bandeira" for="field_bandeira">Bandeira</label>
+                    <select class="form-control" name="bandeira" [(ngModel)]="cartao.bandeira" id="field_bandeira" >
+                        <option value="AMERICAN">{{'jnsFinanceiroApp.Bandeira.AMERICAN' | translate}}</option>
+                        <option value="CIELO">{{'jnsFinanceiroApp.Bandeira.CIELO' | translate}}</option>
+                        <option value="ELO">{{'jnsFinanceiroApp.Bandeira.ELO' | translate}}</option>
+                        <option value="MASTERCARD">{{'jnsFinanceiroApp.Bandeira.MASTERCARD' | translate}}</option>
+                        <option value="VISA">{{'jnsFinanceiroApp.Bandeira.VISA' | translate}}</option>
+                        <option value="OUTROS">{{'jnsFinanceiroApp.Bandeira.OUTROS' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.cartao.numero" for="field_numero">Numero</label>
+                    <input type="number" class="form-control" name="numero" id="field_numero"
+                        [(ngModel)]="cartao.numero" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.cartao.logotipo" for="field_logotipo">Logotipo</label>
+                    <div>
+                        <img [src]="'data:' + cartao.logotipoContentType + ';base64,' + cartao.logotipo" style="max-height: 100px;" *ngIf="cartao.logotipo" alt="cartao image"/>
+                        <div *ngIf="cartao.logotipo" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{cartao.logotipoContentType}}, {{byteSize(cartao.logotipo)}}</span>
+                            <button type="button" (click)="clearInputImage('logotipo', 'logotipoContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_logotipo" (change)="setFileData($event, cartao, 'logotipo', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="logotipo" id="field_logotipo"
+                        [(ngModel)]="cartao.logotipo" />
+                    <input type="hidden" class="form-control" name="logotipoContentType" id="field_logotipoContentType"
+                        [(ngModel)]="cartao.logotipoContentType" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

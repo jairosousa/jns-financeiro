@@ -57,6 +57,9 @@ public class Parcela implements Serializable {
     @Column(name = "status")
     private Status status;
 
+    @OneToOne    @JoinColumn(unique = true)
+    private Cartao cartao;
+
     @ManyToOne
     @JsonIgnoreProperties("parcelas")
     private Pagamento pagamento;
@@ -172,6 +175,19 @@ public class Parcela implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Cartao getCartao() {
+        return cartao;
+    }
+
+    public Parcela cartao(Cartao cartao) {
+        this.cartao = cartao;
+        return this;
+    }
+
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
     }
 
     public Pagamento getPagamento() {

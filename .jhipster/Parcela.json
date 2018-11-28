@@ -38,6 +38,14 @@
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-one",
+            "relationshipName": "cartao",
+            "otherEntityName": "cartao",
+            "otherEntityField": "nome",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "parcela"
+        },
+        {
             "relationshipType": "many-to-one",
             "relationshipName": "pagamento",
             "otherEntityName": "pagamento",
@@ -47,7 +55,7 @@
     "changelogDate": "20181123233919",
     "entityTableName": "parcela",
     "dto": "mapstruct",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

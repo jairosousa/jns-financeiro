@@ -1,10 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span class="text-primary"><fa-icon [icon]="faForn"></fa-icon></span>
         <span jhiTranslate="jnsFinanceiroApp.fornecedor.home.title">Fornecedors</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-fornecedor" [routerLink]="['/fornecedor/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="jnsFinanceiroApp.fornecedor.home.adicionar">
+            <span class="hidden-sm-down"  jhiTranslate="jnsFinanceiroApp.fornecedor.home.createLabel">
             Create new Fornecedor
             </span>
         </button>
@@ -32,6 +31,9 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nome"><span jhiTranslate="jnsFinanceiroApp.fornecedor.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="razaoSocial"><span jhiTranslate="jnsFinanceiroApp.fornecedor.razaoSocial">Razao Social</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefoneFixo"><span jhiTranslate="jnsFinanceiroApp.fornecedor.telefoneFixo">Telefone Fixo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefoneCel"><span jhiTranslate="jnsFinanceiroApp.fornecedor.telefoneCel">Telefone Cel</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="pessoa"><span jhiTranslate="jnsFinanceiroApp.fornecedor.pessoa">Pessoa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="cnpj"><span jhiTranslate="jnsFinanceiroApp.fornecedor.cnpj">Cnpj</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="cpf"><span jhiTranslate="jnsFinanceiroApp.fornecedor.cpf">Cpf</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -43,6 +45,9 @@
             <tr *ngFor="let fornecedor of fornecedors ;trackBy: trackId">
                 <td><a [routerLink]="['/fornecedor', fornecedor.id, 'view' ]">{{fornecedor.id}}</a></td>
                 <td>{{fornecedor.nome}}</td>
+                <td>{{fornecedor.razaoSocial}}</td>
+                <td>{{fornecedor.telefoneFixo}}</td>
+                <td>{{fornecedor.telefoneCel}}</td>
                 <td jhiTranslate="{{'jnsFinanceiroApp.Pessoa.' + fornecedor.pessoa}}">{{fornecedor.pessoa}}</td>
                 <td>{{fornecedor.cnpj}}</td>
                 <td>{{fornecedor.cpf}}</td>

@@ -26,6 +26,18 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="razao_social" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="telefone_fixo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="telefone_cel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="pessoa" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

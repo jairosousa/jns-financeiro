@@ -1,20 +1,29 @@
 package br.com.jns.financeiro.web.rest;
 
+import com.codahale.metrics.annotation.Timed;
 import br.com.jns.financeiro.service.ParcelaService;
-import br.com.jns.financeiro.service.dto.ParcelaDTO;
 import br.com.jns.financeiro.web.rest.errors.BadRequestAlertException;
 import br.com.jns.financeiro.web.rest.util.HeaderUtil;
-import com.codahale.metrics.annotation.Timed;
+import br.com.jns.financeiro.web.rest.util.PaginationUtil;
+import br.com.jns.financeiro.service.dto.ParcelaDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Parcela.
@@ -78,13 +87,16 @@ public class ParcelaResource {
     /**
      * GET  /parcelas : get all the parcelas.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of parcelas in body
      */
     @GetMapping("/parcelas")
     @Timed
-    public List<ParcelaDTO> getAllParcelas() {
-        log.debug("REST request to get all Parcelas");
-        return parcelaService.findAll();
+    public ResponseEntity<List<ParcelaDTO>> getAllParcelas(Pageable pageable) {
+        log.debug("REST request to get a page of Parcelas");
+        Page<ParcelaDTO> page = parcelaService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/parcelas");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
@@ -120,13 +132,16 @@ public class ParcelaResource {
      * to the query.
      *
      * @param query the query of the parcela search
+     * @param pageable the pagination information
      * @return the result of the search
      */
     @GetMapping("/_search/parcelas")
     @Timed
-    public List<ParcelaDTO> searchParcelas(@RequestParam String query) {
-        log.debug("REST request to search Parcelas for query {}", query);
-        return parcelaService.search(query);
+    public ResponseEntity<List<ParcelaDTO>> searchParcelas(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of Parcelas for query {}", query);
+        Page<ParcelaDTO> page = parcelaService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/parcelas");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 }

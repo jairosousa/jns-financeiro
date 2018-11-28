@@ -1,0 +1,13 @@
+{
+    "jnsFinanceiroApp": {
+        "Bandeira": {
+            "null": "",
+            "AMERICAN": "AMERICAN",
+            "CIELO": "CIELO",
+            "ELO": "ELO",
+            "MASTERCARD": "MASTERCARD",
+            "VISA": "VISA",
+            "OUTROS": "OUTROS"
+        }
+    }
+}

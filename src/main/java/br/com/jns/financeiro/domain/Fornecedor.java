@@ -32,6 +32,15 @@ public class Fornecedor implements Serializable {
     @Column(name = "nome", nullable = false)
     private String nome;
 
+    @Column(name = "razao_social")
+    private String razaoSocial;
+
+    @Column(name = "telefone_fixo")
+    private String telefoneFixo;
+
+    @Column(name = "telefone_cel")
+    private String telefoneCel;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "pessoa")
     private Pessoa pessoa;
@@ -65,6 +74,45 @@ public class Fornecedor implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public Fornecedor razaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+        return this;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public String getTelefoneFixo() {
+        return telefoneFixo;
+    }
+
+    public Fornecedor telefoneFixo(String telefoneFixo) {
+        this.telefoneFixo = telefoneFixo;
+        return this;
+    }
+
+    public void setTelefoneFixo(String telefoneFixo) {
+        this.telefoneFixo = telefoneFixo;
+    }
+
+    public String getTelefoneCel() {
+        return telefoneCel;
+    }
+
+    public Fornecedor telefoneCel(String telefoneCel) {
+        this.telefoneCel = telefoneCel;
+        return this;
+    }
+
+    public void setTelefoneCel(String telefoneCel) {
+        this.telefoneCel = telefoneCel;
     }
 
     public Pessoa getPessoa() {
@@ -145,6 +193,9 @@ public class Fornecedor implements Serializable {
         return "Fornecedor{" +
             "id=" + getId() +
             ", nome='" + getNome() + "'" +
+            ", razaoSocial='" + getRazaoSocial() + "'" +
+            ", telefoneFixo='" + getTelefoneFixo() + "'" +
+            ", telefoneCel='" + getTelefoneCel() + "'" +
             ", pessoa='" + getPessoa() + "'" +
             ", cnpj='" + getCnpj() + "'" +
             ", cpf='" + getCpf() + "'" +
