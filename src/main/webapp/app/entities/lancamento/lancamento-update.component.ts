@@ -11,6 +11,8 @@ import { IFornecedor } from 'app/shared/model/fornecedor.model';
 import { FornecedorService } from 'app/entities/fornecedor';
 import { ICategoria } from 'app/shared/model/categoria.model';
 import { CategoriaService } from 'app/entities/categoria';
+import { IPagamento } from 'app/shared/model/pagamento.model';
+import { PagamentoService } from 'app/entities/pagamento';
 
 @Component({
     selector: 'jhi-lancamento-update',

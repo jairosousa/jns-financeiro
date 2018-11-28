@@ -61,7 +61,7 @@
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.pagamento" for="field_pagamento">Pagamento</label>
                     <select class="form-control" id="field_pagamento" name="pagamento" [(ngModel)]="lancamento.pagamentoId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="pagamentoOption.id" *ngFor="let pagamentoOption of pagamentos; trackBy: trackPagamentoById">{{pagamentoOption.forma}}</option>
+                        <option [ngValue]="pagamentoOption.id" *ngFor="let pagamentoOption of pagamentos; trackBy: trackPagamentoById">{{pagamentoOption.tipoPagamento}}</option>
                     </select>
                 </div>
 

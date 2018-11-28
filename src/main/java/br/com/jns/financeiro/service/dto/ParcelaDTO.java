@@ -1,12 +1,11 @@
 package br.com.jns.financeiro.service.dto;
 
-import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
-import br.com.jns.financeiro.domain.enumeration.Status;
-
+import java.time.LocalDate;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Objects;
+import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
+import br.com.jns.financeiro.domain.enumeration.Status;
 
 /**
  * A DTO for the Parcela entity.

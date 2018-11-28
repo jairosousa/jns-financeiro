@@ -80,24 +80,8 @@ public class FornecedorServiceImpl implements FornecedorService {
     @Transactional(readOnly = true)
     public Page<FornecedorDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Fornecedors");
-        return fornecedorRepository.findAll(pageable)
+        return fornecedorRepository.findAllByOrderByNomeAsc(pageable)
             .map(fornecedorMapper::toDto);
-    }
-
-
-
-    /**
-     *  get all the fornecedors where Lancamento is null.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true) 
-    public List<FornecedorDTO> findAllWhereLancamentoIsNull() {
-        log.debug("Request to get all fornecedors where Lancamento is null");
-        return StreamSupport
-            .stream(fornecedorRepository.findAll().spliterator(), false)
-            .filter(fornecedor -> fornecedor.getLancamento() == null)
-            .map(fornecedorMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**

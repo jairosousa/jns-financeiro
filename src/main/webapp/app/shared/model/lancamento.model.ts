@@ -12,7 +12,7 @@ export interface ILancamento {
     descricao?: string;
     valor?: number;
     tipo?: Tipo;
-    pagamentoForma?: string;
+    pagamentoTipoPagamento?: string;
     pagamentoId?: number;
     fornecedorNome?: string;
     fornecedorId?: number;
@@ -28,7 +28,7 @@ export class Lancamento implements ILancamento {
         public descricao?: string,
         public valor?: number,
         public tipo?: Tipo,
-        public pagamentoForma?: string,
+        public pagamentoTipoPagamento?: string,
         public pagamentoId?: number,
         public fornecedorNome?: string,
         public fornecedorId?: number,

@@ -12,7 +12,7 @@ import org.mapstruct.*;
 public interface LancamentoMapper extends EntityMapper<LancamentoDTO, Lancamento> {
 
     @Mapping(source = "pagamento.id", target = "pagamentoId")
-    @Mapping(source = "pagamento.forma", target = "pagamentoForma")
+    @Mapping(source = "pagamento.tipoPagamento", target = "pagamentoTipoPagamento")
     @Mapping(source = "fornecedor.id", target = "fornecedorId")
     @Mapping(source = "fornecedor.nome", target = "fornecedorNome")
     @Mapping(source = "categoria.id", target = "categoriaId")
