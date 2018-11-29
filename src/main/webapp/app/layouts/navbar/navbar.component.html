@@ -63,13 +63,13 @@
 
                     <li>
                         <a class="dropdown-item" routerLink="parcela" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span class="text-primary"><fa-icon [icon]="faPag" fixedWidth="true"></fa-icon></span>
                             <span jhiTranslate="global.menu.entities.parcela">Parcela</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="cartao" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span class="text-primary"><fa-icon [icon]="faCard" fixedWidth="true"></fa-icon></span>
                             <span jhiTranslate="global.menu.entities.cartao">Cartao</span>
                         </a>
                     </li>

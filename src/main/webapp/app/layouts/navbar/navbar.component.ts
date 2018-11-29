@@ -7,7 +7,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 import { VERSION } from 'app/app.constants';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from '../profiles/profile.service';
-import { faBoxOpen, faCheckSquare, faMoneyCheckAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBoxOpen, faCheckSquare, faCreditCard, faHandHoldingUsd, faMoneyCheckAlt } from '@fortawesome/free-solid-svg-icons';
 import { faListAlt } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
@@ -26,6 +26,8 @@ export class NavbarComponent implements OnInit {
     faCat = faListAlt;
     faPay = faMoneyCheckAlt;
     faLanc = faCheckSquare;
+    faCard = faCreditCard;
+    faPag = faHandHoldingUsd;
 
     constructor(
         private loginService: LoginService,
