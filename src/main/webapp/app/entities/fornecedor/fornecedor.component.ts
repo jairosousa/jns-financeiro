@@ -9,6 +9,7 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { FornecedorService } from './fornecedor.service';
+import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'jhi-fornecedor',
@@ -30,6 +31,7 @@ export class FornecedorComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    faForn = faBoxOpen;
 
     constructor(
         private fornecedorService: FornecedorService,

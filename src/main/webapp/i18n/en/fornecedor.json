@@ -3,13 +3,14 @@
         "fornecedor": {
             "home": {
                 "title": "Fornecedors",
-                "createLabel": "Create a new Fornecedor",
-                "createOrEditLabel": "Create or edit a Fornecedor",
+                "adicionar": "Fornecedor",
+                "createLabel": "New Fornecedor",
+                "editLabel": "Edit a Fornecedor",
                 "search": "Search for Fornecedor"
             },
-            "created": "A new Fornecedor is created with identifier {{ param }}",
-            "updated": "A Fornecedor is updated with identifier {{ param }}",
-            "deleted": "A Fornecedor is deleted with identifier {{ param }}",
+            "created": "Fornecedor successfully saved",
+            "updated": "Fornecedor was successfully updated",
+            "deleted": "Fornecedor deleted successfully",
             "delete": {
                 "question": "Are you sure you want to delete Fornecedor {{ id }}?"
             },
@@ -23,7 +24,7 @@
             "pessoa": "Pessoa",
             "cnpj": "Cnpj",
             "cpf": "Cpf",
-            "endereco": "Endereco"
+            "endereco": "Endereço"
         }
     }
 }

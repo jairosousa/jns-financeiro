@@ -1,5 +1,6 @@
 package br.com.jns.financeiro.web.rest;
 
+import br.com.jns.financeiro.service.exceptions.ViaCepException;
 import com.codahale.metrics.annotation.Timed;
 import br.com.jns.financeiro.service.EnderecoService;
 import br.com.jns.financeiro.web.rest.errors.BadRequestAlertException;
@@ -143,6 +144,12 @@ public class EnderecoResource {
         Page<EnderecoDTO> page = enderecoService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/enderecos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/enderecos/cep/{cep}")
+    public ResponseEntity<EnderecoDTO> getEnderecoByCep(@PathVariable String cep) throws ViaCepException {
+        log.debug("REST request to get Cep : {}", cep);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(enderecoService.findEnderecoByCep(cep)));
     }
 
 }

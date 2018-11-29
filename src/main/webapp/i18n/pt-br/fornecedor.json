@@ -2,14 +2,15 @@
     "jnsFinanceiroApp": {
         "fornecedor": {
             "home": {
-                "title": "Fornecedors",
-                "createLabel": "Criar novo Fornecedor",
-                "createOrEditLabel": "Criar ou editar Fornecedor",
+                "title": "Fornecedores",
+                "adicionar": "Fornecedor",
+                "createLabel": "Criar Fornecedor",
+                "editLabel": "Editar Fornecedor",
                 "search": "Pesquisar por Fornecedor"
             },
-            "created": "Um novo Fornecedor foi criado com o identificador {{ param }}",
-            "updated": "Um Fornecedor foi atualizado com o identificador {{ param }}",
-            "deleted": "Um Fornecedor foi deletado com o identificador {{ param }}",
+            "created": "Fornecedor foi salvo com sucesso!",
+            "updated": "Fornecedor foi atualizado com sucesso!",
+            "deleted": "Fornecedor foi excluido com sucesso!",
             "delete": {
                 "question": "Tem certeza de que deseja excluir Fornecedor {{ id }}?"
             },
@@ -18,12 +19,12 @@
             },
             "nome": "Nome",
             "razaoSocial": "Razao Social",
-            "telefoneFixo": "Telefone Fixo",
+            "telefoneFixo": "Telefones",
             "telefoneCel": "Telefone Cel",
             "pessoa": "Pessoa",
             "cnpj": "Cnpj",
             "cpf": "Cpf",
-            "endereco": "Endereco"
+            "endereco": "Endereço"
         }
     }
 }
