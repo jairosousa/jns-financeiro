@@ -66,7 +66,7 @@ public class FornecedorServiceImpl implements FornecedorService {
     @Transactional(readOnly = true)
     public Page<FornecedorDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Fornecedors");
-        return fornecedorRepository.findAll(pageable)
+        return fornecedorRepository.findAllByOrderByNomeAsc(pageable)
             .map(fornecedorMapper::toDto);
     }
 
