@@ -1,0 +1,19 @@
+<nav class="mb-5">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+
+        <li *ngFor="let item of items" class="breadcrumb-item" [class.active]="isThelastItem(item)">
+            <span *ngIf="isThelastItem(item)">
+                <span class="text-primary font-weight-bold" *ngIf="item.currentAction == 'new'" [jhiTranslate]="translate(item.text, item.currentAction)">Create or edit </span>
+                <span class="text-primary font-weight-bold" *ngIf="item.currentAction == 'edit'" [jhiTranslate]="translate(item.text, item.currentAction)">Create or edit </span>
+                <span class="text-primary font-weight-bold" *ngIf="item.currentAction == ''" [jhiTranslate]="translate(item.text, item.currentAction)">Create or edit </span>
+            </span>
+            <a *ngIf="!isThelastItem(item)" [routerLink]="item.link">{{item.text}}</a>
+        </li>
+        <!--<li class="breadcrumb-item"><a [routerLink]="['/categoria']">Categorias</a></li>-->
+        <!--<li class="breadcrumb-item active">-->
+            <!--<span *ngIf="currentAction == 'new'" jhiTranslate="jnsFinanceiroApp.categoria.home.createLabel">Create or edit a Categoria</span>-->
+            <!--<span *ngIf="currentAction == 'edit'" jhiTranslate="jnsFinanceiroApp.categoria.home.editLabel">Create or edit a Categoria</span>-->
+        <!--</li>-->
+    </ol>
+</nav>
