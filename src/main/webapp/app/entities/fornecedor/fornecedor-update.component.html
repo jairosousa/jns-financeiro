@@ -1,15 +1,8 @@
 <div class="justify-content-center">
     <div class="container">
-        <nav class="mb-5">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
-                <li class="breadcrumb-item"><a [routerLink]="['/fornecedor']">Fornecedores</a></li>
-                <li class="breadcrumb-item active">
-                    <span *ngIf="currentAction == 'new'" jhiTranslate="jnsFinanceiroApp.fornecedor.home.createLabel">Create or edit a fornecedor</span>
-                    <span *ngIf="currentAction == 'edit'" jhiTranslate="jnsFinanceiroApp.fornecedor.home.editLabel">Create or edit a fornecedor</span>
-                </li>
-            </ol>
-        </nav>
+        <jhi-bread-crumb
+            [items]="[{text: 'Fornecedor', link: '/fornecedor'}, {text: 'fornecedor', currentAction: currentAction}]"
+        ></jhi-bread-crumb>
 
         <div class="row mb-4">
             <div class="col-md">
