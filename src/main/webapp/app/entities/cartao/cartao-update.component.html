@@ -1,24 +1,10 @@
-<div class="justify-content-center">
-    <div class="container">
-        <jhi-bread-crumb
-            [items]="[{text: 'Cartões', link: '/cartao'}, {text: 'cartao', currentAction: currentAction}]"
-        ></jhi-bread-crumb>
-
-        <div class="row mb-4">
-            <div class="col-md">
-                <h1 class="h2 border-left pl-2">
-                    <h2 *ngIf="currentAction == 'edit'" d="jhi-cartao-heading-e" jhiTranslate="jnsFinanceiroApp.cartao.home.editLabel">Create or edit a Cartao</h2>
-                    <h2 *ngIf="currentAction == 'new'" d="jhi-cartao-heading-c" jhiTranslate="jnsFinanceiroApp.cartao.home.createLabel">Create or edit a Cartao</h2>
-                </h1>
-            </div>
-
-        </div>
-
+<div class="row justify-content-center">
+    <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-
+            <h2 id="jhi-cartao-heading" jhiTranslate="jnsFinanceiroApp.cartao.home.createOrEditLabel">Create or edit a Cartao</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="true">
+                <div class="form-group" [hidden]="!cartao.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="cartao.id" readonly />

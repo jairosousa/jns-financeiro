@@ -3,7 +3,7 @@
         "FormaPagamento": {
             "null": "",
             "DINHEIRO": "DINHEIRO",
-            "CARTAO": "CARTAO",
+            "CREDITO": "CREDITO",
             "DEBITO": "DEBITO"
         }
     }

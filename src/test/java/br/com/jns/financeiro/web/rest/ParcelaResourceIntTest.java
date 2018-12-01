@@ -72,7 +72,7 @@ public class ParcelaResourceIntTest {
     private static final BigDecimal UPDATED_TOTAL = new BigDecimal(2);
 
     private static final FormaPagamento DEFAULT_FORMA = FormaPagamento.DINHEIRO;
-    private static final FormaPagamento UPDATED_FORMA = FormaPagamento.CARTAO;
+    private static final FormaPagamento UPDATED_FORMA = FormaPagamento.CREDITO;
 
     private static final Status DEFAULT_STATUS = Status.PAGO;
     private static final Status UPDATED_STATUS = Status.PENDENTE;

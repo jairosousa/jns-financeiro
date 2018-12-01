@@ -2,7 +2,7 @@ import { Moment } from 'moment';
 
 export const enum FormaPagamento {
     DINHEIRO = 'DINHEIRO',
-    CARTAO = 'CARTAO',
+    CREDITO = 'CREDITO',
     DEBITO = 'DEBITO'
 }
 

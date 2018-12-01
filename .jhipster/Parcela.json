@@ -28,7 +28,7 @@
         {
             "fieldName": "forma",
             "fieldType": "FormaPagamento",
-            "fieldValues": "DINHEIRO,CARTAO,DEBITO"
+            "fieldValues": "DINHEIRO,CREDITO,DEBITO"
         },
         {
             "fieldName": "status",
