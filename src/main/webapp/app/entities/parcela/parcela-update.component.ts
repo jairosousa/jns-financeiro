@@ -39,18 +39,9 @@ export class ParcelaUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ parcela }) => {
             this.parcela = parcela;
         });
-        this.cartaoService.query({ filter: 'parcela-is-null' }).subscribe(
+        this.cartaoService.query().subscribe(
             (res: HttpResponse<ICartao[]>) => {
-                if (!this.parcela.cartaoId) {
-                    this.cartaos = res.body;
-                } else {
-                    this.cartaoService.find(this.parcela.cartaoId).subscribe(
-                        (subRes: HttpResponse<ICartao>) => {
-                            this.cartaos = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
-                }
+                this.cartaos = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

@@ -1,9 +1,9 @@
 package br.com.jns.financeiro.service.dto;
 
-import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
 import br.com.jns.financeiro.domain.enumeration.Status;
 import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
 
@@ -15,12 +15,9 @@ public class PagamentoDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private LocalDate vencimento;
-
-    private LocalDate diaPagamento;
-
-    @NotNull
     private Long quantidadeParcelas;
+
+    private FormaPagamento formaPag;
 
     @NotNull
     private Status status;
@@ -35,28 +32,20 @@ public class PagamentoDTO implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getVencimento() {
-        return vencimento;
-    }
-
-    public void setVencimento(LocalDate vencimento) {
-        this.vencimento = vencimento;
-    }
-
-    public LocalDate getDiaPagamento() {
-        return diaPagamento;
-    }
-
-    public void setDiaPagamento(LocalDate diaPagamento) {
-        this.diaPagamento = diaPagamento;
-    }
-
     public Long getQuantidadeParcelas() {
         return quantidadeParcelas;
     }
 
     public void setQuantidadeParcelas(Long quantidadeParcelas) {
         this.quantidadeParcelas = quantidadeParcelas;
+    }
+
+    public FormaPagamento getFormaPag() {
+        return formaPag;
+    }
+
+    public void setFormaPag(FormaPagamento formaPag) {
+        this.formaPag = formaPag;
     }
 
     public Status getStatus() {
@@ -100,9 +89,8 @@ public class PagamentoDTO implements Serializable {
     public String toString() {
         return "PagamentoDTO{" +
             "id=" + getId() +
-            ", vencimento='" + getVencimento() + "'" +
-            ", diaPagamento='" + getDiaPagamento() + "'" +
             ", quantidadeParcelas=" + getQuantidadeParcelas() +
+            ", formaPag='" + getFormaPag() + "'" +
             ", status='" + getStatus() + "'" +
             ", tipoPagamento='" + getTipoPagamento() + "'" +
             "}";

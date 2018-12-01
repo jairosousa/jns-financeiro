@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IPagamento } from 'app/shared/model/pagamento.model';
@@ -19,8 +18,6 @@ export class PagamentoUpdateComponent implements OnInit {
     isSaving: boolean;
 
     lancamentos: ILancamento[];
-    vencimentoDp: any;
-    diaPagamentoDp: any;
 
     constructor(
         private jhiAlertService: JhiAlertService,

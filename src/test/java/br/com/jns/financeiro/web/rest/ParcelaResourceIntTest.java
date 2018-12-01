@@ -42,7 +42,6 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
 import br.com.jns.financeiro.domain.enumeration.Status;
 /**
  * Test class for the ParcelaResource REST controller.
@@ -70,9 +69,6 @@ public class ParcelaResourceIntTest {
 
     private static final BigDecimal DEFAULT_TOTAL = new BigDecimal(1);
     private static final BigDecimal UPDATED_TOTAL = new BigDecimal(2);
-
-    private static final FormaPagamento DEFAULT_FORMA = FormaPagamento.DINHEIRO;
-    private static final FormaPagamento UPDATED_FORMA = FormaPagamento.CREDITO;
 
     private static final Status DEFAULT_STATUS = Status.PAGO;
     private static final Status UPDATED_STATUS = Status.PENDENTE;
@@ -135,7 +131,6 @@ public class ParcelaResourceIntTest {
             .valor(DEFAULT_VALOR)
             .juros(DEFAULT_JUROS)
             .total(DEFAULT_TOTAL)
-            .forma(DEFAULT_FORMA)
             .status(DEFAULT_STATUS);
         return parcela;
     }
@@ -167,7 +162,6 @@ public class ParcelaResourceIntTest {
         assertThat(testParcela.getValor()).isEqualTo(DEFAULT_VALOR);
         assertThat(testParcela.getJuros()).isEqualTo(DEFAULT_JUROS);
         assertThat(testParcela.getTotal()).isEqualTo(DEFAULT_TOTAL);
-        assertThat(testParcela.getForma()).isEqualTo(DEFAULT_FORMA);
         assertThat(testParcela.getStatus()).isEqualTo(DEFAULT_STATUS);
 
         // Validate the Parcela in Elasticsearch
@@ -214,10 +208,9 @@ public class ParcelaResourceIntTest {
             .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())))
             .andExpect(jsonPath("$.[*].juros").value(hasItem(DEFAULT_JUROS.intValue())))
             .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.intValue())))
-            .andExpect(jsonPath("$.[*].forma").value(hasItem(DEFAULT_FORMA.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getParcela() throws Exception {
@@ -235,7 +228,6 @@ public class ParcelaResourceIntTest {
             .andExpect(jsonPath("$.valor").value(DEFAULT_VALOR.intValue()))
             .andExpect(jsonPath("$.juros").value(DEFAULT_JUROS.intValue()))
             .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.intValue()))
-            .andExpect(jsonPath("$.forma").value(DEFAULT_FORMA.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
@@ -266,7 +258,6 @@ public class ParcelaResourceIntTest {
             .valor(UPDATED_VALOR)
             .juros(UPDATED_JUROS)
             .total(UPDATED_TOTAL)
-            .forma(UPDATED_FORMA)
             .status(UPDATED_STATUS);
         ParcelaDTO parcelaDTO = parcelaMapper.toDto(updatedParcela);
 
@@ -285,7 +276,6 @@ public class ParcelaResourceIntTest {
         assertThat(testParcela.getValor()).isEqualTo(UPDATED_VALOR);
         assertThat(testParcela.getJuros()).isEqualTo(UPDATED_JUROS);
         assertThat(testParcela.getTotal()).isEqualTo(UPDATED_TOTAL);
-        assertThat(testParcela.getForma()).isEqualTo(UPDATED_FORMA);
         assertThat(testParcela.getStatus()).isEqualTo(UPDATED_STATUS);
 
         // Validate the Parcela in Elasticsearch
@@ -353,7 +343,6 @@ public class ParcelaResourceIntTest {
             .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())))
             .andExpect(jsonPath("$.[*].juros").value(hasItem(DEFAULT_JUROS.intValue())))
             .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.intValue())))
-            .andExpect(jsonPath("$.[*].forma").value(hasItem(DEFAULT_FORMA.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 

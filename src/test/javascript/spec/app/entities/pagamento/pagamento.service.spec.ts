@@ -4,10 +4,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { PagamentoService } from 'app/entities/pagamento/pagamento.service';
-import { IPagamento, Pagamento, Status, TipoPagamento } from 'app/shared/model/pagamento.model';
+import { IPagamento, Pagamento, FormaPagamento, Status, TipoPagamento } from 'app/shared/model/pagamento.model';
 
 describe('Service Tests', () => {
     describe('Pagamento Service', () => {
@@ -15,7 +13,6 @@ describe('Service Tests', () => {
         let service: PagamentoService;
         let httpMock: HttpTestingController;
         let elemDefault: IPagamento;
-        let currentDate: moment.Moment;
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [HttpClientTestingModule]
@@ -23,20 +20,13 @@ describe('Service Tests', () => {
             injector = getTestBed();
             service = injector.get(PagamentoService);
             httpMock = injector.get(HttpTestingController);
-            currentDate = moment();
 
-            elemDefault = new Pagamento(0, currentDate, currentDate, 0, Status.PAGO, TipoPagamento.AVISTA);
+            elemDefault = new Pagamento(0, 0, FormaPagamento.DINHEIRO, Status.PAGO, TipoPagamento.AVISTA);
         });
 
         describe('Service methods', async () => {
             it('should find an element', async () => {
-                const returnedFromService = Object.assign(
-                    {
-                        vencimento: currentDate.format(DATE_FORMAT),
-                        diaPagamento: currentDate.format(DATE_FORMAT)
-                    },
-                    elemDefault
-                );
+                const returnedFromService = Object.assign({}, elemDefault);
                 service
                     .find(123)
                     .pipe(take(1))
@@ -49,19 +39,11 @@ describe('Service Tests', () => {
             it('should create a Pagamento', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        id: 0,
-                        vencimento: currentDate.format(DATE_FORMAT),
-                        diaPagamento: currentDate.format(DATE_FORMAT)
+                        id: 0
                     },
                     elemDefault
                 );
-                const expected = Object.assign(
-                    {
-                        vencimento: currentDate,
-                        diaPagamento: currentDate
-                    },
-                    returnedFromService
-                );
+                const expected = Object.assign({}, returnedFromService);
                 service
                     .create(new Pagamento(null))
                     .pipe(take(1))
@@ -73,22 +55,15 @@ describe('Service Tests', () => {
             it('should update a Pagamento', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        vencimento: currentDate.format(DATE_FORMAT),
-                        diaPagamento: currentDate.format(DATE_FORMAT),
                         quantidadeParcelas: 1,
+                        formaPag: 'BBBBBB',
                         status: 'BBBBBB',
                         tipoPagamento: 'BBBBBB'
                     },
                     elemDefault
                 );
 
-                const expected = Object.assign(
-                    {
-                        vencimento: currentDate,
-                        diaPagamento: currentDate
-                    },
-                    returnedFromService
-                );
+                const expected = Object.assign({}, returnedFromService);
                 service
                     .update(expected)
                     .pipe(take(1))
@@ -100,21 +75,14 @@ describe('Service Tests', () => {
             it('should return a list of Pagamento', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        vencimento: currentDate.format(DATE_FORMAT),
-                        diaPagamento: currentDate.format(DATE_FORMAT),
                         quantidadeParcelas: 1,
+                        formaPag: 'BBBBBB',
                         status: 'BBBBBB',
                         tipoPagamento: 'BBBBBB'
                     },
                     elemDefault
                 );
-                const expected = Object.assign(
-                    {
-                        vencimento: currentDate,
-                        diaPagamento: currentDate
-                    },
-                    returnedFromService
-                );
+                const expected = Object.assign({}, returnedFromService);
                 service
                     .query(expected)
                     .pipe(
