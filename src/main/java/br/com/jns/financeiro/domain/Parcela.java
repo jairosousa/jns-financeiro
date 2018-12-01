@@ -12,8 +12,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
-
 import br.com.jns.financeiro.domain.enumeration.Status;
 
 /**
@@ -50,14 +48,11 @@ public class Parcela implements Serializable {
     private BigDecimal total;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "forma")
-    private FormaPagamento forma;
-
-    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
 
-    @OneToOne    @JoinColumn(unique = true)
+    @ManyToOne
+    @JsonIgnoreProperties("")
     private Cartao cartao;
 
     @ManyToOne
@@ -151,19 +146,6 @@ public class Parcela implements Serializable {
         this.total = total;
     }
 
-    public FormaPagamento getForma() {
-        return forma;
-    }
-
-    public Parcela forma(FormaPagamento forma) {
-        this.forma = forma;
-        return this;
-    }
-
-    public void setForma(FormaPagamento forma) {
-        this.forma = forma;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -234,7 +216,6 @@ public class Parcela implements Serializable {
             ", valor=" + getValor() +
             ", juros=" + getJuros() +
             ", total=" + getTotal() +
-            ", forma='" + getForma() + "'" +
             ", status='" + getStatus() + "'" +
             "}";
     }

@@ -1,11 +1,5 @@
 import { Moment } from 'moment';
 
-export const enum FormaPagamento {
-    DINHEIRO = 'DINHEIRO',
-    CREDITO = 'CARTAO',
-    DEBITO = 'DEBITO'
-}
-
 export const enum Status {
     PAGO = 'PAGO',
     PENDENTE = 'PENDENTE'
@@ -19,7 +13,6 @@ export interface IParcela {
     valor?: number;
     juros?: number;
     total?: number;
-    forma?: FormaPagamento;
     status?: Status;
     cartaoNome?: string;
     cartaoId?: number;
@@ -35,7 +28,6 @@ export class Parcela implements IParcela {
         public valor?: number,
         public juros?: number,
         public total?: number,
-        public forma?: FormaPagamento,
         public status?: Status,
         public cartaoNome?: string,
         public cartaoId?: number,

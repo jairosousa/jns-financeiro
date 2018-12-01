@@ -50,14 +50,6 @@
                         [(ngModel)]="parcela.total" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.forma" for="field_forma">Forma</label>
-                    <select class="form-control" name="forma" [(ngModel)]="parcela.forma" id="field_forma" >
-                        <option value="DINHEIRO">{{'jnsFinanceiroApp.FormaPagamento.DINHEIRO' | translate}}</option>
-                        <option value="CREDITO">{{'jnsFinanceiroApp.FormaPagamento.CREDITO' | translate}}</option>
-                        <option value="DEBITO">{{'jnsFinanceiroApp.FormaPagamento.DEBITO' | translate}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.status" for="field_status">Status</label>
                     <select class="form-control" name="status" [(ngModel)]="parcela.status" id="field_status" >
                         <option value="PAGO">{{'jnsFinanceiroApp.Status.PAGO' | translate}}</option>
@@ -67,7 +59,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.cartao" for="field_cartao">Cartao</label>
-                    <select class="form-control" id="field_cartao" name="cartao" [(ngModel)]="parcela.cartaoId">
+                    <select class="form-control" id="field_cartao" name="cartao" [(ngModel)]="parcela.cartaoId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="cartaoOption.id" *ngFor="let cartaoOption of cartaos; trackBy: trackCartaoById">{{cartaoOption.nome}}</option>
                     </select>

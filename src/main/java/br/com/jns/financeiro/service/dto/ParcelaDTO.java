@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
-import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
 import br.com.jns.financeiro.domain.enumeration.Status;
 
 /**
@@ -25,8 +24,6 @@ public class ParcelaDTO implements Serializable {
     private BigDecimal juros;
 
     private BigDecimal total;
-
-    private FormaPagamento forma;
 
     private Status status;
 
@@ -92,14 +89,6 @@ public class ParcelaDTO implements Serializable {
         this.total = total;
     }
 
-    public FormaPagamento getForma() {
-        return forma;
-    }
-
-    public void setForma(FormaPagamento forma) {
-        this.forma = forma;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -163,7 +152,6 @@ public class ParcelaDTO implements Serializable {
             ", valor=" + getValor() +
             ", juros=" + getJuros() +
             ", total=" + getTotal() +
-            ", forma='" + getForma() + "'" +
             ", status='" + getStatus() + "'" +
             ", cartao=" + getCartaoId() +
             ", cartao='" + getCartaoNome() + "'" +
