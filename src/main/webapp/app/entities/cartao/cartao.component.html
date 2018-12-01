@@ -1,19 +1,27 @@
 <div>
+    <jhi-bread-crumb
+        [items]="[{text: 'cartao', currentAction: ''}]"
+    ></jhi-bread-crumb>
+
     <h2 id="page-heading">
+        <span class="text-primary"><fa-icon [icon]="faCard"></fa-icon></span>
         <span jhiTranslate="jnsFinanceiroApp.cartao.home.title">Cartaos</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cartao" [routerLink]="['/cartao/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cartao"
+                [routerLink]="['/cartao/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="jnsFinanceiroApp.cartao.home.createLabel">
+            <span class="hidden-sm-down" jhiTranslate="jnsFinanceiroApp.cartao.home.adicionar">
             Create new Cartao
             </span>
         </button>
     </h2>
+
     <jhi-alert></jhi-alert>
     <div class="row">
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jnsFinanceiroApp.cartao.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                           name="currentSearch" placeholder="{{ 'jnsFinanceiroApp.cartao.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
@@ -29,26 +37,41 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="jnsFinanceiroApp.cartao.nome">Nome</span></th>
-            <th><span jhiTranslate="jnsFinanceiroApp.cartao.bandeira">Bandeira</span></th>
-            <th><span jhiTranslate="jnsFinanceiroApp.cartao.numero">Numero</span></th>
-            <th><span jhiTranslate="jnsFinanceiroApp.cartao.logotipo">Logotipo</span></th>
-            <th></th>
+                <!--<th><span jhiTranslate="global.field.id">ID</span></th>-->
+                <th><span jhiTranslate="jnsFinanceiroApp.cartao.nome">Nome</span></th>
+                <!--<th class="text-center"><span jhiTranslate="jnsFinanceiroApp.cartao.bandeira">Bandeira</span></th>-->
+                <!--<th class="text-center"><span jhiTranslate="jnsFinanceiroApp.cartao.numero">Numero</span></th>-->
+                <!--<th class="text-center"><span jhiTranslate="jnsFinanceiroApp.cartao.logotipo">Logotipo</span></th>-->
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let cartao of cartaos ;trackBy: trackId">
-                <td><a [routerLink]="['/cartao', cartao.id, 'view' ]">{{cartao.id}}</a></td>
-                <td>{{cartao.nome}}</td>
-                <td jhiTranslate="{{'jnsFinanceiroApp.Bandeira.' + cartao.bandeira}}">{{cartao.bandeira}}</td>
-                <td>{{cartao.numero}}</td>
-                <td>
-                    <a *ngIf="cartao.logotipo" (click)="openFile(cartao.logotipoContentType, cartao.logotipo)">
-                        <img [src]="'data:' + cartao.logotipoContentType + ';base64,' + cartao.logotipo" style="max-height: 30px;" alt="cartao image"/>
-                    </a>
-                    <span *ngIf="cartao.logotipo">{{cartao.logotipoContentType}}, {{byteSize(cartao.logotipo)}}</span>
+                <!--<td><a [routerLink]="['/cartao', cartao.id, 'view' ]">{{cartao.id}}</a></td>-->
+                <td colspan="4">
+                    <div>
+                    <span class="h4">{{cartao.nome}}</span>
+                    <span class="h4"><a *ngIf="cartao.logotipo" (click)="openFile(cartao.logotipoContentType, cartao.logotipo)">
+                        <img [src]="'data:' + cartao.logotipoContentType + ';base64,' + cartao.logotipo"
+                             style="max-height: 30px;" alt="cartao image"/>
+                    </a></span>
+                    </div>
+                    <span class="font-weight-bold text-primary">{{cartao.bandeira}}</span><br/>
+                    <span class="font-weight-bold text-info">{{cartao.numero}}</span>
                 </td>
+                <!--<td class="text-center" jhiTranslate="{{'jnsFinanceiroApp.Bandeira.' + cartao.bandeira}}">-->
+                    <!--{{cartao.bandeira}}-->
+                <!--</td>-->
+                <!--<td>{{cartao.numero}}</td>-->
+                <!--<td class="text-center">-->
+                    <!--<a *ngIf="cartao.logotipo" (click)="openFile(cartao.logotipoContentType, cartao.logotipo)">-->
+                        <!--<img [src]="'data:' + cartao.logotipoContentType + ';base64,' + cartao.logotipo"-->
+                             <!--style="max-height: 30px;" alt="cartao image"/>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash;<span *ngIf="cartao.logotipo">{{cartao.logotipoContentType}}, {{byteSize(cartao.logotipo)}}</span>&ndash;&gt;-->
+                <!--</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

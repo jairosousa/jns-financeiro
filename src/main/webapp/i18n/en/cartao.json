@@ -2,23 +2,24 @@
     "jnsFinanceiroApp": {
         "cartao": {
             "home": {
-                "title": "Cartaos",
-                "createLabel": "Create a new Cartao",
-                "createOrEditLabel": "Create or edit a Cartao",
-                "search": "Search for Cartao"
+                "title": "Cred Cards",
+                "adicionar": "Cred Card",
+                "createLabel": "Create a new Cred Card",
+                "editLabel": "Edit Cred Card",
+                "search": "Search for Cred Card"
             },
-            "created": "A new Cartao is created with identifier {{ param }}",
-            "updated": "A Cartao is updated with identifier {{ param }}",
-            "deleted": "A Cartao is deleted with identifier {{ param }}",
+            "created": "A new Cred Card is created with identifier {{ param }}",
+            "updated": "A Cred Card is updated with identifier {{ param }}",
+            "deleted": "A Cred Card is deleted with identifier {{ param }}",
             "delete": {
                 "question": "Are you sure you want to delete Cartao {{ id }}?"
             },
             "detail": {
-                "title": "Cartao"
+                "title": "Cred Card"
             },
             "nome": "Nome",
             "bandeira": "Bandeira",
-            "numero": "Numero",
+            "numero": "Number",
             "logotipo": "Logotipo"
         }
     }

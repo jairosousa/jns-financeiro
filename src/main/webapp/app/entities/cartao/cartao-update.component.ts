@@ -1,6 +1,6 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JhiDataUtils } from 'ng-jhipster';
 
@@ -15,15 +15,19 @@ export class CartaoUpdateComponent implements OnInit {
     cartao: ICartao;
     isSaving: boolean;
 
+    currentAction: string;
+
     constructor(
         private dataUtils: JhiDataUtils,
         private cartaoService: CartaoService,
         private elementRef: ElementRef,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private router: Router
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
+        this.setCurrentyAction();
         this.activatedRoute.data.subscribe(({ cartao }) => {
             this.cartao = cartao;
         });
@@ -59,15 +63,25 @@ export class CartaoUpdateComponent implements OnInit {
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<ICartao>>) {
-        result.subscribe((res: HttpResponse<ICartao>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+        result.subscribe((res: HttpResponse<ICartao>) => this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess() {
+    private onSaveSuccess(cartao: ICartao) {
         this.isSaving = false;
-        this.previousState();
+        this.router
+            .navigateByUrl('categoria', { skipLocationChange: true })
+            .then(() => this.router.navigate(['cartao', cartao.id, 'edit']));
     }
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private setCurrentyAction() {
+        if (this.activatedRoute.snapshot.url[1].path === 'new') {
+            this.currentAction = 'new';
+        } else {
+            this.currentAction = 'edit';
+        }
     }
 }

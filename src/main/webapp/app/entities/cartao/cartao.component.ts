@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 
 import { ICartao } from 'app/shared/model/cartao.model';
 import { Principal } from 'app/core';
 import { CartaoService } from './cartao.service';
+import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'jhi-cartao',
@@ -17,6 +18,8 @@ export class CartaoComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     currentSearch: string;
+
+    faCard = faCreditCard;
 
     constructor(
         private cartaoService: CartaoService,

@@ -8,9 +8,9 @@
                 "editLabel": "Editar Categoria",
                 "search": "Pesquisar por Categoria"
             },
-            "created": "Uma nova Categoria foi criado com o identificador {{ param }}",
-            "updated": "A Categoria foi atualizado com o identificador {{ param }}",
-            "deleted": "a Categoria foi deletado com o identificador {{ param }}",
+            "created": "A Categoria foi criado com sucesso!",
+            "updated": "A Categoria foi atualizado com sucesso!}",
+            "deleted": "a Categoria foi deletado com sucesso!",
             "delete": {
                 "question": "Tem certeza de que deseja excluir a Categoria {{ id }}?"
             },

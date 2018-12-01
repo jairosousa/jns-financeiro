@@ -1,7 +1,7 @@
 <div class="justify-content-center">
     <div class="container">
         <jhi-bread-crumb
-            [items]="[{text: 'Categoria', link: '/categoria'}, {text: 'categoria', currentAction: currentAction}]"
+            [items]="[{text: 'Categorias', link: '/categoria'}, {text: 'categoria', currentAction: currentAction}]"
         ></jhi-bread-crumb>
 
         <div class="row mb-4">
@@ -17,6 +17,7 @@
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <div>
                 <jhi-alert-error></jhi-alert-error>
+                <jhi-alert></jhi-alert>
                 <div class="form-group" [hidden]="true">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
