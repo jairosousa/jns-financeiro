@@ -26,6 +26,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="data_primeiro_vencimento" type="date">
+                <constraints nullable="false" />
+            </column>
+
             <column name="forma_pag" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

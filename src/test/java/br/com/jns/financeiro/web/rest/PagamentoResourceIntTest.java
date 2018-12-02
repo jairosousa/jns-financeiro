@@ -27,6 +27,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 
@@ -53,6 +55,9 @@ public class PagamentoResourceIntTest {
 
     private static final Long DEFAULT_QUANTIDADE_PARCELAS = 1L;
     private static final Long UPDATED_QUANTIDADE_PARCELAS = 2L;
+
+    private static final LocalDate DEFAULT_DATA_PRIMEIRO_VENCIMENTO = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATA_PRIMEIRO_VENCIMENTO = LocalDate.now(ZoneId.systemDefault());
 
     private static final FormaPagamento DEFAULT_FORMA_PAG = FormaPagamento.DINHEIRO;
     private static final FormaPagamento UPDATED_FORMA_PAG = FormaPagamento.CREDITO;
@@ -116,6 +121,7 @@ public class PagamentoResourceIntTest {
     public static Pagamento createEntity(EntityManager em) {
         Pagamento pagamento = new Pagamento()
             .quantidadeParcelas(DEFAULT_QUANTIDADE_PARCELAS)
+            .dataPrimeiroVencimento(DEFAULT_DATA_PRIMEIRO_VENCIMENTO)
             .formaPag(DEFAULT_FORMA_PAG)
             .status(DEFAULT_STATUS)
             .tipoPagamento(DEFAULT_TIPO_PAGAMENTO);
@@ -144,6 +150,7 @@ public class PagamentoResourceIntTest {
         assertThat(pagamentoList).hasSize(databaseSizeBeforeCreate + 1);
         Pagamento testPagamento = pagamentoList.get(pagamentoList.size() - 1);
         assertThat(testPagamento.getQuantidadeParcelas()).isEqualTo(DEFAULT_QUANTIDADE_PARCELAS);
+        assertThat(testPagamento.getDataPrimeiroVencimento()).isEqualTo(DEFAULT_DATA_PRIMEIRO_VENCIMENTO);
         assertThat(testPagamento.getFormaPag()).isEqualTo(DEFAULT_FORMA_PAG);
         assertThat(testPagamento.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testPagamento.getTipoPagamento()).isEqualTo(DEFAULT_TIPO_PAGAMENTO);
@@ -196,6 +203,44 @@ public class PagamentoResourceIntTest {
 
     @Test
     @Transactional
+    public void checkDataPrimeiroVencimentoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = pagamentoRepository.findAll().size();
+        // set the field null
+        pagamento.setDataPrimeiroVencimento(null);
+
+        // Create the Pagamento, which fails.
+        PagamentoDTO pagamentoDTO = pagamentoMapper.toDto(pagamento);
+
+        restPagamentoMockMvc.perform(post("/api/pagamentos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(pagamentoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Pagamento> pagamentoList = pagamentoRepository.findAll();
+        assertThat(pagamentoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkFormaPagIsRequired() throws Exception {
+        int databaseSizeBeforeTest = pagamentoRepository.findAll().size();
+        // set the field null
+        pagamento.setFormaPag(null);
+
+        // Create the Pagamento, which fails.
+        PagamentoDTO pagamentoDTO = pagamentoMapper.toDto(pagamento);
+
+        restPagamentoMockMvc.perform(post("/api/pagamentos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(pagamentoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Pagamento> pagamentoList = pagamentoRepository.findAll();
+        assertThat(pagamentoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkStatusIsRequired() throws Exception {
         int databaseSizeBeforeTest = pagamentoRepository.findAll().size();
         // set the field null
@@ -225,6 +270,7 @@ public class PagamentoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(pagamento.getId().intValue())))
             .andExpect(jsonPath("$.[*].quantidadeParcelas").value(hasItem(DEFAULT_QUANTIDADE_PARCELAS.intValue())))
+            .andExpect(jsonPath("$.[*].dataPrimeiroVencimento").value(hasItem(DEFAULT_DATA_PRIMEIRO_VENCIMENTO.toString())))
             .andExpect(jsonPath("$.[*].formaPag").value(hasItem(DEFAULT_FORMA_PAG.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].tipoPagamento").value(hasItem(DEFAULT_TIPO_PAGAMENTO.toString())));
@@ -242,6 +288,7 @@ public class PagamentoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(pagamento.getId().intValue()))
             .andExpect(jsonPath("$.quantidadeParcelas").value(DEFAULT_QUANTIDADE_PARCELAS.intValue()))
+            .andExpect(jsonPath("$.dataPrimeiroVencimento").value(DEFAULT_DATA_PRIMEIRO_VENCIMENTO.toString()))
             .andExpect(jsonPath("$.formaPag").value(DEFAULT_FORMA_PAG.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.tipoPagamento").value(DEFAULT_TIPO_PAGAMENTO.toString()));
@@ -269,6 +316,7 @@ public class PagamentoResourceIntTest {
         em.detach(updatedPagamento);
         updatedPagamento
             .quantidadeParcelas(UPDATED_QUANTIDADE_PARCELAS)
+            .dataPrimeiroVencimento(UPDATED_DATA_PRIMEIRO_VENCIMENTO)
             .formaPag(UPDATED_FORMA_PAG)
             .status(UPDATED_STATUS)
             .tipoPagamento(UPDATED_TIPO_PAGAMENTO);
@@ -284,6 +332,7 @@ public class PagamentoResourceIntTest {
         assertThat(pagamentoList).hasSize(databaseSizeBeforeUpdate);
         Pagamento testPagamento = pagamentoList.get(pagamentoList.size() - 1);
         assertThat(testPagamento.getQuantidadeParcelas()).isEqualTo(UPDATED_QUANTIDADE_PARCELAS);
+        assertThat(testPagamento.getDataPrimeiroVencimento()).isEqualTo(UPDATED_DATA_PRIMEIRO_VENCIMENTO);
         assertThat(testPagamento.getFormaPag()).isEqualTo(UPDATED_FORMA_PAG);
         assertThat(testPagamento.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testPagamento.getTipoPagamento()).isEqualTo(UPDATED_TIPO_PAGAMENTO);
@@ -348,6 +397,7 @@ public class PagamentoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(pagamento.getId().intValue())))
             .andExpect(jsonPath("$.[*].quantidadeParcelas").value(hasItem(DEFAULT_QUANTIDADE_PARCELAS.intValue())))
+            .andExpect(jsonPath("$.[*].dataPrimeiroVencimento").value(hasItem(DEFAULT_DATA_PRIMEIRO_VENCIMENTO.toString())))
             .andExpect(jsonPath("$.[*].formaPag").value(hasItem(DEFAULT_FORMA_PAG.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].tipoPagamento").value(hasItem(DEFAULT_TIPO_PAGAMENTO.toString())));

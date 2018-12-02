@@ -17,6 +17,8 @@
                 "title": "Pagamento"
             },
             "formaPag": "Forma Pag",
+            "dataPrimeiroVencimento": "Data Primeiro Vencimento",
+            "dataVencimento": "Data Vencimento",
             "quantidadeParcelas": "Quantidade Parcelas",
             "status": "Status",
             "tipoPagamento": "Tipo Pagamento",

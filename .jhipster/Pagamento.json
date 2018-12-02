@@ -9,6 +9,13 @@
             ]
         },
         {
+            "fieldName": "dataPrimeiroVencimento",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "formaPag",
             "fieldType": "FormaPagamento",
             "fieldValues": "DINHEIRO,CREDITO,DEBITO"

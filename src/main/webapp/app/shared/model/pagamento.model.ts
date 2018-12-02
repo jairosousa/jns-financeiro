@@ -1,4 +1,5 @@
 import { IParcela } from 'app/shared/model//parcela.model';
+import { Moment } from 'moment';
 
 export const enum FormaPagamento {
     DINHEIRO = 'DINHEIRO',
@@ -19,6 +20,7 @@ export const enum TipoPagamento {
 export interface IPagamento {
     id?: number;
     quantidadeParcelas?: number;
+    dataPrimeiroVencimento?: Moment;
     formaPag?: FormaPagamento;
     status?: Status;
     tipoPagamento?: TipoPagamento;
@@ -30,6 +32,7 @@ export class Pagamento implements IPagamento {
     constructor(
         public id?: number,
         public quantidadeParcelas?: number,
+        public dataPrimeiroVencimento?: Moment,
         public formaPag?: FormaPagamento,
         public status?: Status,
         public tipoPagamento?: TipoPagamento,

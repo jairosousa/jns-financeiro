@@ -17,6 +17,8 @@ export class PagamentoUpdateComponent implements OnInit {
     pagamento: IPagamento;
     isSaving: boolean;
 
+    dataPrimeiroVencimentoDp: any;
+
     lancamentos: ILancamento[];
 
     constructor(

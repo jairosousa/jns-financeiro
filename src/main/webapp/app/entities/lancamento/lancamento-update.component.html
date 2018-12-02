@@ -164,54 +164,84 @@
                 </div>
 
                 <!--OPÇÕES DE PAGAMENTO AVISTA-->
-                <div class="form-row" *ngIf="pagamento">
-                    <div class="col-sm-12 col-md-4" *ngIf="pagamento.tipoPagamento == 'AVISTA'">
+                <div class="form-row" *ngIf="pagamento && pagamento.tipoPagamento == 'AVISTA'">
+                    <div class="form-group col-sm-12 col-md-4">
                         <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.dataVencimento" for="field_dataVencimento-AV">Data Vencimento</label>
+                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.dataVencimento"
+                                   for="field_dataPrimeiroVencimento">Data</label>
                             <div class="input-group">
-                                <input id="field_dataVencimento-AV" type="text" class="form-control" name="dataVencimento" ngbDatepicker  #dataVencimentoDp="ngbDatepicker" [(ngModel)]="parcela.dataVencimento"
-                                />
+                                <input id="field_dataPrimeiroVencimento" type="text" class="form-control"
+                                       name="dataPrimeiroVencimento" ngbDatepicker
+                                       #dataDp="ngbDatepicker" [(ngModel)]="pagamento.dataPrimeiroVencimento"
+                                       required/>
                                 <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataVencimentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
+                            <button type="button" class="btn btn-secondary" (click)="dataPrimeiroVencimentoDp.toggle()"><fa-icon
+                                [icon]="'calendar-alt'"></fa-icon></button>
+                            </span>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.dataPrimeiroVencimento?.dirty && editForm.controls.dataPrimeiroVencimento?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.dataPrimeiroVencimento?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <!--OPÇÕES DE PAGAMENTO PARCELADO-->
-                <div class="form-row" *ngIf="pagamento">
-                    <div class="col-sm-12 col-md-4" *ngIf="pagamento.tipoPagamento == 'PARCELADO'">
+                <div class="form-row" *ngIf="pagamento && pagamento.tipoPagamento == 'PARCELADO'">
+                    <div class="form-group col-sm-12 col-md-4">
                         <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas" for="field_quantidadeParcelas">Quantidade Parcelas</label>
-                            <input type="number" class="form-control" name="quantidadeParcelas" id="field_quantidadeParcelas"
+                            <label class="form-control-label"
+                                   jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas"
+                                   for="field_quantidadeParcelas">Quantidade Parcelas</label>
+                            <input type="number" class="form-control" name="quantidadeParcelas"
+                                   id="field_quantidadeParcelas"
                                    [(ngModel)]="pagamento.quantidadeParcelas" required/>
-                            <div [hidden]="!(editForm.controls.quantidadeParcelas?.dirty && editForm.controls.quantidadeParcelas?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.quantidadeParcelas?.errors?.required" jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.quantidadeParcelas?.errors?.number" jhiTranslate="entity.validation.number">
-                                    This field should be a number.
-                                </small>
-                            </div>
+                        </div>
+                        <div
+                            [hidden]="!(editForm.controls.quantidadeParcelas?.dirty && editForm.controls.quantidadeParcelas?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.quantidadeParcelas?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.quantidadeParcelas?.errors?.number"
+                                   jhiTranslate="entity.validation.number">
+                                This field should be a number.
+                            </small>
                         </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-4" *ngIf="pagamento.tipoPagamento == 'PARCELADO'">
+                    <div class="form-group col-sm-12 col-md-4">
                         <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.parcelado" for="field_dataVencimento-PAR">Data Vencimento</label>
+                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.dataVencimento"
+                                   for="field_dataPrimeiroVencimento-p">Data</label>
                             <div class="input-group">
-                                <input id="field_dataVencimento-PAR" type="text" class="form-control" name="dataVencimento" ngbDatepicker  #dataVencimentoDp="ngbDatepicker" [(ngModel)]="parcela.dataVencimento"
-                                />
+                                <input id="field_dataPrimeiroVencimento-p" type="text" class="form-control"
+                                       name="dataPrimeiroVencimento" ngbDatepicker
+                                       #dataDp="ngbDatepicker" [(ngModel)]="pagamento.dataPrimeiroVencimento"
+                                       required/>
                                 <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataVencimentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
+                            <button type="button" class="btn btn-secondary" (click)="dataPrimeiroVencimentoDp.toggle()"><fa-icon
+                                [icon]="'calendar-alt'"></fa-icon></button>
+                            </span>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.dataPrimeiroVencimento?.dirty && editForm.controls.dataPrimeiroVencimento?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.dataPrimeiroVencimento?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4"></div>
 
                 </div>
 

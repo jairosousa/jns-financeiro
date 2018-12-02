@@ -9,6 +9,7 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -38,8 +39,13 @@ public class Pagamento implements Serializable {
     @Column(name = "quantidade_parcelas", nullable = false)
     private Long quantidadeParcelas;
 
+    @NotNull
+    @Column(name = "data_primeiro_vencimento", nullable = false)
+    private LocalDate dataPrimeiroVencimento;
+
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "forma_pag")
+    @Column(name = "forma_pag", nullable = false)
     private FormaPagamento formaPag;
 
     @NotNull
@@ -53,7 +59,6 @@ public class Pagamento implements Serializable {
 
     @OneToMany(mappedBy = "pagamento")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-
     private Set<Parcela> parcelas = new HashSet<>();
     @OneToOne(mappedBy = "pagamento")
     @JsonIgnore
@@ -79,6 +84,19 @@ public class Pagamento implements Serializable {
 
     public void setQuantidadeParcelas(Long quantidadeParcelas) {
         this.quantidadeParcelas = quantidadeParcelas;
+    }
+
+    public LocalDate getDataPrimeiroVencimento() {
+        return dataPrimeiroVencimento;
+    }
+
+    public Pagamento dataPrimeiroVencimento(LocalDate dataPrimeiroVencimento) {
+        this.dataPrimeiroVencimento = dataPrimeiroVencimento;
+        return this;
+    }
+
+    public void setDataPrimeiroVencimento(LocalDate dataPrimeiroVencimento) {
+        this.dataPrimeiroVencimento = dataPrimeiroVencimento;
     }
 
     public FormaPagamento getFormaPag() {
@@ -184,6 +202,7 @@ public class Pagamento implements Serializable {
         return "Pagamento{" +
             "id=" + getId() +
             ", quantidadeParcelas=" + getQuantidadeParcelas() +
+            ", dataPrimeiroVencimento='" + getDataPrimeiroVencimento() + "'" +
             ", formaPag='" + getFormaPag() + "'" +
             ", status='" + getStatus() + "'" +
             ", tipoPagamento='" + getTipoPagamento() + "'" +

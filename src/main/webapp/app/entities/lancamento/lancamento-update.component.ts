@@ -6,13 +6,12 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { ILancamento, Tipo } from 'app/shared/model/lancamento.model';
 import { LancamentoService } from './lancamento.service';
-import { FormaPagamento, IPagamento, TipoPagamento } from 'app/shared/model/pagamento.model';
+import { FormaPagamento, IPagamento, Status, TipoPagamento } from 'app/shared/model/pagamento.model';
 import { PagamentoService } from 'app/entities/pagamento';
 import { IFornecedor } from 'app/shared/model/fornecedor.model';
 import { FornecedorService } from 'app/entities/fornecedor';
 import { ICategoria } from 'app/shared/model/categoria.model';
 import { CategoriaService } from 'app/entities/categoria';
-import { IParcela } from 'app/shared/model/parcela.model';
 import moment = require('moment');
 
 @Component({
@@ -23,7 +22,6 @@ export class LancamentoUpdateComponent implements OnInit {
     lancamento: ILancamento;
     pagamento: IPagamento;
     isSaving: boolean;
-    parcela: IParcela;
 
     // pagamentos: IPagamento[];
 
@@ -54,11 +52,11 @@ export class LancamentoUpdateComponent implements OnInit {
                 if (!this.lancamento.pagamentoId) {
                     this.lancamento.tipo = Tipo.RECEITA;
                     this.pagamento = {};
-                    this.parcela = {};
                     this.pagamento.tipoPagamento = TipoPagamento.AVISTA;
                     this.pagamento.formaPag = FormaPagamento.DINHEIRO;
                     this.pagamento.quantidadeParcelas = 1;
-                    this.parcela.dataVencimento = moment();
+                    this.pagamento.dataPrimeiroVencimento = moment();
+                    this.pagamento.status = Status.PENDENTE;
                 } else {
                     this.pagamentoService
                         .find(this.lancamento.pagamentoId)
@@ -88,8 +86,6 @@ export class LancamentoUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.lancamento.pagamento = this.pagamento;
-        this.pagamento.parcelas = [];
-        this.pagamento.parcelas.push(this.parcela);
         console.log(this.lancamento);
         // if (this.lancamento.id !== undefined) {
         //     this.subscribeToSaveResponse(this.lancamentoService.update(this.lancamento));

@@ -17,7 +17,6 @@
                 "title": "Parcela"
             },
             "dataVencimento": "Data Vencimento",
-            "parcelado": "Data Vencimento 1º Parcela",
             "dataPagamento": "Data Pagamento",
             "numero": "Numero",
             "valor": "Valor",
