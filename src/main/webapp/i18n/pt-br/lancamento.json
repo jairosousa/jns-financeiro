@@ -2,25 +2,26 @@
     "jnsFinanceiroApp": {
         "lancamento": {
             "home": {
-                "title": "Lancamentos",
-                "createLabel": "Criar novo Lancamento",
-                "createOrEditLabel": "Criar ou editar Lancamento",
-                "search": "Pesquisar por Lancamento"
+                "title": "Lançamentos",
+                "createLabel": "Criar Lançamento",
+                "adicionar": "Lançamento",
+                "editLabel": "Editar Lançamento",
+                "search": "Pesquisar por Lançamento"
             },
-            "created": "Um novo Lancamento foi criado com o identificador {{ param }}",
-            "updated": "Um Lancamento foi atualizado com o identificador {{ param }}",
-            "deleted": "Um Lancamento foi deletado com o identificador {{ param }}",
+            "created": "Lançamento foi criado com o sucesso!",
+            "updated": "Lançamento foi atualizado com sucesso!",
+            "deleted": "Lançamento foi deletado com sucesso!",
             "delete": {
-                "question": "Tem certeza de que deseja excluir Lancamento {{ id }}?"
+                "question": "Tem certeza de que deseja excluir Lançamento {{ id }}?"
             },
             "detail": {
-                "title": "Lancamento"
+                "title": "Lançamento"
             },
-            "data": "Data",
+            "data": "Data Compra",
             "nome": "Nome",
-            "descricao": "Descricao",
+            "descricao": "Descrição",
             "valor": "Valor",
-            "tipo": "Tipo",
+            "tipo": "Tipo Lançamento",
             "pagamento": "Pagamento",
             "fornecedor": "Fornecedor",
             "categoria": "Categoria"

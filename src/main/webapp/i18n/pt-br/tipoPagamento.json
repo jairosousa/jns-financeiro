@@ -2,8 +2,8 @@
     "jnsFinanceiroApp": {
         "TipoPagamento": {
             "null": "",
-            "AVISTA": "AVISTA",
-            "PARCELADO": "PARCELADO"
+            "AVISTA": "A Vista",
+            "PARCELADO": "A Prazo"
         }
     }
 }

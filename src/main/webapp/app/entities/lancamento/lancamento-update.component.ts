@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 
-import { ILancamento } from 'app/shared/model/lancamento.model';
+import { ILancamento, Tipo } from 'app/shared/model/lancamento.model';
 import { LancamentoService } from './lancamento.service';
-import { IPagamento } from 'app/shared/model/pagamento.model';
+import { FormaPagamento, IPagamento, TipoPagamento } from 'app/shared/model/pagamento.model';
 import { PagamentoService } from 'app/entities/pagamento';
 import { IFornecedor } from 'app/shared/model/fornecedor.model';
 import { FornecedorService } from 'app/entities/fornecedor';
 import { ICategoria } from 'app/shared/model/categoria.model';
 import { CategoriaService } from 'app/entities/categoria';
+import { IParcela } from 'app/shared/model/parcela.model';
+import moment = require('moment');
 
 @Component({
     selector: 'jhi-lancamento-update',
@@ -20,14 +21,18 @@ import { CategoriaService } from 'app/entities/categoria';
 })
 export class LancamentoUpdateComponent implements OnInit {
     lancamento: ILancamento;
+    pagamento: IPagamento;
     isSaving: boolean;
+    parcela: IParcela;
 
-    pagamentos: IPagamento[];
+    // pagamentos: IPagamento[];
 
     fornecedors: IFornecedor[];
 
     categorias: ICategoria[];
     dataDp: any;
+
+    currentAction: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -40,20 +45,24 @@ export class LancamentoUpdateComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
+        this.setCurrentyAction();
         this.activatedRoute.data.subscribe(({ lancamento }) => {
             this.lancamento = lancamento;
         });
         this.pagamentoService.query({ filter: 'lancamento-is-null' }).subscribe(
             (res: HttpResponse<IPagamento[]>) => {
                 if (!this.lancamento.pagamentoId) {
-                    this.pagamentos = res.body;
+                    this.lancamento.tipo = Tipo.RECEITA;
+                    this.pagamento = {};
+                    this.parcela = {};
+                    this.pagamento.tipoPagamento = TipoPagamento.AVISTA;
+                    this.pagamento.formaPag = FormaPagamento.DINHEIRO;
+                    this.pagamento.quantidadeParcelas = 1;
+                    this.parcela.dataVencimento = moment();
                 } else {
-                    this.pagamentoService.find(this.lancamento.pagamentoId).subscribe(
-                        (subRes: HttpResponse<IPagamento>) => {
-                            this.pagamentos = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
+                    this.pagamentoService
+                        .find(this.lancamento.pagamentoId)
+                        .subscribe((subRes: HttpResponse<IPagamento>) => {}, (subRes: HttpErrorResponse) => this.onError(subRes.message));
                 }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
@@ -78,11 +87,15 @@ export class LancamentoUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        if (this.lancamento.id !== undefined) {
-            this.subscribeToSaveResponse(this.lancamentoService.update(this.lancamento));
-        } else {
-            this.subscribeToSaveResponse(this.lancamentoService.create(this.lancamento));
-        }
+        this.lancamento.pagamento = this.pagamento;
+        this.pagamento.parcelas = [];
+        this.pagamento.parcelas.push(this.parcela);
+        console.log(this.lancamento);
+        // if (this.lancamento.id !== undefined) {
+        //     this.subscribeToSaveResponse(this.lancamentoService.update(this.lancamento));
+        // } else {
+        //     this.subscribeToSaveResponse(this.lancamentoService.create(this.lancamento));
+        // }
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<ILancamento>>) {
@@ -112,5 +125,13 @@ export class LancamentoUpdateComponent implements OnInit {
 
     trackCategoriaById(index: number, item: ICategoria) {
         return item.id;
+    }
+
+    private setCurrentyAction() {
+        if (this.activatedRoute.snapshot.url[1].path === 'new') {
+            this.currentAction = 'new';
+        } else {
+            this.currentAction = 'edit';
+        }
     }
 }

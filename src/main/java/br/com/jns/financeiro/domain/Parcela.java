@@ -134,7 +134,7 @@ public class Parcela implements Serializable {
     }
 
     public BigDecimal getTotal() {
-        return total;
+        return this.valor.add(this.juros);
     }
 
     public Parcela total(BigDecimal total) {
