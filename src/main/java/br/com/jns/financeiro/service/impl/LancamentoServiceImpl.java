@@ -71,6 +71,16 @@ public class LancamentoServiceImpl implements LancamentoService {
         return result;
     }
 
+    @Override
+    public LancamentoDTO update(LancamentoDTO lancamentoDTO) {
+        log.debug("Request to save Lancamento : {}", lancamentoDTO);
+        Lancamento lancamento = lancamentoMapper.toEntity(lancamentoDTO);
+        lancamento = lancamentoRepository.save(lancamento);
+        LancamentoDTO result = lancamentoMapper.toDto(lancamento);
+        lancamentoSearchRepository.save(lancamento);
+        return result;
+    }
+
     private void gerarParcela(Lancamento lancamento) {
         if (lancamento.getPagamento().getTipoPagamento().equals(TipoPagamento.AVISTA)) {
             Parcela parcela = new Parcela();

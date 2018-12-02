@@ -21,6 +21,14 @@ public interface LancamentoService {
     LancamentoDTO save(LancamentoDTO lancamentoDTO);
 
     /**
+     * update a lancamento.
+     *
+     * @param lancamentoDTO the entity to save
+     * @return the persisted entity
+     */
+    LancamentoDTO update(LancamentoDTO lancamentoDTO);
+
+    /**
      * Get all the lancamentos.
      *
      * @param pageable the pagination information

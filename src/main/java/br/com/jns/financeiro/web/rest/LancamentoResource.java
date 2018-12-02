@@ -79,7 +79,7 @@ public class LancamentoResource {
         if (lancamentoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        LancamentoDTO result = lancamentoService.save(lancamentoDTO);
+        LancamentoDTO result = lancamentoService.update(lancamentoDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, lancamentoDTO.getId().toString()))
             .body(result);
