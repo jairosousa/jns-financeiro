@@ -3,8 +3,10 @@ package br.com.jns.financeiro.service.impl;
 import br.com.jns.financeiro.domain.Lancamento;
 import br.com.jns.financeiro.domain.Pagamento;
 import br.com.jns.financeiro.domain.Parcela;
+import br.com.jns.financeiro.domain.enumeration.Status;
 import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
 import br.com.jns.financeiro.repository.LancamentoRepository;
+import br.com.jns.financeiro.repository.ParcelaRepository;
 import br.com.jns.financeiro.repository.search.LancamentoSearchRepository;
 import br.com.jns.financeiro.service.LancamentoService;
 import br.com.jns.financeiro.service.dto.LancamentoDTO;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
@@ -38,11 +41,14 @@ public class LancamentoServiceImpl implements LancamentoService {
 
     private final PagamentoMapper pagamentoMapper;
 
-    public LancamentoServiceImpl(LancamentoRepository lancamentoRepository, LancamentoMapper lancamentoMapper, LancamentoSearchRepository lancamentoSearchRepository, PagamentoMapper pagamentoMapper) {
+    private final ParcelaRepository parcelaRepository;
+
+    public LancamentoServiceImpl(LancamentoRepository lancamentoRepository, LancamentoMapper lancamentoMapper, LancamentoSearchRepository lancamentoSearchRepository, PagamentoMapper pagamentoMapper, ParcelaRepository parcelaRepository) {
         this.lancamentoRepository = lancamentoRepository;
         this.lancamentoMapper = lancamentoMapper;
         this.lancamentoSearchRepository = lancamentoSearchRepository;
         this.pagamentoMapper = pagamentoMapper;
+        this.parcelaRepository = parcelaRepository;
     }
 
     /**
@@ -59,15 +65,23 @@ public class LancamentoServiceImpl implements LancamentoService {
         Lancamento lancamento = lancamentoMapper.toEntity(lancamentoDTO);
         lancamento.setPagamento(pagamento);
         lancamento = lancamentoRepository.save(lancamento);
-        this.gerarParcela(lancamento.getPagamento());
+        this.gerarParcela(lancamento);
         LancamentoDTO result = lancamentoMapper.toDto(lancamento);
         lancamentoSearchRepository.save(lancamento);
         return result;
     }
 
-    private void gerarParcela(Pagamento pagamento) {
-        if (pagamento.getTipoPagamento().equals(TipoPagamento.AVISTA)) {
-
+    private void gerarParcela(Lancamento lancamento) {
+        if (lancamento.getPagamento().getTipoPagamento().equals(TipoPagamento.AVISTA)) {
+            Parcela parcela = new Parcela();
+            parcela.setDataVencimento(lancamento.getPagamento().getDataPrimeiroVencimento());
+            parcela.setNumero(lancamento.getPagamento().getQuantidadeParcelas());
+            parcela.setValor(lancamento.getValor());
+            parcela.setStatus(Status.PENDENTE);
+            parcela.setPagamento(lancamento.getPagamento());
+            parcela.setJuros(new BigDecimal("0"));
+            parcela.valor(lancamento.getValor());
+            parcelaRepository.save(parcela);
         }
     }
 

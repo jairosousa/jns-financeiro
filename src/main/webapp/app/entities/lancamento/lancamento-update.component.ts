@@ -29,6 +29,8 @@ export class LancamentoUpdateComponent implements OnInit {
 
     categorias: ICategoria[];
     dataDp: any;
+    dataPrimeiroVencimentoDp: any;
+    dataVencimentoDp: any;
 
     currentAction: string;
 
@@ -51,6 +53,7 @@ export class LancamentoUpdateComponent implements OnInit {
             (res: HttpResponse<IPagamento[]>) => {
                 if (!this.lancamento.pagamentoId) {
                     this.lancamento.tipo = Tipo.RECEITA;
+                    this.lancamento.data = moment();
                     this.pagamento = {};
                     this.pagamento.tipoPagamento = TipoPagamento.AVISTA;
                     this.pagamento.formaPag = FormaPagamento.DINHEIRO;
@@ -58,9 +61,12 @@ export class LancamentoUpdateComponent implements OnInit {
                     this.pagamento.dataPrimeiroVencimento = moment();
                     this.pagamento.status = Status.PENDENTE;
                 } else {
-                    this.pagamentoService
-                        .find(this.lancamento.pagamentoId)
-                        .subscribe((subRes: HttpResponse<IPagamento>) => {}, (subRes: HttpErrorResponse) => this.onError(subRes.message));
+                    this.pagamentoService.find(this.lancamento.pagamentoId).subscribe(
+                        (subRes: HttpResponse<IPagamento>) => {
+                            this.pagamento = subRes.body;
+                        },
+                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                    );
                 }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
@@ -87,11 +93,11 @@ export class LancamentoUpdateComponent implements OnInit {
         this.isSaving = true;
         this.lancamento.pagamento = this.pagamento;
         console.log(this.lancamento);
-        // if (this.lancamento.id !== undefined) {
-        //     this.subscribeToSaveResponse(this.lancamentoService.update(this.lancamento));
-        // } else {
-        //     this.subscribeToSaveResponse(this.lancamentoService.create(this.lancamento));
-        // }
+        if (this.lancamento.id !== undefined) {
+            this.subscribeToSaveResponse(this.lancamentoService.update(this.lancamento));
+        } else {
+            this.subscribeToSaveResponse(this.lancamentoService.create(this.lancamento));
+        }
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<ILancamento>>) {

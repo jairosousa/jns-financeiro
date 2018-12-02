@@ -172,10 +172,10 @@
                             <div class="input-group">
                                 <input id="field_dataPrimeiroVencimento" type="text" class="form-control"
                                        name="dataPrimeiroVencimento" ngbDatepicker
-                                       #dataDp="ngbDatepicker" [(ngModel)]="pagamento.dataPrimeiroVencimento"
+                                       #dataVencimentoDp="ngbDatepicker" [(ngModel)]="pagamento.dataPrimeiroVencimento"
                                        required/>
                                 <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataPrimeiroVencimentoDp.toggle()"><fa-icon
+                            <button type="button" class="btn btn-secondary" (click)="dataVencimentoDp.toggle()"><fa-icon
                                 [icon]="'calendar-alt'"></fa-icon></button>
                             </span>
                             </div>
@@ -225,7 +225,7 @@
                             <div class="input-group">
                                 <input id="field_dataPrimeiroVencimento-p" type="text" class="form-control"
                                        name="dataPrimeiroVencimento" ngbDatepicker
-                                       #dataDp="ngbDatepicker" [(ngModel)]="pagamento.dataPrimeiroVencimento"
+                                       #dataPrimeiroVencimentoDp="ngbDatepicker" [(ngModel)]="pagamento.dataPrimeiroVencimento"
                                        required/>
                                 <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dataPrimeiroVencimentoDp.toggle()"><fa-icon
