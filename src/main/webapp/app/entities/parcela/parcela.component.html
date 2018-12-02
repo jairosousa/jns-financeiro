@@ -36,7 +36,6 @@
             <th jhiSortBy="valor"><span jhiTranslate="jnsFinanceiroApp.parcela.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="juros"><span jhiTranslate="jnsFinanceiroApp.parcela.juros">Juros</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="total"><span jhiTranslate="jnsFinanceiroApp.parcela.total">Total</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="forma"><span jhiTranslate="jnsFinanceiroApp.parcela.forma">Forma</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.parcela.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="cartaoNome"><span jhiTranslate="jnsFinanceiroApp.parcela.cartao">Cartao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="pagamentoId"><span jhiTranslate="jnsFinanceiroApp.parcela.pagamento">Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -52,7 +51,6 @@
                 <td>{{parcela.valor}}</td>
                 <td>{{parcela.juros}}</td>
                 <td>{{parcela.total}}</td>
-                <td jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + parcela.forma}}">{{parcela.forma}}</td>
                 <td jhiTranslate="{{'jnsFinanceiroApp.Status.' + parcela.status}}">{{parcela.status}}</td>
                 <td>
                     <div *ngIf="parcela.cartaoId">

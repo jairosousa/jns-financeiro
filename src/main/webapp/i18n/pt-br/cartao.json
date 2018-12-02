@@ -2,24 +2,23 @@
     "jnsFinanceiroApp": {
         "cartao": {
             "home": {
-                "title": "Cartões",
-                "adicionar": "Cartão",
-                "createLabel": "Criar Cartão",
-                "editLabel": "Editar Cartao",
+                "title": "Cartaos",
+                "createLabel": "Criar novo Cartao",
+                "createOrEditLabel": "Criar ou editar Cartao",
                 "search": "Pesquisar por Cartao"
             },
-            "created": "O Cartão foi criado com sucesso! }}",
-            "updated": "O Cartao foi atualizado com sucesso!",
-            "deleted": "O Cartao foi deletado com sucesso!",
+            "created": "Um novo Cartao foi criado com o identificador {{ param }}",
+            "updated": "Um Cartao foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Cartao foi deletado com o identificador {{ param }}",
             "delete": {
-                "question": "Tem certeza de que deseja excluir Cartão {{ id }}?"
+                "question": "Tem certeza de que deseja excluir Cartao {{ id }}?"
             },
             "detail": {
-                "title": "Cartão"
+                "title": "Cartao"
             },
             "nome": "Nome",
             "bandeira": "Bandeira",
-            "numero": "Número (quatro últimos)",
+            "numero": "Numero",
             "logotipo": "Logotipo"
         }
     }

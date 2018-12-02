@@ -22,15 +22,15 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="vencimento" type="date">
+            <column name="quantidade_parcelas" type="bigint">
                 <constraints nullable="false" />
             </column>
 
-            <column name="dia_pagamento" type="date">
-                <constraints nullable="true" />
+            <column name="data_primeiro_vencimento" type="date">
+                <constraints nullable="false" />
             </column>
 
-            <column name="quantidade_parcelas" type="bigint">
+            <column name="forma_pag" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
 

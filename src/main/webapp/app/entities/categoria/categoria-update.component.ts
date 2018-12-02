@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ICategoria } from 'app/shared/model/categoria.model';
@@ -14,13 +14,10 @@ export class CategoriaUpdateComponent implements OnInit {
     categoria: ICategoria;
     isSaving: boolean;
 
-    currentAction: string;
-
-    constructor(private categoriaService: CategoriaService, private activatedRoute: ActivatedRoute, private router: Router) {}
+    constructor(private categoriaService: CategoriaService, private activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         this.isSaving = false;
-        this.setCurrentyAction();
         this.activatedRoute.data.subscribe(({ categoria }) => {
             this.categoria = categoria;
         });
@@ -39,29 +36,16 @@ export class CategoriaUpdateComponent implements OnInit {
         }
     }
 
-    // METHODOS PRIVATES
-
     private subscribeToSaveResponse(result: Observable<HttpResponse<ICategoria>>) {
-        result.subscribe((res: HttpResponse<ICategoria>) => this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
+        result.subscribe((res: HttpResponse<ICategoria>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess(categoria: ICategoria) {
+    private onSaveSuccess() {
         this.isSaving = false;
-        this.router
-            .navigateByUrl('categoria', { skipLocationChange: true })
-            .then(() => this.router.navigate(['categoria', categoria.id, 'edit']));
-        // this.previousState();
+        this.previousState();
     }
 
     private onSaveError() {
         this.isSaving = false;
-    }
-
-    private setCurrentyAction() {
-        if (this.activatedRoute.snapshot.url[1].path === 'new') {
-            this.currentAction = 'new';
-        } else {
-            this.currentAction = 'edit';
-        }
     }
 }

@@ -59,17 +59,17 @@ export class PagamentoService {
 
     protected convertDateFromClient(pagamento: IPagamento): IPagamento {
         const copy: IPagamento = Object.assign({}, pagamento, {
-            vencimento: pagamento.vencimento != null && pagamento.vencimento.isValid() ? pagamento.vencimento.format(DATE_FORMAT) : null,
-            diaPagamento:
-                pagamento.diaPagamento != null && pagamento.diaPagamento.isValid() ? pagamento.diaPagamento.format(DATE_FORMAT) : null
+            dataPrimeiroVencimento:
+                pagamento.dataPrimeiroVencimento != null && pagamento.dataPrimeiroVencimento.isValid()
+                    ? pagamento.dataPrimeiroVencimento.format(DATE_FORMAT)
+                    : null
         });
         return copy;
     }
 
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
-            res.body.vencimento = res.body.vencimento != null ? moment(res.body.vencimento) : null;
-            res.body.diaPagamento = res.body.diaPagamento != null ? moment(res.body.diaPagamento) : null;
+            res.body.dataPrimeiroVencimento = res.body.dataPrimeiroVencimento != null ? moment(res.body.dataPrimeiroVencimento) : null;
         }
         return res;
     }
@@ -77,8 +77,8 @@ export class PagamentoService {
     protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
         if (res.body) {
             res.body.forEach((pagamento: IPagamento) => {
-                pagamento.vencimento = pagamento.vencimento != null ? moment(pagamento.vencimento) : null;
-                pagamento.diaPagamento = pagamento.diaPagamento != null ? moment(pagamento.diaPagamento) : null;
+                pagamento.dataPrimeiroVencimento =
+                    pagamento.dataPrimeiroVencimento != null ? moment(pagamento.dataPrimeiroVencimento) : null;
             });
         }
         return res;

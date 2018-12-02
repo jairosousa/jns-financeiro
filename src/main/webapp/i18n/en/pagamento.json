@@ -16,9 +16,9 @@
             "detail": {
                 "title": "Pagamento"
             },
-            "vencimento": "Vencimento",
-            "diaPagamento": "Dia Pagamento",
             "quantidadeParcelas": "Quantidade Parcelas",
+            "dataPrimeiroVencimento": "Data Primeiro Vencimento",
+            "formaPag": "Forma Pag",
             "status": "Status",
             "tipoPagamento": "Tipo Pagamento",
             "parcela": "Parcela",

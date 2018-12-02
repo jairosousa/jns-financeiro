@@ -1,13 +1,10 @@
 package br.com.jns.financeiro.service.impl;
 
-import br.com.jns.financeiro.domain.Endereco;
-import br.com.jns.financeiro.repository.EnderecoRepository;
 import br.com.jns.financeiro.service.FornecedorService;
 import br.com.jns.financeiro.domain.Fornecedor;
 import br.com.jns.financeiro.repository.FornecedorRepository;
 import br.com.jns.financeiro.repository.search.FornecedorSearchRepository;
 import br.com.jns.financeiro.service.dto.FornecedorDTO;
-import br.com.jns.financeiro.service.mapper.EnderecoMapper;
 import br.com.jns.financeiro.service.mapper.FornecedorMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,16 +33,10 @@ public class FornecedorServiceImpl implements FornecedorService {
 
     private final FornecedorSearchRepository fornecedorSearchRepository;
 
-    private final EnderecoRepository enderecoRepository;
-
-    private final EnderecoMapper enderecoMapper;
-
-    public FornecedorServiceImpl(FornecedorRepository fornecedorRepository, FornecedorMapper fornecedorMapper, FornecedorSearchRepository fornecedorSearchRepository, EnderecoRepository enderecoRepository, EnderecoMapper enderecoMapper) {
+    public FornecedorServiceImpl(FornecedorRepository fornecedorRepository, FornecedorMapper fornecedorMapper, FornecedorSearchRepository fornecedorSearchRepository) {
         this.fornecedorRepository = fornecedorRepository;
         this.fornecedorMapper = fornecedorMapper;
         this.fornecedorSearchRepository = fornecedorSearchRepository;
-        this.enderecoRepository = enderecoRepository;
-        this.enderecoMapper = enderecoMapper;
     }
 
     /**
@@ -58,8 +49,6 @@ public class FornecedorServiceImpl implements FornecedorService {
     public FornecedorDTO save(FornecedorDTO fornecedorDTO) {
         log.debug("Request to save Fornecedor : {}", fornecedorDTO);
 
-        Endereco endereco = enderecoMapper.toEntity(fornecedorDTO.getEndereco());
-        fornecedorDTO.setEnderecoId(enderecoRepository.save(endereco).getId());
         Fornecedor fornecedor = fornecedorMapper.toEntity(fornecedorDTO);
         fornecedor = fornecedorRepository.save(fornecedor);
         FornecedorDTO result = fornecedorMapper.toDto(fornecedor);
@@ -77,7 +66,7 @@ public class FornecedorServiceImpl implements FornecedorService {
     @Transactional(readOnly = true)
     public Page<FornecedorDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Fornecedors");
-        return fornecedorRepository.findAllByOrderByNomeAsc(pageable)
+        return fornecedorRepository.findAll(pageable)
             .map(fornecedorMapper::toDto);
     }
 

@@ -7,7 +7,7 @@ import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { ParcelaService } from 'app/entities/parcela/parcela.service';
-import { IParcela, Parcela, FormaPagamento, Status } from 'app/shared/model/parcela.model';
+import { IParcela, Parcela, Status } from 'app/shared/model/parcela.model';
 
 describe('Service Tests', () => {
     describe('Parcela Service', () => {
@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Parcela(0, currentDate, currentDate, 0, 0, 0, 0, FormaPagamento.DINHEIRO, Status.PAGO);
+            elemDefault = new Parcela(0, currentDate, currentDate, 0, 0, 0, 0, Status.PAGO);
         });
 
         describe('Service methods', async () => {
@@ -79,7 +79,6 @@ describe('Service Tests', () => {
                         valor: 1,
                         juros: 1,
                         total: 1,
-                        forma: 'BBBBBB',
                         status: 'BBBBBB'
                     },
                     elemDefault
@@ -109,7 +108,6 @@ describe('Service Tests', () => {
                         valor: 1,
                         juros: 1,
                         total: 1,
-                        forma: 'BBBBBB',
                         status: 'BBBBBB'
                     },
                     elemDefault

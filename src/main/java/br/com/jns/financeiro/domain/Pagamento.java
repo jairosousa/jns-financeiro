@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
+
 import br.com.jns.financeiro.domain.enumeration.Status;
 
 import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
@@ -34,15 +36,17 @@ public class Pagamento implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "vencimento", nullable = false)
-    private LocalDate vencimento;
-
-    @Column(name = "dia_pagamento")
-    private LocalDate diaPagamento;
-
-    @NotNull
     @Column(name = "quantidade_parcelas", nullable = false)
     private Long quantidadeParcelas;
+
+    @NotNull
+    @Column(name = "data_primeiro_vencimento", nullable = false)
+    private LocalDate dataPrimeiroVencimento;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "forma_pag", nullable = false)
+    private FormaPagamento formaPag;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -56,7 +60,6 @@ public class Pagamento implements Serializable {
     @OneToMany(mappedBy = "pagamento")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Parcela> parcelas = new HashSet<>();
-
     @OneToOne(mappedBy = "pagamento")
     @JsonIgnore
     private Lancamento lancamento;
@@ -70,32 +73,6 @@ public class Pagamento implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getVencimento() {
-        return vencimento;
-    }
-
-    public Pagamento vencimento(LocalDate vencimento) {
-        this.vencimento = vencimento;
-        return this;
-    }
-
-    public void setVencimento(LocalDate vencimento) {
-        this.vencimento = vencimento;
-    }
-
-    public LocalDate getDiaPagamento() {
-        return diaPagamento;
-    }
-
-    public Pagamento diaPagamento(LocalDate diaPagamento) {
-        this.diaPagamento = diaPagamento;
-        return this;
-    }
-
-    public void setDiaPagamento(LocalDate diaPagamento) {
-        this.diaPagamento = diaPagamento;
-    }
-
     public Long getQuantidadeParcelas() {
         return quantidadeParcelas;
     }
@@ -107,6 +84,32 @@ public class Pagamento implements Serializable {
 
     public void setQuantidadeParcelas(Long quantidadeParcelas) {
         this.quantidadeParcelas = quantidadeParcelas;
+    }
+
+    public LocalDate getDataPrimeiroVencimento() {
+        return dataPrimeiroVencimento;
+    }
+
+    public Pagamento dataPrimeiroVencimento(LocalDate dataPrimeiroVencimento) {
+        this.dataPrimeiroVencimento = dataPrimeiroVencimento;
+        return this;
+    }
+
+    public void setDataPrimeiroVencimento(LocalDate dataPrimeiroVencimento) {
+        this.dataPrimeiroVencimento = dataPrimeiroVencimento;
+    }
+
+    public FormaPagamento getFormaPag() {
+        return formaPag;
+    }
+
+    public Pagamento formaPag(FormaPagamento formaPag) {
+        this.formaPag = formaPag;
+        return this;
+    }
+
+    public void setFormaPag(FormaPagamento formaPag) {
+        this.formaPag = formaPag;
     }
 
     public Status getStatus() {
@@ -198,9 +201,9 @@ public class Pagamento implements Serializable {
     public String toString() {
         return "Pagamento{" +
             "id=" + getId() +
-            ", vencimento='" + getVencimento() + "'" +
-            ", diaPagamento='" + getDiaPagamento() + "'" +
             ", quantidadeParcelas=" + getQuantidadeParcelas() +
+            ", dataPrimeiroVencimento='" + getDataPrimeiroVencimento() + "'" +
+            ", formaPag='" + getFormaPag() + "'" +
             ", status='" + getStatus() + "'" +
             ", tipoPagamento='" + getTipoPagamento() + "'" +
             "}";

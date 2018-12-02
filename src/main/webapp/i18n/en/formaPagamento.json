@@ -2,9 +2,9 @@
     "jnsFinanceiroApp": {
         "FormaPagamento": {
             "null": "",
-            "DINHEIRO": "Cash",
-            "CARTAO": "Credit Card",
-            "DEBITO": "Debit Card"
+            "DINHEIRO": "DINHEIRO",
+            "CREDITO": "CREDITO",
+            "DEBITO": "DEBITO"
         }
     }
 }

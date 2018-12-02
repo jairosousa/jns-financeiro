@@ -41,8 +41,4 @@ export class EnderecoService {
         const options = createRequestOption(req);
         return this.http.get<IEndereco[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
     }
-
-    findEndereco(cep: string): Observable<EntityResponseType> {
-        return this.http.get<IEndereco>(`${this.resourceUrl}/cep/${cep}`, { observe: 'response' });
-    }
 }

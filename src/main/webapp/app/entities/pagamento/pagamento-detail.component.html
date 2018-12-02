@@ -5,17 +5,17 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.vencimento">Vencimento</span></dt>
-                <dd>
-                    <span>{{pagamento.vencimento}}</span>
-                </dd>
-                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.diaPagamento">Dia Pagamento</span></dt>
-                <dd>
-                    <span>{{pagamento.diaPagamento}}</span>
-                </dd>
                 <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas">Quantidade Parcelas</span></dt>
                 <dd>
                     <span>{{pagamento.quantidadeParcelas}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.dataPrimeiroVencimento">Data Primeiro Vencimento</span></dt>
+                <dd>
+                    <span>{{pagamento.dataPrimeiroVencimento}}</span>
+                </dd>
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.formaPag">Forma Pag</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + pagamento.formaPag}}">{{pagamento.formaPag}}</span>
                 </dd>
                 <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.status">Status</span></dt>
                 <dd>

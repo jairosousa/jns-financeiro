@@ -19,8 +19,7 @@ export class PagamentoUpdateComponent implements OnInit {
     isSaving: boolean;
 
     lancamentos: ILancamento[];
-    vencimentoDp: any;
-    diaPagamentoDp: any;
+    dataPrimeiroVencimentoDp: any;
 
     constructor(
         private jhiAlertService: JhiAlertService,

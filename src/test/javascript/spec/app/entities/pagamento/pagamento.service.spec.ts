@@ -7,7 +7,7 @@ import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { PagamentoService } from 'app/entities/pagamento/pagamento.service';
-import { IPagamento, Pagamento, Status, TipoPagamento } from 'app/shared/model/pagamento.model';
+import { IPagamento, Pagamento, FormaPagamento, Status, TipoPagamento } from 'app/shared/model/pagamento.model';
 
 describe('Service Tests', () => {
     describe('Pagamento Service', () => {
@@ -25,15 +25,14 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Pagamento(0, currentDate, currentDate, 0, Status.PAGO, TipoPagamento.AVISTA);
+            elemDefault = new Pagamento(0, 0, currentDate, FormaPagamento.DINHEIRO, Status.PAGO, TipoPagamento.AVISTA);
         });
 
         describe('Service methods', async () => {
             it('should find an element', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        vencimento: currentDate.format(DATE_FORMAT),
-                        diaPagamento: currentDate.format(DATE_FORMAT)
+                        dataPrimeiroVencimento: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
                 );
@@ -50,15 +49,13 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         id: 0,
-                        vencimento: currentDate.format(DATE_FORMAT),
-                        diaPagamento: currentDate.format(DATE_FORMAT)
+                        dataPrimeiroVencimento: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
                 );
                 const expected = Object.assign(
                     {
-                        vencimento: currentDate,
-                        diaPagamento: currentDate
+                        dataPrimeiroVencimento: currentDate
                     },
                     returnedFromService
                 );
@@ -73,9 +70,9 @@ describe('Service Tests', () => {
             it('should update a Pagamento', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        vencimento: currentDate.format(DATE_FORMAT),
-                        diaPagamento: currentDate.format(DATE_FORMAT),
                         quantidadeParcelas: 1,
+                        dataPrimeiroVencimento: currentDate.format(DATE_FORMAT),
+                        formaPag: 'BBBBBB',
                         status: 'BBBBBB',
                         tipoPagamento: 'BBBBBB'
                     },
@@ -84,8 +81,7 @@ describe('Service Tests', () => {
 
                 const expected = Object.assign(
                     {
-                        vencimento: currentDate,
-                        diaPagamento: currentDate
+                        dataPrimeiroVencimento: currentDate
                     },
                     returnedFromService
                 );
@@ -100,9 +96,9 @@ describe('Service Tests', () => {
             it('should return a list of Pagamento', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        vencimento: currentDate.format(DATE_FORMAT),
-                        diaPagamento: currentDate.format(DATE_FORMAT),
                         quantidadeParcelas: 1,
+                        dataPrimeiroVencimento: currentDate.format(DATE_FORMAT),
+                        formaPag: 'BBBBBB',
                         status: 'BBBBBB',
                         tipoPagamento: 'BBBBBB'
                     },
@@ -110,8 +106,7 @@ describe('Service Tests', () => {
                 );
                 const expected = Object.assign(
                     {
-                        vencimento: currentDate,
-                        diaPagamento: currentDate
+                        dataPrimeiroVencimento: currentDate
                     },
                     returnedFromService
                 );

@@ -2,19 +2,23 @@
     "name": "Pagamento",
     "fields": [
         {
-            "fieldName": "vencimento",
+            "fieldName": "quantidadeParcelas",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dataPrimeiroVencimento",
             "fieldType": "LocalDate",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
-            "fieldName": "diaPagamento",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "quantidadeParcelas",
-            "fieldType": "Long",
+            "fieldName": "formaPag",
+            "fieldType": "FormaPagamento",
+            "fieldValues": "DINHEIRO,CREDITO,DEBITO",
             "fieldValidateRules": [
                 "required"
             ]
