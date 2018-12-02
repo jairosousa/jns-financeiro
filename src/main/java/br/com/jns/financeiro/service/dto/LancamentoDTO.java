@@ -39,8 +39,6 @@ public class LancamentoDTO implements Serializable {
 
     private String categoriaNome;
 
-    private PagamentoDTO pagamento;
-
     public Long getId() {
         return id;
     }
@@ -135,14 +133,6 @@ public class LancamentoDTO implements Serializable {
 
     public void setCategoriaNome(String categoriaNome) {
         this.categoriaNome = categoriaNome;
-    }
-
-    public PagamentoDTO getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(PagamentoDTO pagamento) {
-        this.pagamento = pagamento;
     }
 
     @Override

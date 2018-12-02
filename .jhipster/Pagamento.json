@@ -18,12 +18,15 @@
         {
             "fieldName": "formaPag",
             "fieldType": "FormaPagamento",
-            "fieldValues": "DINHEIRO,CREDITO,DEBITO"
+            "fieldValues": "DINHEIRO,CREDITO,DEBITO",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "status",
             "fieldType": "Status",
-            "fieldValues": "PAGO,PENDENTE",
+            "fieldValues": "PAGO,PENDENTE,CANCELADO",
             "fieldValidateRules": [
                 "required"
             ]

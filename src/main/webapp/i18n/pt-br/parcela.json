@@ -18,13 +18,12 @@
             },
             "dataVencimento": "Data Vencimento",
             "dataPagamento": "Data Pagamento",
-            "numero": "Número",
+            "numero": "Numero",
             "valor": "Valor",
             "juros": "Juros",
             "total": "Total",
-            "forma": "Forma",
             "status": "Status",
-            "cartao": "Cartão",
+            "cartao": "Cartao",
             "pagamento": "Pagamento"
         }
     }

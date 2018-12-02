@@ -1,262 +1,93 @@
-<div class="justify-content-center">
-    <div class="container">
-        <jhi-bread-crumb
-            [items]="[{text: 'Lançamentos', link: '/lancamento'}, {text: 'lancamento', currentAction: currentAction}]"
-        ></jhi-bread-crumb>
-
-        <div class="row mb-4">
-            <div class="col-md">
-                <h1 class="h2 border-left pl-2">
-                    <h2 *ngIf="currentAction == 'edit'" id="jhi-lancamento-heading-e"
-                        jhiTranslate="jnsFinanceiroApp.lancamento.home.editLabel">Create or edit a Lancamento</h2>
-                    <h2 *ngIf="currentAction == 'new'" id="jhi-lancamento-heading-c"
-                        jhiTranslate="jnsFinanceiroApp.lancamento.home.createLabel">Create or edit a Lancamento</h2>
-                </h1>
-            </div>
-
-        </div>
-
+<div class="row justify-content-center">
+    <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-lancamento-heading" jhiTranslate="jnsFinanceiroApp.lancamento.home.createOrEditLabel">Create or edit a Lancamento</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <jhi-alert></jhi-alert>
-                <div class="form-group" [hidden]="true">
+                <div class="form-group" [hidden]="!lancamento.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="lancamento.id" readonly/>
+                        [(ngModel)]="lancamento.id" readonly />
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group col-sm-12 col-md-2">
-                        <label class="form-control-label"
-                               jhiTranslate="jnsFinanceiroApp.lancamento.tipo">Tipo Lançamento</label>
-                        <div class="btn-block btn-group">
-                            <label (click)="lancamento.tipo='RECEITA'" [class.active]="lancamento.tipo == 'RECEITA'"
-                                   jhiTranslate="jnsFinanceiroApp.Tipo.RECEITA" name="tipo"
-                                   class="btn btn-outline-info">RECEITA</label>
-                            <label (click)="lancamento.tipo='DESPESA'" [class.active]="lancamento.tipo == 'DESPESA'"
-                                   jhiTranslate="jnsFinanceiroApp.Tipo.DESPESA" name="tipo"
-                                   class="btn btn-outline-info">RECEITA</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-sm-12 col-md-8">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.nome"
-                                   for="field_nome">Nome</label>
-                            <input type="text" class="form-control" name="nome" id="field_nome"
-                                   [(ngModel)]="lancamento.nome" required minlength="3"/>
-                            <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.nome?.errors?.required"
-                                       jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.nome?.errors?.minlength"
-                                       jhiTranslate="entity.validation.minlength" translateValues="{ min: 3 }">
-                                    This field is required to be at least 3 characters.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-sm-12 col-md-4">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.data"
-                                   for="field_data">Data</label>
-                            <div class="input-group">
-                                <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker
-                                       #dataDp="ngbDatepicker" [(ngModel)]="lancamento.data"
-                                       required/>
-                                <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon
-                                [icon]="'calendar-alt'"></fa-icon></button>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.data" for="field_data">Data</label>
+                    <div class="input-group">
+                        <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker  #dataDp="ngbDatepicker" [(ngModel)]="lancamento.data"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
-                            </div>
-                            <div [hidden]="!(editForm.controls.data?.dirty && editForm.controls.data?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.data?.errors?.required"
-                                       jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                            </div>
-                        </div>
+                    </div>
+                    <div [hidden]="!(editForm.controls.data?.dirty && editForm.controls.data?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.data?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
                     </div>
                 </div>
-
-                <div class="form-row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.fornecedor"
-                                   for="field_fornecedor">Fornecedor</label>
-                            <select class="form-control" id="field_fornecedor" name="fornecedor"
-                                    [(ngModel)]="lancamento.fornecedorId">
-                                <option [ngValue]="null"></option>
-                                <option [ngValue]="fornecedorOption.id"
-                                        *ngFor="let fornecedorOption of fornecedors; trackBy: trackFornecedorById">
-                                    {{fornecedorOption.nome}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.categoria"
-                                   for="field_categoria">Categoria</label>
-                            <select class="form-control" id="field_categoria" name="categoria"
-                                    [(ngModel)]="lancamento.categoriaId">
-                                <option [ngValue]="null"></option>
-                                <option [ngValue]="categoriaOption.id"
-                                        *ngFor="let categoriaOption of categorias; trackBy: trackCategoriaById">
-                                    {{categoriaOption.nome}}
-                                </option>
-                            </select>
-                        </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                        [(ngModel)]="lancamento.nome" required minlength="3"/>
+                    <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nome?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nome?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 3 }">
+                        This field is required to be at least 3 characters.
+                        </small>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.descricao" for="field_descricao">Descricao</label>
+                    <input type="text" class="form-control" name="descricao" id="field_descricao"
+                        [(ngModel)]="lancamento.descricao" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.valor" for="field_valor">Valor</label>
+                    <input type="number" class="form-control" name="valor" id="field_valor"
+                        [(ngModel)]="lancamento.valor" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.tipo" for="field_tipo">Tipo</label>
+                    <select class="form-control" name="tipo" [(ngModel)]="lancamento.tipo" id="field_tipo" >
+                        <option value="DESPESA">{{'jnsFinanceiroApp.Tipo.DESPESA' | translate}}</option>
+                        <option value="RECEITA">{{'jnsFinanceiroApp.Tipo.RECEITA' | translate}}</option>
+                    </select>
+                </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.descricao"
-                           for="field_descricao">Descricao</label>
-                    <input type="text" class="form-control" name="descricao" id="field_descricao"
-                           [(ngModel)]="lancamento.descricao"/>
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.pagamento" for="field_pagamento">Pagamento</label>
+                    <select class="form-control" id="field_pagamento" name="pagamento" [(ngModel)]="lancamento.pagamentoId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="pagamentoOption.id" *ngFor="let pagamentoOption of pagamentos; trackBy: trackPagamentoById">{{pagamentoOption.tipoPagamento}}</option>
+                    </select>
                 </div>
-
-                <div class="form-row">
-                    <div class="col-sm-12 col-md-4">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.valor"
-                                   for="field_valor">Valor</label>
-                            <input type="number" class="form-control" name="valor" id="field_valor"
-                                   [(ngModel)]="lancamento.valor"/>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-4" *ngIf="pagamento">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento"
-                                   for="field_tipoPagamento">Tipo Pagamento</label>
-                            <select class="form-control" name="tipoPagamento" [(ngModel)]="pagamento.tipoPagamento"
-                                    id="field_tipoPagamento">
-                                <option value="AVISTA">{{'jnsFinanceiroApp.TipoPagamento.AVISTA' | translate}}</option>
-                                <option value="PARCELADO">{{'jnsFinanceiroApp.TipoPagamento.PARCELADO' | translate}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-4" *ngIf="pagamento">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.formaPag"
-                                   for="field_formaPag">Forma Pag</label>
-                            <select class="form-control" name="formaPag" [(ngModel)]="pagamento.formaPag"
-                                    id="field_formaPag">
-                                <option value="DINHEIRO">{{'jnsFinanceiroApp.FormaPagamento.DINHEIRO' | translate}}
-                                </option>
-                                <option value="CREDITO">{{'jnsFinanceiroApp.FormaPagamento.CREDITO' | translate}}
-                                </option>
-                                <option value="DEBITO">{{'jnsFinanceiroApp.FormaPagamento.DEBITO' | translate}}</option>
-                            </select>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.fornecedor" for="field_fornecedor">Fornecedor</label>
+                    <select class="form-control" id="field_fornecedor" name="fornecedor" [(ngModel)]="lancamento.fornecedorId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="fornecedorOption.id" *ngFor="let fornecedorOption of fornecedors; trackBy: trackFornecedorById">{{fornecedorOption.nome}}</option>
+                    </select>
                 </div>
-
-                <!--OPÇÕES DE PAGAMENTO AVISTA-->
-                <div class="form-row" *ngIf="pagamento && pagamento.tipoPagamento == 'AVISTA'">
-                    <div class="form-group col-sm-12 col-md-4">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.dataVencimento"
-                                   for="field_dataPrimeiroVencimento">Data</label>
-                            <div class="input-group">
-                                <input id="field_dataPrimeiroVencimento" type="text" class="form-control"
-                                       name="dataPrimeiroVencimento" ngbDatepicker
-                                       #dataVencimentoDp="ngbDatepicker" [(ngModel)]="pagamento.dataPrimeiroVencimento"
-                                       required/>
-                                <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataVencimentoDp.toggle()"><fa-icon
-                                [icon]="'calendar-alt'"></fa-icon></button>
-                            </span>
-                            </div>
-                            <div
-                                [hidden]="!(editForm.controls.dataPrimeiroVencimento?.dirty && editForm.controls.dataPrimeiroVencimento?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.dataPrimeiroVencimento?.errors?.required"
-                                       jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.categoria" for="field_categoria">Categoria</label>
+                    <select class="form-control" id="field_categoria" name="categoria" [(ngModel)]="lancamento.categoriaId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="categoriaOption.id" *ngFor="let categoriaOption of categorias; trackBy: trackCategoriaById">{{categoriaOption.nome}}</option>
+                    </select>
                 </div>
-
-                <!--OPÇÕES DE PAGAMENTO PARCELADO-->
-                <div class="form-row" *ngIf="pagamento && pagamento.tipoPagamento == 'PARCELADO'">
-                    <div class="form-group col-sm-12 col-md-4">
-                        <div class="form-group">
-                            <label class="form-control-label"
-                                   jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas"
-                                   for="field_quantidadeParcelas">Quantidade Parcelas</label>
-                            <input type="number" class="form-control" name="quantidadeParcelas"
-                                   id="field_quantidadeParcelas"
-                                   [(ngModel)]="pagamento.quantidadeParcelas" required/>
-                        </div>
-                        <div
-                            [hidden]="!(editForm.controls.quantidadeParcelas?.dirty && editForm.controls.quantidadeParcelas?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!editForm.controls.quantidadeParcelas?.errors?.required"
-                                   jhiTranslate="entity.validation.required">
-                                This field is required.
-                            </small>
-                            <small class="form-text text-danger"
-                                   [hidden]="!editForm.controls.quantidadeParcelas?.errors?.number"
-                                   jhiTranslate="entity.validation.number">
-                                This field should be a number.
-                            </small>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-sm-12 col-md-4">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.dataVencimento"
-                                   for="field_dataPrimeiroVencimento-p">Data</label>
-                            <div class="input-group">
-                                <input id="field_dataPrimeiroVencimento-p" type="text" class="form-control"
-                                       name="dataPrimeiroVencimento" ngbDatepicker
-                                       #dataPrimeiroVencimentoDp="ngbDatepicker" [(ngModel)]="pagamento.dataPrimeiroVencimento"
-                                       required/>
-                                <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataPrimeiroVencimentoDp.toggle()"><fa-icon
-                                [icon]="'calendar-alt'"></fa-icon></button>
-                            </span>
-                            </div>
-                            <div
-                                [hidden]="!(editForm.controls.dataPrimeiroVencimento?.dirty && editForm.controls.dataPrimeiroVencimento?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.dataPrimeiroVencimento?.errors?.required"
-                                       jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
-                        class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
-
-            <!--<pre>{{editForm.value | json}}</pre>-->
         </form>
     </div>
 </div>

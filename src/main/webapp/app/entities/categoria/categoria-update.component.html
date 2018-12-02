@@ -1,24 +1,10 @@
-<div class="justify-content-center">
-    <div class="container">
-        <jhi-bread-crumb
-            [items]="[{text: 'Categorias', link: '/categoria'}, {text: 'categoria', currentAction: currentAction}]"
-        ></jhi-bread-crumb>
-
-        <div class="row mb-4">
-            <div class="col-md">
-                <h1 class="h2 border-left pl-2">
-                    <h2 *ngIf="currentAction == 'edit'" id="jhi-categoria-heading-e" jhiTranslate="jnsFinanceiroApp.categoria.home.editLabel">Create or edit a Categoria</h2>
-                    <h2 *ngIf="currentAction == 'new'" id="jhi-categoria-heading-c" jhiTranslate="jnsFinanceiroApp.categoria.home.createLabel">Create or edit a Categoria</h2>
-                </h1>
-            </div>
-
-        </div>
-
+<div class="row justify-content-center">
+    <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-categoria-heading" jhiTranslate="jnsFinanceiroApp.categoria.home.createOrEditLabel">Create or edit a Categoria</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <jhi-alert></jhi-alert>
-                <div class="form-group" [hidden]="true">
+                <div class="form-group" [hidden]="!categoria.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="categoria.id" readonly />

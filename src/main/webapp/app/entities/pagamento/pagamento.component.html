@@ -29,18 +29,20 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="quantidadeParcelas"><span jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas">Quantidade Parcelas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="formaPag"><span jhiTranslate="jnsFinanceiroApp.pagamento.formaPag">Forma Pag</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.pagamento.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="tipoPagamento"><span jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento">Tipo Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th></th>
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="quantidadeParcelas"><span jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas">Quantidade Parcelas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dataPrimeiroVencimento"><span jhiTranslate="jnsFinanceiroApp.pagamento.dataPrimeiroVencimento">Data Primeiro Vencimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="formaPag"><span jhiTranslate="jnsFinanceiroApp.pagamento.formaPag">Forma Pag</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.pagamento.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tipoPagamento"><span jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento">Tipo Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let pagamento of pagamentos ;trackBy: trackId">
                 <td><a [routerLink]="['/pagamento', pagamento.id, 'view' ]">{{pagamento.id}}</a></td>
                 <td>{{pagamento.quantidadeParcelas}}</td>
+                <td>{{pagamento.dataPrimeiroVencimento | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + pagamento.formaPag}}">{{pagamento.formaPag}}</td>
                 <td jhiTranslate="{{'jnsFinanceiroApp.Status.' + pagamento.status}}">{{pagamento.status}}</td>
                 <td jhiTranslate="{{'jnsFinanceiroApp.TipoPagamento.' + pagamento.tipoPagamento}}">{{pagamento.tipoPagamento}}</td>

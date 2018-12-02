@@ -1,5 +1,5 @@
-import { IParcela } from 'app/shared/model//parcela.model';
 import { Moment } from 'moment';
+import { IParcela } from 'app/shared/model//parcela.model';
 
 export const enum FormaPagamento {
     DINHEIRO = 'DINHEIRO',
@@ -9,7 +9,8 @@ export const enum FormaPagamento {
 
 export const enum Status {
     PAGO = 'PAGO',
-    PENDENTE = 'PENDENTE'
+    PENDENTE = 'PENDENTE',
+    CANCELADO = 'CANCELADO'
 }
 
 export const enum TipoPagamento {

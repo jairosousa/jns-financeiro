@@ -1,85 +1,76 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-pagamento-heading" jhiTranslate="jnsFinanceiroApp.pagamento.home.createOrEditLabel">Create or
-                edit a Pagamento</h2>
+            <h2 id="jhi-pagamento-heading" jhiTranslate="jnsFinanceiroApp.pagamento.home.createOrEditLabel">Create or edit a Pagamento</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!pagamento.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="pagamento.id" readonly/>
+                        [(ngModel)]="pagamento.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas"
-                           for="field_quantidadeParcelas">Quantidade Parcelas</label>
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas" for="field_quantidadeParcelas">Quantidade Parcelas</label>
                     <input type="number" class="form-control" name="quantidadeParcelas" id="field_quantidadeParcelas"
-                           [(ngModel)]="pagamento.quantidadeParcelas" required/>
-                    <div
-                        [hidden]="!(editForm.controls.quantidadeParcelas?.dirty && editForm.controls.quantidadeParcelas?.invalid)">
+                        [(ngModel)]="pagamento.quantidadeParcelas" required/>
+                    <div [hidden]="!(editForm.controls.quantidadeParcelas?.dirty && editForm.controls.quantidadeParcelas?.invalid)">
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.quantidadeParcelas?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
+                        [hidden]="!editForm.controls.quantidadeParcelas?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
                         </small>
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.quantidadeParcelas?.errors?.number"
-                               jhiTranslate="entity.validation.number">
+                            [hidden]="!editForm.controls.quantidadeParcelas?.errors?.number" jhiTranslate="entity.validation.number">
                             This field should be a number.
                         </small>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.dataPrimeiroVencimento"
-                           for="field_dataPrimeiroVencimento">Data Primeiro Vencimento</label>
-                    <input id="field_dataPrimeiroVencimento" type="text" class="form-control"
-                           name="dataPrimeiroVencimento" ngbDatepicker #dataPrimeiroVencimentoDp="ngbDatepicker"
-                           [(ngModel)]="pagamento.dataPrimeiroVencimento"
-                           required/>
-                    <span class="input-group-append">
-                        <button type="button" class="btn btn-secondary" (click)="dataPrimeiroVencimentoDp.toggle()"><fa-icon
-                            [icon]="'calendar-alt'"></fa-icon></button>
-                    </span>
-                    <div
-                        [hidden]="!(editForm.controls.dataPrimeiroVencimento?.dirty && editForm.controls.dataPrimeiroVencimento?.invalid)">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.dataPrimeiroVencimento" for="field_dataPrimeiroVencimento">Data Primeiro Vencimento</label>
+                    <div class="input-group">
+                        <input id="field_dataPrimeiroVencimento" type="text" class="form-control" name="dataPrimeiroVencimento" ngbDatepicker  #dataPrimeiroVencimentoDp="ngbDatepicker" [(ngModel)]="pagamento.dataPrimeiroVencimento"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataPrimeiroVencimentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.dataPrimeiroVencimento?.dirty && editForm.controls.dataPrimeiroVencimento?.invalid)">
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.dataPrimeiroVencimento?.errors?.required"
-                               jhiTranslate="entity.validation.required">
+                        [hidden]="!editForm.controls.dataPrimeiroVencimento?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
                         </small>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.formaPag"
-                           for="field_formaPag">Forma Pag</label>
-                    <select class="form-control" name="formaPag" [(ngModel)]="pagamento.formaPag" id="field_formaPag">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.formaPag" for="field_formaPag">Forma Pag</label>
+                    <select class="form-control" name="formaPag" [(ngModel)]="pagamento.formaPag" id="field_formaPag"  required>
                         <option value="DINHEIRO">{{'jnsFinanceiroApp.FormaPagamento.DINHEIRO' | translate}}</option>
                         <option value="CREDITO">{{'jnsFinanceiroApp.FormaPagamento.CREDITO' | translate}}</option>
                         <option value="DEBITO">{{'jnsFinanceiroApp.FormaPagamento.DEBITO' | translate}}</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.status"
-                           for="field_status">Status</label>
-                    <select class="form-control" name="status" [(ngModel)]="pagamento.status" id="field_status"
-                            required>
-                        <option value="PAGO">{{'jnsFinanceiroApp.Status.PAGO' | translate}}</option>
-                        <option value="PENDENTE">{{'jnsFinanceiroApp.Status.PENDENTE' | translate}}</option>
-                    </select>
-                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                    <div [hidden]="!(editForm.controls.formaPag?.dirty && editForm.controls.formaPag?.invalid)">
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.status?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
+                        [hidden]="!editForm.controls.formaPag?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento"
-                           for="field_tipoPagamento">Tipo Pagamento</label>
-                    <select class="form-control" name="tipoPagamento" [(ngModel)]="pagamento.tipoPagamento"
-                            id="field_tipoPagamento">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" [(ngModel)]="pagamento.status" id="field_status"  required>
+                        <option value="PAGO">{{'jnsFinanceiroApp.Status.PAGO' | translate}}</option>
+                        <option value="PENDENTE">{{'jnsFinanceiroApp.Status.PENDENTE' | translate}}</option>
+                        <option value="CANCELADO">{{'jnsFinanceiroApp.Status.CANCELADO' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento" for="field_tipoPagamento">Tipo Pagamento</label>
+                    <select class="form-control" name="tipoPagamento" [(ngModel)]="pagamento.tipoPagamento" id="field_tipoPagamento" >
                         <option value="AVISTA">{{'jnsFinanceiroApp.TipoPagamento.AVISTA' | translate}}</option>
                         <option value="PARCELADO">{{'jnsFinanceiroApp.TipoPagamento.PARCELADO' | translate}}</option>
                     </select>
@@ -87,11 +78,10 @@
 
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
-                        class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
