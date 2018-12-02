@@ -14,7 +14,8 @@ export const enum Status {
 
 export const enum TipoPagamento {
     AVISTA = 'AVISTA',
-    PARCELADO = 'PARCELADO'
+    PARCELADO = 'PARCELADO',
+    CANCELADO = 'CANCELADO'
 }
 
 export interface IPagamento {

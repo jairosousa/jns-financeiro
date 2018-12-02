@@ -42,7 +42,7 @@
                 <dt><span jhiTranslate="jnsFinanceiroApp.parcela.pagamento">Pagamento</span></dt>
                 <dd>
                     <div *ngIf="parcela.pagamentoId">
-                        <a [routerLink]="['/pagamento', parcela.pagamentoId, 'view']">{{parcela.pagamentoId}}</a>
+                        <a [routerLink]="['/pagamento', parcela.pagamentoId, 'view']">{{parcela.pagamentoFormaPag}}</a>
                     </div>
                 </dd>
             </dl>

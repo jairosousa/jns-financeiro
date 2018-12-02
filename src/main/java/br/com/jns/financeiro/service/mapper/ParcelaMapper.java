@@ -14,6 +14,7 @@ public interface ParcelaMapper extends EntityMapper<ParcelaDTO, Parcela> {
     @Mapping(source = "cartao.id", target = "cartaoId")
     @Mapping(source = "cartao.nome", target = "cartaoNome")
     @Mapping(source = "pagamento.id", target = "pagamentoId")
+    @Mapping(source = "pagamento.formaPag", target = "pagamentoFormaPag")
     ParcelaDTO toDto(Parcela parcela);
 
     @Mapping(source = "cartaoId", target = "cartao")

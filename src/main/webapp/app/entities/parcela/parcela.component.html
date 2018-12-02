@@ -38,7 +38,7 @@
                 <th jhiSortBy="total"><span jhiTranslate="jnsFinanceiroApp.parcela.total">Total</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.parcela.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="cartaoNome"><span jhiTranslate="jnsFinanceiroApp.parcela.cartao">Cartao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="pagamentoId"><span jhiTranslate="jnsFinanceiroApp.parcela.pagamento">Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="pagamentoFormaPag"><span jhiTranslate="jnsFinanceiroApp.parcela.pagamento">Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th></th>
             </tr>
             </thead>
@@ -59,7 +59,7 @@
                 </td>
                 <td>
                     <div *ngIf="parcela.pagamentoId">
-                        <a [routerLink]="['../pagamento', parcela.pagamentoId , 'view' ]" >{{parcela.pagamentoId}}</a>
+                        <a [routerLink]="['../pagamento', parcela.pagamentoId , 'view' ]" >{{parcela.pagamentoFormaPag}}</a>
                     </div>
                 </td>
                 <td class="text-right">

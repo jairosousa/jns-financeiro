@@ -2,7 +2,8 @@ import { Moment } from 'moment';
 
 export const enum Status {
     PAGO = 'PAGO',
-    PENDENTE = 'PENDENTE'
+    PENDENTE = 'PENDENTE',
+    CANCELADO = 'CANCELADO'
 }
 
 export interface IParcela {
