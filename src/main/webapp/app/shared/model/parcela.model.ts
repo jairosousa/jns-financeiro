@@ -2,7 +2,8 @@ import { Moment } from 'moment';
 
 export const enum Status {
     PAGO = 'PAGO',
-    PENDENTE = 'PENDENTE'
+    PENDENTE = 'PENDENTE',
+    CANCELADO = 'CANCELADO'
 }
 
 export interface IParcela {
@@ -16,6 +17,7 @@ export interface IParcela {
     status?: Status;
     cartaoNome?: string;
     cartaoId?: number;
+    pagamentoFormaPag?: string;
     pagamentoId?: number;
 }
 
@@ -31,6 +33,7 @@ export class Parcela implements IParcela {
         public status?: Status,
         public cartaoNome?: string,
         public cartaoId?: number,
+        public pagamentoFormaPag?: string,
         public pagamentoId?: number
     ) {}
 }

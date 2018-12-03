@@ -3,12 +3,18 @@
     "fields": [
         {
             "fieldName": "nome",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "bandeira",
             "fieldType": "Bandeira",
-            "fieldValues": "AMERICAN,CIELO,ELO,MASTERCARD,VISA,OUTROS"
+            "fieldValues": "AMERICAN,CIELO,ELO,MASTERCARD,VISA,OUTROS",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "numero",

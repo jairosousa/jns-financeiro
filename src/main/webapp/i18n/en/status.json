@@ -3,7 +3,8 @@
         "Status": {
             "null": "",
             "PAGO": "PAGO",
-            "PENDENTE": "PENDENTE"
+            "PENDENTE": "PENDENTE",
+            "CANCELADO": "CANCELADO"
         }
     }
 }

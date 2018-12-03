@@ -23,12 +23,18 @@
         },
         {
             "fieldName": "valor",
-            "fieldType": "BigDecimal"
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "tipo",
             "fieldType": "Tipo",
-            "fieldValues": "DESPESA,RECEITA"
+            "fieldValues": "DESPESA,RECEITA",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "relationships": [

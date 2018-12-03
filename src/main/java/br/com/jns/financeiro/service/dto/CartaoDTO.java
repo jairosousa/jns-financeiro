@@ -1,5 +1,6 @@
 package br.com.jns.financeiro.service.dto;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Lob;
@@ -12,8 +13,10 @@ public class CartaoDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private String nome;
 
+    @NotNull
     private Bandeira bandeira;
 
     private Long numero;

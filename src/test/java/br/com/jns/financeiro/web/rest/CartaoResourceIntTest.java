@@ -178,6 +178,44 @@ public class CartaoResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNomeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = cartaoRepository.findAll().size();
+        // set the field null
+        cartao.setNome(null);
+
+        // Create the Cartao, which fails.
+        CartaoDTO cartaoDTO = cartaoMapper.toDto(cartao);
+
+        restCartaoMockMvc.perform(post("/api/cartaos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(cartaoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Cartao> cartaoList = cartaoRepository.findAll();
+        assertThat(cartaoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkBandeiraIsRequired() throws Exception {
+        int databaseSizeBeforeTest = cartaoRepository.findAll().size();
+        // set the field null
+        cartao.setBandeira(null);
+
+        // Create the Cartao, which fails.
+        CartaoDTO cartaoDTO = cartaoMapper.toDto(cartao);
+
+        restCartaoMockMvc.perform(post("/api/cartaos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(cartaoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Cartao> cartaoList = cartaoRepository.findAll();
+        assertThat(cartaoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllCartaos() throws Exception {
         // Initialize the database
         cartaoRepository.saveAndFlush(cartao);

@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
@@ -26,11 +27,13 @@ public class Cartao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome")
+    @NotNull
+    @Column(name = "nome", nullable = false)
     private String nome;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "bandeira")
+    @Column(name = "bandeira", nullable = false)
     private Bandeira bandeira;
 
     @Column(name = "numero")

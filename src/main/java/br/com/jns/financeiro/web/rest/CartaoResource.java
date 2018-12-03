@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -46,7 +47,7 @@ public class CartaoResource {
      */
     @PostMapping("/cartaos")
     @Timed
-    public ResponseEntity<CartaoDTO> createCartao(@RequestBody CartaoDTO cartaoDTO) throws URISyntaxException {
+    public ResponseEntity<CartaoDTO> createCartao(@Valid @RequestBody CartaoDTO cartaoDTO) throws URISyntaxException {
         log.debug("REST request to save Cartao : {}", cartaoDTO);
         if (cartaoDTO.getId() != null) {
             throw new BadRequestAlertException("A new cartao cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +69,7 @@ public class CartaoResource {
      */
     @PutMapping("/cartaos")
     @Timed
-    public ResponseEntity<CartaoDTO> updateCartao(@RequestBody CartaoDTO cartaoDTO) throws URISyntaxException {
+    public ResponseEntity<CartaoDTO> updateCartao(@Valid @RequestBody CartaoDTO cartaoDTO) throws URISyntaxException {
         log.debug("REST request to update Cartao : {}", cartaoDTO);
         if (cartaoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

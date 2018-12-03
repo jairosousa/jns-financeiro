@@ -35,11 +35,11 @@
             </column>
 
             <column name="valor" type="decimal(10,2)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="tipo" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="pagamento_id" type="bigint">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_lancamento_pagamento_id" />

@@ -2,10 +2,9 @@
     "jnsFinanceiroApp": {
         "lancamento": {
             "home": {
-                "title": "Lançamentos",
-                "adicionar": "Lançamento",
-                "createLabel": "New Lançamento",
-                "editLabel": "Edit Lançamento",
+                "title": "Lancamentos",
+                "createLabel": "Create a new Lancamento",
+                "createOrEditLabel": "Create or edit a Lancamento",
                 "search": "Search for Lancamento"
             },
             "created": "A new Lancamento is created with identifier {{ param }}",
@@ -15,11 +14,11 @@
                 "question": "Are you sure you want to delete Lancamento {{ id }}?"
             },
             "detail": {
-                "title": "Lançamento"
+                "title": "Lancamento"
             },
-            "data": "Data Comp´ra",
+            "data": "Data",
             "nome": "Nome",
-            "descricao": "Descrição",
+            "descricao": "Descricao",
             "valor": "Valor",
             "tipo": "Tipo",
             "pagamento": "Pagamento",

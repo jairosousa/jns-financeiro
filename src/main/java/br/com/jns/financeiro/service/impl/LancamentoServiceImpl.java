@@ -1,28 +1,22 @@
 package br.com.jns.financeiro.service.impl;
 
-import br.com.jns.financeiro.domain.Lancamento;
-import br.com.jns.financeiro.domain.Pagamento;
-import br.com.jns.financeiro.domain.Parcela;
-import br.com.jns.financeiro.domain.enumeration.Status;
-import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
-import br.com.jns.financeiro.repository.LancamentoRepository;
-import br.com.jns.financeiro.repository.ParcelaRepository;
-import br.com.jns.financeiro.repository.search.LancamentoSearchRepository;
 import br.com.jns.financeiro.service.LancamentoService;
+import br.com.jns.financeiro.domain.Lancamento;
+import br.com.jns.financeiro.repository.LancamentoRepository;
+import br.com.jns.financeiro.repository.search.LancamentoSearchRepository;
 import br.com.jns.financeiro.service.dto.LancamentoDTO;
 import br.com.jns.financeiro.service.mapper.LancamentoMapper;
-import br.com.jns.financeiro.service.mapper.PagamentoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing Lancamento.
@@ -39,16 +33,10 @@ public class LancamentoServiceImpl implements LancamentoService {
 
     private final LancamentoSearchRepository lancamentoSearchRepository;
 
-    private final PagamentoMapper pagamentoMapper;
-
-    private final ParcelaRepository parcelaRepository;
-
-    public LancamentoServiceImpl(LancamentoRepository lancamentoRepository, LancamentoMapper lancamentoMapper, LancamentoSearchRepository lancamentoSearchRepository, PagamentoMapper pagamentoMapper, ParcelaRepository parcelaRepository) {
+    public LancamentoServiceImpl(LancamentoRepository lancamentoRepository, LancamentoMapper lancamentoMapper, LancamentoSearchRepository lancamentoSearchRepository) {
         this.lancamentoRepository = lancamentoRepository;
         this.lancamentoMapper = lancamentoMapper;
         this.lancamentoSearchRepository = lancamentoSearchRepository;
-        this.pagamentoMapper = pagamentoMapper;
-        this.parcelaRepository = parcelaRepository;
     }
 
     /**
@@ -60,39 +48,12 @@ public class LancamentoServiceImpl implements LancamentoService {
     @Override
     public LancamentoDTO save(LancamentoDTO lancamentoDTO) {
         log.debug("Request to save Lancamento : {}", lancamentoDTO);
-        Parcela parcela = null;
-        Pagamento pagamento = pagamentoMapper.toEntity(lancamentoDTO.getPagamento());
-        Lancamento lancamento = lancamentoMapper.toEntity(lancamentoDTO);
-        lancamento.setPagamento(pagamento);
-        lancamento = lancamentoRepository.save(lancamento);
-        this.gerarParcela(lancamento);
-        LancamentoDTO result = lancamentoMapper.toDto(lancamento);
-        lancamentoSearchRepository.save(lancamento);
-        return result;
-    }
 
-    @Override
-    public LancamentoDTO update(LancamentoDTO lancamentoDTO) {
-        log.debug("Request to save Lancamento : {}", lancamentoDTO);
         Lancamento lancamento = lancamentoMapper.toEntity(lancamentoDTO);
         lancamento = lancamentoRepository.save(lancamento);
         LancamentoDTO result = lancamentoMapper.toDto(lancamento);
         lancamentoSearchRepository.save(lancamento);
         return result;
-    }
-
-    private void gerarParcela(Lancamento lancamento) {
-        if (lancamento.getPagamento().getTipoPagamento().equals(TipoPagamento.AVISTA)) {
-            Parcela parcela = new Parcela();
-            parcela.setDataVencimento(lancamento.getPagamento().getDataPrimeiroVencimento());
-            parcela.setNumero(lancamento.getPagamento().getQuantidadeParcelas());
-            parcela.setValor(lancamento.getValor());
-            parcela.setStatus(Status.PENDENTE);
-            parcela.setPagamento(lancamento.getPagamento());
-            parcela.setJuros(new BigDecimal("0"));
-            parcela.valor(lancamento.getValor());
-            parcelaRepository.save(parcela);
-        }
     }
 
     /**
@@ -139,7 +100,7 @@ public class LancamentoServiceImpl implements LancamentoService {
     /**
      * Search for the lancamento corresponding to the query.
      *
-     * @param query    the query of the search
+     * @param query the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */

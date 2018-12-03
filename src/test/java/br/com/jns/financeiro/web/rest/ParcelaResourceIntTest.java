@@ -210,7 +210,7 @@ public class ParcelaResourceIntTest {
             .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getParcela() throws Exception {

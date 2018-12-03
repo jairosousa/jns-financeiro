@@ -33,6 +33,8 @@ public class ParcelaDTO implements Serializable {
 
     private Long pagamentoId;
 
+    private String pagamentoFormaPag;
+
     public Long getId() {
         return id;
     }
@@ -121,6 +123,14 @@ public class ParcelaDTO implements Serializable {
         this.pagamentoId = pagamentoId;
     }
 
+    public String getPagamentoFormaPag() {
+        return pagamentoFormaPag;
+    }
+
+    public void setPagamentoFormaPag(String pagamentoFormaPag) {
+        this.pagamentoFormaPag = pagamentoFormaPag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -156,6 +166,7 @@ public class ParcelaDTO implements Serializable {
             ", cartao=" + getCartaoId() +
             ", cartao='" + getCartaoNome() + "'" +
             ", pagamento=" + getPagamentoId() +
+            ", pagamento='" + getPagamentoFormaPag() + "'" +
             "}";
     }
 }

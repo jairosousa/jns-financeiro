@@ -25,7 +25,10 @@
         {
             "fieldName": "pessoa",
             "fieldType": "Pessoa",
-            "fieldValues": "FISICA,JURIDICA"
+            "fieldValues": "FISICA,JURIDICA",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "cnpj",

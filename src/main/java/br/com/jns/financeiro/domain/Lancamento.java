@@ -42,15 +42,16 @@ public class Lancamento implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "valor", precision = 10, scale = 2)
+    @NotNull
+    @Column(name = "valor", precision = 10, scale = 2, nullable = false)
     private BigDecimal valor;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo")
+    @Column(name = "tipo", nullable = false)
     private Tipo tipo;
 
-    @OneToOne(cascade={CascadeType.ALL})
-    @JoinColumn(unique = true)
+    @OneToOne    @JoinColumn(unique = true)
     private Pagamento pagamento;
 
     @ManyToOne

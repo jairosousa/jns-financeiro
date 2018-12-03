@@ -1,24 +1,10 @@
-<div class="justify-content-center">
-    <div class="container">
-        <jhi-bread-crumb
-            [items]="[{text: 'Cartões', link: '/cartao'}, {text: 'cartao', currentAction: currentAction}]"
-        ></jhi-bread-crumb>
-
-        <div class="row mb-4">
-            <div class="col-md">
-                <h1 class="h2 border-left pl-2">
-                    <h2 *ngIf="currentAction == 'edit'" d="jhi-cartao-heading-e" jhiTranslate="jnsFinanceiroApp.cartao.home.editLabel">Create or edit a Cartao</h2>
-                    <h2 *ngIf="currentAction == 'new'" d="jhi-cartao-heading-c" jhiTranslate="jnsFinanceiroApp.cartao.home.createLabel">Create or edit a Cartao</h2>
-                </h1>
-            </div>
-
-        </div>
-
+<div class="row justify-content-center">
+    <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-
+            <h2 id="jhi-cartao-heading" jhiTranslate="jnsFinanceiroApp.cartao.home.createOrEditLabel">Create or edit a Cartao</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="true">
+                <div class="form-group" [hidden]="!cartao.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="cartao.id" readonly />
@@ -26,11 +12,17 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.cartao.nome" for="field_nome">Nome</label>
                     <input type="text" class="form-control" name="nome" id="field_nome"
-                        [(ngModel)]="cartao.nome" />
+                        [(ngModel)]="cartao.nome" required/>
+                    <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nome?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.cartao.bandeira" for="field_bandeira">Bandeira</label>
-                    <select class="form-control" name="bandeira" [(ngModel)]="cartao.bandeira" id="field_bandeira" >
+                    <select class="form-control" name="bandeira" [(ngModel)]="cartao.bandeira" id="field_bandeira"  required>
                         <option value="AMERICAN">{{'jnsFinanceiroApp.Bandeira.AMERICAN' | translate}}</option>
                         <option value="CIELO">{{'jnsFinanceiroApp.Bandeira.CIELO' | translate}}</option>
                         <option value="ELO">{{'jnsFinanceiroApp.Bandeira.ELO' | translate}}</option>
@@ -38,6 +30,12 @@
                         <option value="VISA">{{'jnsFinanceiroApp.Bandeira.VISA' | translate}}</option>
                         <option value="OUTROS">{{'jnsFinanceiroApp.Bandeira.OUTROS' | translate}}</option>
                     </select>
+                    <div [hidden]="!(editForm.controls.bandeira?.dirty && editForm.controls.bandeira?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.bandeira?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.cartao.numero" for="field_numero">Numero</label>

@@ -3,22 +3,21 @@
         "categoria": {
             "home": {
                 "title": "Categorias",
-                "adicionar": "Categoria",
-                "createLabel": "Criar Categoria",
-                "editLabel": "Editar Categoria",
+                "createLabel": "Criar novo Categoria",
+                "createOrEditLabel": "Criar ou editar Categoria",
                 "search": "Pesquisar por Categoria"
             },
-            "created": "A Categoria foi criado com sucesso!",
-            "updated": "A Categoria foi atualizado com sucesso!}",
-            "deleted": "a Categoria foi deletado com sucesso!",
+            "created": "Um novo Categoria foi criado com o identificador {{ param }}",
+            "updated": "Um Categoria foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Categoria foi deletado com o identificador {{ param }}",
             "delete": {
-                "question": "Tem certeza de que deseja excluir a Categoria {{ id }}?"
+                "question": "Tem certeza de que deseja excluir Categoria {{ id }}?"
             },
             "detail": {
                 "title": "Categoria"
             },
             "nome": "Nome",
-            "descricao": "Descrição"
+            "descricao": "Descricao"
         }
     }
 }

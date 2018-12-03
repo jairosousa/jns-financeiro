@@ -1,8 +1,8 @@
 package br.com.jns.financeiro.service.dto;
 
+import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Objects;
 import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
 import br.com.jns.financeiro.domain.enumeration.Status;
@@ -18,14 +18,16 @@ public class PagamentoDTO implements Serializable {
     @NotNull
     private Long quantidadeParcelas;
 
-    private FormaPagamento formaPag;
-
     @NotNull
     private LocalDate dataPrimeiroVencimento;
 
     @NotNull
+    private FormaPagamento formaPag;
+
+    @NotNull
     private Status status;
 
+    @NotNull
     private TipoPagamento tipoPagamento;
 
     public Long getId() {

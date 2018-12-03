@@ -53,8 +53,9 @@ public class Pagamento implements Serializable {
     @Column(name = "status", nullable = false)
     private Status status;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_pagamento")
+    @Column(name = "tipo_pagamento", nullable = false)
     private TipoPagamento tipoPagamento;
 
     @OneToMany(mappedBy = "pagamento")

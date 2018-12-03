@@ -41,8 +41,9 @@ public class Fornecedor implements Serializable {
     @Column(name = "telefone_cel")
     private String telefoneCel;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "pessoa")
+    @Column(name = "pessoa", nullable = false)
     private Pessoa pessoa;
 
     @Column(name = "cnpj")

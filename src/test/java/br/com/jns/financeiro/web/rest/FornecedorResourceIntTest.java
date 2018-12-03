@@ -209,6 +209,25 @@ public class FornecedorResourceIntTest {
 
     @Test
     @Transactional
+    public void checkPessoaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = fornecedorRepository.findAll().size();
+        // set the field null
+        fornecedor.setPessoa(null);
+
+        // Create the Fornecedor, which fails.
+        FornecedorDTO fornecedorDTO = fornecedorMapper.toDto(fornecedor);
+
+        restFornecedorMockMvc.perform(post("/api/fornecedors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(fornecedorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Fornecedor> fornecedorList = fornecedorRepository.findAll();
+        assertThat(fornecedorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFornecedors() throws Exception {
         // Initialize the database
         fornecedorRepository.saveAndFlush(fornecedor);
