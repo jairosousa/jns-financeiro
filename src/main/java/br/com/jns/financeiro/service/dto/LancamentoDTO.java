@@ -23,8 +23,10 @@ public class LancamentoDTO implements Serializable {
 
     private String descricao;
 
+    @NotNull
     private BigDecimal valor;
 
+    @NotNull
     private Tipo tipo;
 
     private Long pagamentoId;

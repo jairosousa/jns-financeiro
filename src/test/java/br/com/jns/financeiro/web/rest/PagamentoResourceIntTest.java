@@ -260,6 +260,25 @@ public class PagamentoResourceIntTest {
 
     @Test
     @Transactional
+    public void checkTipoPagamentoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = pagamentoRepository.findAll().size();
+        // set the field null
+        pagamento.setTipoPagamento(null);
+
+        // Create the Pagamento, which fails.
+        PagamentoDTO pagamentoDTO = pagamentoMapper.toDto(pagamento);
+
+        restPagamentoMockMvc.perform(post("/api/pagamentos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(pagamentoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Pagamento> pagamentoList = pagamentoRepository.findAll();
+        assertThat(pagamentoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPagamentos() throws Exception {
         // Initialize the database
         pagamentoRepository.saveAndFlush(pagamento);

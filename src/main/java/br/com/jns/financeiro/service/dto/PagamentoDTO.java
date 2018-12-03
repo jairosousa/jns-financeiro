@@ -18,6 +18,7 @@ public class PagamentoDTO implements Serializable {
     @NotNull
     private Long quantidadeParcelas;
 
+    @NotNull
     private FormaPagamento formaPag;
 
     @NotNull
@@ -26,6 +27,7 @@ public class PagamentoDTO implements Serializable {
     @NotNull
     private Status status;
 
+    @NotNull
     private TipoPagamento tipoPagamento;
 
     public Long getId() {

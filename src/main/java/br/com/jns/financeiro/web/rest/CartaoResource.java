@@ -1,24 +1,21 @@
 package br.com.jns.financeiro.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import br.com.jns.financeiro.service.CartaoService;
+import br.com.jns.financeiro.service.dto.CartaoDTO;
 import br.com.jns.financeiro.web.rest.errors.BadRequestAlertException;
 import br.com.jns.financeiro.web.rest.util.HeaderUtil;
-import br.com.jns.financeiro.service.dto.CartaoDTO;
+import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Cartao.
@@ -46,7 +43,7 @@ public class CartaoResource {
      */
     @PostMapping("/cartaos")
     @Timed
-    public ResponseEntity<CartaoDTO> createCartao(@RequestBody CartaoDTO cartaoDTO) throws URISyntaxException {
+    public ResponseEntity<CartaoDTO> createCartao(@Valid @RequestBody CartaoDTO cartaoDTO) throws URISyntaxException {
         log.debug("REST request to save Cartao : {}", cartaoDTO);
         if (cartaoDTO.getId() != null) {
             throw new BadRequestAlertException("A new cartao cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +65,7 @@ public class CartaoResource {
      */
     @PutMapping("/cartaos")
     @Timed
-    public ResponseEntity<CartaoDTO> updateCartao(@RequestBody CartaoDTO cartaoDTO) throws URISyntaxException {
+    public ResponseEntity<CartaoDTO> updateCartao(@Valid @RequestBody CartaoDTO cartaoDTO) throws URISyntaxException {
         log.debug("REST request to update Cartao : {}", cartaoDTO);
         if (cartaoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

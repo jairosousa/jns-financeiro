@@ -42,7 +42,7 @@
             "relationshipType": "many-to-one",
             "relationshipName": "pagamento",
             "otherEntityName": "pagamento",
-            "otherEntityField": "id"
+            "otherEntityField": "formaPag"
         }
     ],
     "changelogDate": "20181123233919",

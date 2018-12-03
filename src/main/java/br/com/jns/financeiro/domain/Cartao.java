@@ -1,15 +1,14 @@
 package br.com.jns.financeiro.domain;
 
+import br.com.jns.financeiro.domain.enumeration.Bandeira;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
-
-import br.com.jns.financeiro.domain.enumeration.Bandeira;
 
 /**
  * A Cartao.
@@ -26,11 +25,13 @@ public class Cartao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome")
+    @NotNull
+    @Column(name = "nome", nullable = false)
     private String nome;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "bandeira")
+    @Column(name = "bandeira", nullable = false)
     private Bandeira bandeira;
 
     @Column(name = "numero")

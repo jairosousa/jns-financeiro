@@ -18,7 +18,10 @@
         {
             "fieldName": "formaPag",
             "fieldType": "FormaPagamento",
-            "fieldValues": "DINHEIRO,CREDITO,DEBITO"
+            "fieldValues": "DINHEIRO,CREDITO,DEBITO",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "status",
@@ -31,7 +34,10 @@
         {
             "fieldName": "tipoPagamento",
             "fieldType": "TipoPagamento",
-            "fieldValues": "AVISTA,PARCELADO"
+            "fieldValues": "AVISTA,PARCELADO",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "relationships": [

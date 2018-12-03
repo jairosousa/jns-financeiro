@@ -221,6 +221,44 @@ public class LancamentoResourceIntTest {
 
     @Test
     @Transactional
+    public void checkValorIsRequired() throws Exception {
+        int databaseSizeBeforeTest = lancamentoRepository.findAll().size();
+        // set the field null
+        lancamento.setValor(null);
+
+        // Create the Lancamento, which fails.
+        LancamentoDTO lancamentoDTO = lancamentoMapper.toDto(lancamento);
+
+        restLancamentoMockMvc.perform(post("/api/lancamentos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(lancamentoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Lancamento> lancamentoList = lancamentoRepository.findAll();
+        assertThat(lancamentoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTipoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = lancamentoRepository.findAll().size();
+        // set the field null
+        lancamento.setTipo(null);
+
+        // Create the Lancamento, which fails.
+        LancamentoDTO lancamentoDTO = lancamentoMapper.toDto(lancamento);
+
+        restLancamentoMockMvc.perform(post("/api/lancamentos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(lancamentoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Lancamento> lancamentoList = lancamentoRepository.findAll();
+        assertThat(lancamentoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllLancamentos() throws Exception {
         // Initialize the database
         lancamentoRepository.saveAndFlush(lancamento);
@@ -236,7 +274,7 @@ public class LancamentoResourceIntTest {
             .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())))
             .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getLancamento() throws Exception {

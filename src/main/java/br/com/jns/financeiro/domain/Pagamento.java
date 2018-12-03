@@ -54,12 +54,14 @@ public class Pagamento implements Serializable {
     private Status status;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_pagamento")
+    @Column(name = "tipo_pagamento", nullable = false)
     private TipoPagamento tipoPagamento;
 
+    @NotNull
     @OneToMany(mappedBy = "pagamento")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Parcela> parcelas = new HashSet<>();
+
     @OneToOne(mappedBy = "pagamento")
     @JsonIgnore
     private Lancamento lancamento;

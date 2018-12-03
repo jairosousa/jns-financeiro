@@ -1,16 +1,15 @@
 package br.com.jns.financeiro.domain;
 
+import br.com.jns.financeiro.domain.enumeration.Pessoa;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
-
-import br.com.jns.financeiro.domain.enumeration.Pessoa;
 
 /**
  * A Fornecedor.
@@ -41,8 +40,9 @@ public class Fornecedor implements Serializable {
     @Column(name = "telefone_cel")
     private String telefoneCel;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "pessoa")
+    @Column(name = "pessoa", nullable = false)
     private Pessoa pessoa;
 
     @Column(name = "cnpj")
@@ -51,7 +51,8 @@ public class Fornecedor implements Serializable {
     @Column(name = "cpf")
     private String cpf;
 
-    @OneToOne    @JoinColumn(unique = true)
+    @OneToOne
+    @JoinColumn(unique = true)
     private Endereco endereco;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

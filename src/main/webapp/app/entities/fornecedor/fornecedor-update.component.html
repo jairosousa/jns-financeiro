@@ -51,10 +51,16 @@
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.pessoa"
                                    for="field_pessoa">Pessoa</label>
                             <select class="form-control" name="pessoa" [(ngModel)]="fornecedor.pessoa"
-                                    id="field_pessoa">
+                                    id="field_pessoa" required>
                                 <option value="FISICA">{{'jnsFinanceiroApp.Pessoa.FISICA' | translate}}</option>
                                 <option value="JURIDICA">{{'jnsFinanceiroApp.Pessoa.JURIDICA' | translate}}</option>
                             </select>
+                            <div [hidden]="!(editForm.controls.pessoa?.dirty && editForm.controls.pessoa?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.pessoa?.errors?.required" jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                            </div>
                         </div>
                     </div>
 

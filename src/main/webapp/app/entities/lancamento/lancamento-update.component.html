@@ -132,9 +132,22 @@
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.valor"
                                    for="field_valor">Valor</label>
                             <input type="number" class="form-control" name="valor" id="field_valor"
-                                   [(ngModel)]="lancamento.valor"/>
+                                   [(ngModel)]="lancamento.valor" required/>
+                            <div [hidden]="!(editForm.controls.valor?.dirty && editForm.controls.valor?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.valor?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.valor?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
                         </div>
                     </div>
+
                     <div class="col-sm-12 col-md-4" *ngIf="pagamento">
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento"
@@ -225,7 +238,8 @@
                             <div class="input-group">
                                 <input id="field_dataPrimeiroVencimento-p" type="text" class="form-control"
                                        name="dataPrimeiroVencimento" ngbDatepicker
-                                       #dataPrimeiroVencimentoDp="ngbDatepicker" [(ngModel)]="pagamento.dataPrimeiroVencimento"
+                                       #dataPrimeiroVencimentoDp="ngbDatepicker"
+                                       [(ngModel)]="pagamento.dataPrimeiroVencimento"
                                        required/>
                                 <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dataPrimeiroVencimentoDp.toggle()"><fa-icon

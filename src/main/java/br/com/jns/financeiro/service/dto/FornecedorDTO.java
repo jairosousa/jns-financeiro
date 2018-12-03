@@ -22,6 +22,7 @@ public class FornecedorDTO implements Serializable {
 
     private String telefoneCel;
 
+    @NotNull
     private Pessoa pessoa;
 
     private String cnpj;

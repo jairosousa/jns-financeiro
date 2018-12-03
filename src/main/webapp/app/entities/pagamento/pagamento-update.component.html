@@ -70,10 +70,16 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento" for="field_tipoPagamento">Tipo Pagamento</label>
-                    <select class="form-control" name="tipoPagamento" [(ngModel)]="pagamento.tipoPagamento" id="field_tipoPagamento" >
+                    <select class="form-control" name="tipoPagamento" [(ngModel)]="pagamento.tipoPagamento" id="field_tipoPagamento" required>
                         <option value="AVISTA">{{'jnsFinanceiroApp.TipoPagamento.AVISTA' | translate}}</option>
                         <option value="PARCELADO">{{'jnsFinanceiroApp.TipoPagamento.PARCELADO' | translate}}</option>
                     </select>
+                    <div [hidden]="!(editForm.controls.tipoPagamento?.dirty && editForm.controls.tipoPagamento?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.tipoPagamento?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
 
             </div>
