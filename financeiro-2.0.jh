@@ -2,8 +2,8 @@ entity Lancamento {
 	data LocalDate required,
     nome String required minlength(3),
     descricao String,
-    valor BigDecimal,
-    tipo Tipo,
+    valor BigDecimal required,
+    tipo Tipo required,
 }
 
 entity Fornecedor {
@@ -11,7 +11,7 @@ entity Fornecedor {
     razaoSocial String,
     telefoneFixo String,
     telefoneCel String,
-    pessoa Pessoa,
+    pessoa Pessoa required,
     cnpj String,
     cpf String
 }
@@ -32,11 +32,11 @@ entity Endereco {
 }
 
 entity Pagamento {
-	vencimento LocalDate required,
-    diaPagamento LocalDate,
-   	quantidadeParcelas Long required,
+	quantidadeParcelas Long required,
+    dataPrimeiroVencimento LocalDate required,
+    formaPag FormaPagamento required,
     status Status required,
-    tipoPagamento TipoPagamento
+    tipoPagamento TipoPagamento required
 }
 
 entity Parcela {
@@ -46,13 +46,12 @@ entity Parcela {
     valor BigDecimal,
     juros BigDecimal,
     total BigDecimal,
-    forma FormaPagamento,
     status Status
 }
 
 entity Cartao {
-	nome String,
-	bandeira Bandeira,
+	nome String required,
+	bandeira Bandeira required,
     numero Long,
     logotipo ImageBlob
 }
@@ -66,7 +65,7 @@ enum Tipo {
 }
 
 enum Status {
-    PAGO, PENDENTE
+    PAGO, PENDENTE, CANCELADO
 }
 
 enum TipoPagamento {
@@ -74,7 +73,7 @@ enum TipoPagamento {
 }
 
 enum FormaPagamento {
-    DINHEIRO, CARTAO, DEBITO
+    DINHEIRO, CREDITO, DEBITO
 }
 
 enum Pessoa {
@@ -84,17 +83,17 @@ enum Pessoa {
 relationship OneToOne {
 	Lancamento{pagamento(tipoPagamento)} to Pagamento{lancamento},
     Fornecedor{endereco} to Endereco,
-    Parcela{cartao(nome)} to Cartao
-}
+  }
 
 relationship ManyToOne {
 	Lancamento{fornecedor(nome)} to Fornecedor,
     Lancamento{categoria(nome)} to Categoria,
+    Parcela{cartao(nome)} to Cartao
 }
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	Pagamento{parcela} to Parcela{pagamento}
+	Pagamento{parcela(status)} to Parcela{pagamento(formaPag)}
 }
 
 // Set pagination options
