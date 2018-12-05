@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
@@ -60,14 +62,13 @@ public class LancamentoServiceImpl implements LancamentoService {
     @Override
     public LancamentoDTO save(LancamentoDTO lancamentoDTO) {
         log.debug("Request to save Lancamento : {}", lancamentoDTO);
-        Parcela parcela = null;
         Pagamento pagamento = pagamentoMapper.toEntity(lancamentoDTO.getPagamento());
         Lancamento lancamento = lancamentoMapper.toEntity(lancamentoDTO);
         lancamento.setPagamento(pagamento);
         lancamento = lancamentoRepository.save(lancamento);
-        this.gerarParcela(lancamento);
-        LancamentoDTO result = lancamentoMapper.toDto(lancamento);
         lancamentoSearchRepository.save(lancamento);
+        LancamentoDTO result = lancamentoMapper.toDto(lancamento);
+        this.gerarParcela(lancamento);
         return result;
     }
 
@@ -83,16 +84,36 @@ public class LancamentoServiceImpl implements LancamentoService {
 
     private void gerarParcela(Lancamento lancamento) {
         if (lancamento.getPagamento().getTipoPagamento().equals(TipoPagamento.AVISTA)) {
-            Parcela parcela = new Parcela();
-            parcela.setDataVencimento(lancamento.getPagamento().getDataPrimeiroVencimento());
-            parcela.setNumero(lancamento.getPagamento().getQuantidadeParcelas());
-            parcela.setValor(lancamento.getValor());
-            parcela.setStatus(Status.PENDENTE);
-            parcela.setPagamento(lancamento.getPagamento());
-            parcela.setJuros(new BigDecimal("0"));
-            parcela.valor(lancamento.getValor());
+            Parcela parcela = new Parcela(
+                lancamento.getPagamento().getDataPrimeiroVencimento(),
+                lancamento.getPagamento().getQuantidadeParcelas(),
+                lancamento.getValor(),
+                Status.PENDENTE,
+                lancamento.getPagamento()
+            );
+            //parcela.setJuros(new BigDecimal("0"));
+            //parcela.valor(lancamento.getValor());
             parcelaRepository.save(parcela);
+        } else {
+            String numParcela = Long.toString(lancamento.getPagamento().getQuantidadeParcelas());
+            BigDecimal valorParcela = lancamento.getValor().divide(new BigDecimal(numParcela), 2 , RoundingMode.UP);
+            LocalDate dataInicial = lancamento.getPagamento().getDataPrimeiroVencimento();
+            for (int i = 0; i < lancamento.getPagamento().getQuantidadeParcelas(); i++) {
+                dataInicial = this.gerarDataVencimento(dataInicial, i);
+                parcelaRepository.save(new Parcela(
+                    dataInicial,
+                    (long) (i + 1),
+                    valorParcela,
+                    Status.PENDENTE,
+                    lancamento.getPagamento()
+                ));
+            }
+
         }
+    }
+
+    private LocalDate gerarDataVencimento(LocalDate dataInicial, long i) {
+        return dataInicial.plusMonths(i);
     }
 
     /**

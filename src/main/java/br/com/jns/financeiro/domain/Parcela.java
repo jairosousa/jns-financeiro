@@ -59,6 +59,17 @@ public class Parcela implements Serializable {
     @JsonIgnoreProperties("parcelas")
     private Pagamento pagamento;
 
+    public Parcela() {
+    }
+
+    public Parcela(LocalDate dataVencimento, Long numero, BigDecimal valor, Status status, Pagamento pagamento) {
+        this.dataVencimento = dataVencimento;
+        this.numero = numero;
+        this.valor = valor;
+        this.status = status;
+        this.pagamento = pagamento;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
