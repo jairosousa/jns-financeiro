@@ -131,8 +131,8 @@
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.valor"
                                    for="field_valor">Valor</label>
-                            <input type="number" class="form-control" name="valor" id="field_valor"
-                                   [(ngModel)]="lancamento.valor" required/>
+                            <input type="number" class="form-control text-right" name="valor" id="field_valor"
+                                   [(ngModel)]="lancamento.valor" required [disabled]="currentAction === 'edit'"/>
                             <div [hidden]="!(editForm.controls.valor?.dirty && editForm.controls.valor?.invalid)">
                                 <small class="form-text text-danger"
                                        [hidden]="!editForm.controls.valor?.errors?.required"
@@ -148,7 +148,8 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-4" *ngIf="pagamento">
+                   <!--PAGAMENTO-->
+                    <div class="col-sm-12 col-md-4" *ngIf="pagamento && currentAction === 'new'">
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento"
                                    for="field_tipoPagamento">Tipo Pagamento</label>
@@ -160,7 +161,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4" *ngIf="pagamento">
+                    <div class="col-sm-12 col-md-4" *ngIf="pagamento && currentAction === 'new'">
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.formaPag"
                                    for="field_formaPag">Forma Pag</label>
@@ -177,7 +178,7 @@
                 </div>
 
                 <!--OPÇÕES DE PAGAMENTO AVISTA-->
-                <div class="form-row" *ngIf="pagamento && pagamento.tipoPagamento == 'AVISTA'">
+                <div class="form-row" *ngIf="pagamento && currentAction === 'new' && pagamento.tipoPagamento == 'AVISTA'">
                     <div class="form-group col-sm-12 col-md-4">
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.dataVencimento"
@@ -206,7 +207,7 @@
                 </div>
 
                 <!--OPÇÕES DE PAGAMENTO PARCELADO-->
-                <div class="form-row" *ngIf="pagamento && pagamento.tipoPagamento == 'PARCELADO'">
+                <div class="form-row" *ngIf="pagamento && currentAction === 'new' && pagamento.tipoPagamento == 'PARCELADO'">
                     <div class="form-group col-sm-12 col-md-4">
                         <div class="form-group">
                             <label class="form-control-label"
@@ -231,7 +232,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-sm-12 col-md-4">
+                    <div class="form-group col-sm-12 col-md-4" *ngIf="pagamento && currentAction === 'new'">
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.dataVencimento"
                                    for="field_dataPrimeiroVencimento-p">Data</label>

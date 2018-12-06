@@ -1,9 +1,13 @@
 <div>
+    <jhi-bread-crumb
+        [items]="[{text: 'lancamento', currentAction: ''}]"
+    ></jhi-bread-crumb>
     <h2 id="page-heading">
+        <span class="text-primary"><fa-icon [icon]="faLanc" class="fa"></fa-icon></span>
         <span jhiTranslate="jnsFinanceiroApp.lancamento.home.title">Lancamentos</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-lancamento" [routerLink]="['/lancamento/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="jnsFinanceiroApp.lancamento.home.createLabel">
+            <span class="d-none d-md-inline"  jhiTranslate="jnsFinanceiroApp.lancamento.home.adicionar">
             Create new Lancamento
             </span>
         </button>
@@ -29,13 +33,13 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="data"><span jhiTranslate="jnsFinanceiroApp.lancamento.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="nome"><span jhiTranslate="jnsFinanceiroApp.lancamento.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="descricao"><span jhiTranslate="jnsFinanceiroApp.lancamento.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="valor"><span jhiTranslate="jnsFinanceiroApp.lancamento.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="tipo"><span jhiTranslate="jnsFinanceiroApp.lancamento.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="pagamentoTipoPagamento"><span jhiTranslate="jnsFinanceiroApp.lancamento.pagamento">Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="data"><span jhiTranslate="jnsFinanceiroApp.lancamento.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="nome" colspan="5"><span jhiTranslate="jnsFinanceiroApp.lancamento.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="descricao"><span jhiTranslate="jnsFinanceiroApp.lancamento.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th class="text-center" jhiSortBy="tipo"><span jhiTranslate="jnsFinanceiroApp.lancamento.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th class="text-center" class="text-right" jhiSortBy="valor"><span jhiTranslate="jnsFinanceiroApp.lancamento.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th class="text-center" jhiSortBy="pagamentoTipoPagamento"><span jhiTranslate="jnsFinanceiroApp.lancamento.pagamento">Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fornecedorNome"><span jhiTranslate="jnsFinanceiroApp.lancamento.fornecedor">Fornecedor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="categoriaNome"><span jhiTranslate="jnsFinanceiroApp.lancamento.categoria">Categoria</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -43,15 +47,29 @@
             </thead>
             <tbody>
             <tr *ngFor="let lancamento of lancamentos ;trackBy: trackId">
-                <td><a [routerLink]="['/lancamento', lancamento.id, 'view' ]">{{lancamento.id}}</a></td>
-                <td>{{lancamento.data | date:'mediumDate'}}</td>
-                <td>{{lancamento.nome}}</td>
-                <td>{{lancamento.descricao}}</td>
-                <td>{{lancamento.valor}}</td>
-                <td jhiTranslate="{{'jnsFinanceiroApp.Tipo.' + lancamento.tipo}}">{{lancamento.tipo}}</td>
-                <td>
+                <!--<td><a [routerLink]="['/lancamento', lancamento.id, 'view' ]">{{lancamento.id}}</a></td>-->
+                <td colspan="5">
+                    <div class="h5">{{lancamento.nome}}</div>
+                    <div>{{lancamento.data | date:'mediumDate'}}</div>
+                    <div>{{lancamento.descricao}}</div>
+                </td>
+                <td class="text-center">
+                    <div class="badge badge-pill"
+                         [class.badge-danger]="lancamento.tipo == 'DESPESA' "
+                         [class.badge-success]="lancamento.tipo == 'RECEITA' ">
+                        {{lancamento.tipo}}
+                    </div>
+                </td>
+                <td class="text-right"><span class="h5">{{lancamento.valor}}</span></td>
+                <td class="text-center">
                     <div *ngIf="lancamento.pagamentoId">
                         <a [routerLink]="['../pagamento', lancamento.pagamentoId , 'view' ]" >{{lancamento.pagamentoTipoPagamento}}</a>
+                    </div>
+                    <div class="badge badge-pill"
+                         [class.badge-danger]="lancamento.pagamento.status == 'CANCELADO' "
+                         [class.badge-info]="lancamento.pagamento.status == 'PENDENTE' "
+                         [class.badge-success]="lancamento.pagamento.status == 'PAGO' ">
+                        {{lancamento.pagamento.status}}
                     </div>
                 </td>
                 <td>

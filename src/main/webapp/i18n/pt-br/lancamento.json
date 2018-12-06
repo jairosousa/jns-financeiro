@@ -21,7 +21,7 @@
             "nome": "Nome",
             "descricao": "Descrição",
             "valor": "Valor",
-            "tipo": "Tipo Lançamento",
+            "tipo": "Tipo",
             "pagamento": "Pagamento",
             "fornecedor": "Fornecedor",
             "categoria": "Categoria"

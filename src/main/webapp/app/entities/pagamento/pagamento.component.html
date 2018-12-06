@@ -3,7 +3,7 @@
         <span jhiTranslate="jnsFinanceiroApp.pagamento.home.title">Pagamentos</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pagamento" [routerLink]="['/pagamento/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="jnsFinanceiroApp.pagamento.home.createLabel">
+            <span class="d-none d-md-inline"  jhiTranslate="jnsFinanceiroApp.pagamento.home.createLabel">
             Create new Pagamento
             </span>
         </button>
@@ -31,7 +31,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                 <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="quantidadeParcelas"><span jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas">Quantidade Parcelas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="dataPrimeiroVencimento"><span jhiTranslate="jnsFinanceiroApp.pagamento.dataPrimeiroVencimento">Data Primeiro Vencimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="dataPrimeiroVencimento"><span jhiTranslate="jnsFinanceiroApp.pagamento.dataVencimento">Data Primeiro Vencimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="formaPag"><span jhiTranslate="jnsFinanceiroApp.pagamento.formaPag">Forma Pag</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.pagamento.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="tipoPagamento"><span jhiTranslate="jnsFinanceiroApp.pagamento.tipoPagamento">Tipo Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>

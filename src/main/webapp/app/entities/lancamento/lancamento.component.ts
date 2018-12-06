@@ -9,6 +9,7 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { LancamentoService } from './lancamento.service';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'jhi-lancamento',
@@ -30,6 +31,8 @@ export class LancamentoComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+
+    faLanc = faCheckSquare;
 
     constructor(
         private lancamentoService: LancamentoService,
@@ -162,6 +165,7 @@ export class LancamentoComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.lancamentos = data;
+        console.log(this.lancamentos);
     }
 
     private onError(errorMessage: string) {

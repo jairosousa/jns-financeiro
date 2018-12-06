@@ -96,6 +96,7 @@ public class LancamentoServiceImpl implements LancamentoService {
     public LancamentoDTO update(LancamentoDTO lancamentoDTO) {
         log.debug("Request to save Lancamento : {}", lancamentoDTO);
         Lancamento lancamento = lancamentoMapper.toEntity(lancamentoDTO);
+
         lancamento = lancamentoRepository.save(lancamento);
         LancamentoDTO result = lancamentoMapper.toDto(lancamento);
         lancamentoSearchRepository.save(lancamento);

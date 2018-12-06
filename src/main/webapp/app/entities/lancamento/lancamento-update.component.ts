@@ -91,11 +91,11 @@ export class LancamentoUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.lancamento.pagamento = this.pagamento;
-        console.log(this.lancamento);
         if (this.lancamento.id !== undefined) {
+            this.lancamento.pagamentoId = this.pagamento.id;
             this.subscribeToSaveResponse(this.lancamentoService.update(this.lancamento));
         } else {
+            this.lancamento.pagamento = this.pagamento;
             this.subscribeToSaveResponse(this.lancamentoService.create(this.lancamento));
         }
     }
