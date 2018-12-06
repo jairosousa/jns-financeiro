@@ -96,7 +96,8 @@ public class LancamentoServiceImpl implements LancamentoService {
     public LancamentoDTO update(LancamentoDTO lancamentoDTO) {
         log.debug("Request to save Lancamento : {}", lancamentoDTO);
         Lancamento lancamento = lancamentoMapper.toEntity(lancamentoDTO);
-
+        Optional<Pagamento> pagamento = pagamentoRepository.findById(lancamentoDTO.getPagamentoId());
+        lancamento.setPagamento(pagamento.get());
         lancamento = lancamentoRepository.save(lancamento);
         LancamentoDTO result = lancamentoMapper.toDto(lancamento);
         lancamentoSearchRepository.save(lancamento);
@@ -149,7 +150,7 @@ public class LancamentoServiceImpl implements LancamentoService {
     @Transactional(readOnly = true)
     public Page<LancamentoDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Lancamentos");
-        return lancamentoRepository.findAll(pageable)
+        return lancamentoRepository.findAllByOrderByDataDesc(pageable)
             .map(lancamentoMapper::toDto);
     }
 

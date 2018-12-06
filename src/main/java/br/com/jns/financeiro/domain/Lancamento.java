@@ -51,7 +51,7 @@ public class Lancamento implements Serializable {
     @Column(name = "tipo", nullable = false)
     private Tipo tipo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
     private Pagamento pagamento;
 

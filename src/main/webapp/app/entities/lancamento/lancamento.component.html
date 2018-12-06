@@ -50,8 +50,8 @@
                 <!--<td><a [routerLink]="['/lancamento', lancamento.id, 'view' ]">{{lancamento.id}}</a></td>-->
                 <td colspan="5">
                     <div class="h5">{{lancamento.nome}}</div>
-                    <div>{{lancamento.data | date:'mediumDate'}}</div>
-                    <div>{{lancamento.descricao}}</div>
+                    <div class="badge badge-secondary">{{lancamento.data | date:'dd/MM/yyyy'}}</div>
+                    <div class="font-weight-light font-italic">{{lancamento.descricao}}</div>
                 </td>
                 <td class="text-center">
                     <div class="badge badge-pill"
@@ -110,7 +110,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="lancamentos && lancamentos.length">
+    <div *ngIf="lancamentos && lancamentos.length" class="align-middle">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

@@ -58,7 +58,7 @@ public class Pagamento implements Serializable {
     private TipoPagamento tipoPagamento;
 
     @NotNull
-    @OneToMany(mappedBy = "pagamento")
+    @OneToMany(mappedBy = "pagamento", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Parcela> parcelas = new HashSet<>();
 
