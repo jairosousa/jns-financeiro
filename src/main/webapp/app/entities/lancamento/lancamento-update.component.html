@@ -71,11 +71,14 @@
                                 <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker
                                        #dataDp="ngbDatepicker" [(ngModel)]="lancamento.data"
                                        required/>
+
                                 <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon
+                                    <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon
                                 [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
+                                </span>
+
                             </div>
+
                             <div [hidden]="!(editForm.controls.data?.dirty && editForm.controls.data?.invalid)">
                                 <small class="form-text text-danger"
                                        [hidden]="!editForm.controls.data?.errors?.required"
