@@ -6,12 +6,16 @@ import br.com.jns.financeiro.domain.Parcela;
 import br.com.jns.financeiro.domain.enumeration.Status;
 import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
 import br.com.jns.financeiro.repository.LancamentoRepository;
+import br.com.jns.financeiro.repository.PagamentoRepository;
 import br.com.jns.financeiro.repository.ParcelaRepository;
 import br.com.jns.financeiro.repository.search.LancamentoSearchRepository;
+import br.com.jns.financeiro.repository.search.PagamentoSearchRepository;
+import br.com.jns.financeiro.repository.search.ParcelaSearchRepository;
 import br.com.jns.financeiro.service.LancamentoService;
 import br.com.jns.financeiro.service.dto.LancamentoDTO;
 import br.com.jns.financeiro.service.mapper.LancamentoMapper;
 import br.com.jns.financeiro.service.mapper.PagamentoMapper;
+import br.com.jns.financeiro.service.mapper.ParcelaMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -43,14 +47,27 @@ public class LancamentoServiceImpl implements LancamentoService {
 
     private final PagamentoMapper pagamentoMapper;
 
+    private final PagamentoRepository pagamentoRepository;
+
+    private final PagamentoSearchRepository pagamentoSearchRepository;
+
+    private final ParcelaMapper parcelaMapper;
+
     private final ParcelaRepository parcelaRepository;
 
-    public LancamentoServiceImpl(LancamentoRepository lancamentoRepository, LancamentoMapper lancamentoMapper, LancamentoSearchRepository lancamentoSearchRepository, PagamentoMapper pagamentoMapper, ParcelaRepository parcelaRepository) {
+    private final ParcelaSearchRepository parcelaSearchRepository;
+
+
+    public LancamentoServiceImpl(LancamentoRepository lancamentoRepository, LancamentoMapper lancamentoMapper, LancamentoSearchRepository lancamentoSearchRepository, PagamentoMapper pagamentoMapper, PagamentoRepository pagamentoRepository, PagamentoSearchRepository pagamentoSearchRepository, ParcelaMapper parcelaMapper, ParcelaRepository parcelaRepository, ParcelaSearchRepository parcelaSearchRepository) {
         this.lancamentoRepository = lancamentoRepository;
         this.lancamentoMapper = lancamentoMapper;
         this.lancamentoSearchRepository = lancamentoSearchRepository;
         this.pagamentoMapper = pagamentoMapper;
+        this.pagamentoRepository = pagamentoRepository;
+        this.pagamentoSearchRepository = pagamentoSearchRepository;
+        this.parcelaMapper = parcelaMapper;
         this.parcelaRepository = parcelaRepository;
+        this.parcelaSearchRepository = parcelaSearchRepository;
     }
 
     /**
@@ -63,6 +80,9 @@ public class LancamentoServiceImpl implements LancamentoService {
     public LancamentoDTO save(LancamentoDTO lancamentoDTO) {
         log.debug("Request to save Lancamento : {}", lancamentoDTO);
         Pagamento pagamento = pagamentoMapper.toEntity(lancamentoDTO.getPagamento());
+        pagamento = pagamentoRepository.save(pagamento);
+        pagamentoSearchRepository.save(pagamento);
+
         Lancamento lancamento = lancamentoMapper.toEntity(lancamentoDTO);
         lancamento.setPagamento(pagamento);
         lancamento = lancamentoRepository.save(lancamento);
@@ -91,22 +111,24 @@ public class LancamentoServiceImpl implements LancamentoService {
                 Status.PENDENTE,
                 lancamento.getPagamento()
             );
-            //parcela.setJuros(new BigDecimal("0"));
-            //parcela.valor(lancamento.getValor());
-            parcelaRepository.save(parcela);
+            parcela = parcelaRepository.save(parcela);
+            parcelaSearchRepository.save(parcela);
         } else {
             String numParcela = Long.toString(lancamento.getPagamento().getQuantidadeParcelas());
             BigDecimal valorParcela = lancamento.getValor().divide(new BigDecimal(numParcela), 2 , RoundingMode.UP);
             LocalDate dataInicial = lancamento.getPagamento().getDataPrimeiroVencimento();
             for (int i = 0; i < lancamento.getPagamento().getQuantidadeParcelas(); i++) {
                 dataInicial = this.gerarDataVencimento(dataInicial, i);
-                parcelaRepository.save(new Parcela(
+
+                Parcela parcela = new Parcela(
                     dataInicial,
                     (long) (i + 1),
                     valorParcela,
                     Status.PENDENTE,
                     lancamento.getPagamento()
-                ));
+                );
+                parcela = parcelaRepository.save(parcela);
+                parcelaSearchRepository.save(parcela);
             }
 
         }
