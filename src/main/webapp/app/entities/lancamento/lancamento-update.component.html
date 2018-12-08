@@ -134,7 +134,8 @@
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.lancamento.valor"
                                    for="field_valor">Valor</label>
-                            <input type="number" class="form-control text-right" name="valor" id="field_valor"
+                            <input type="text" class="form-control text-right" name="valor" id="field_valor"
+                                   currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                                    [(ngModel)]="lancamento.valor" required [disabled]="currentAction === 'edit'"/>
                             <div [hidden]="!(editForm.controls.valor?.dirty && editForm.controls.valor?.invalid)">
                                 <small class="form-text text-danger"

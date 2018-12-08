@@ -43,7 +43,7 @@ public class Lancamento implements Serializable {
     private String descricao;
 
     @NotNull
-    @Column(name = "valor", precision = 10, scale = 2, nullable = false)
+    @Column(name = "valor")
     private BigDecimal valor;
 
     @NotNull

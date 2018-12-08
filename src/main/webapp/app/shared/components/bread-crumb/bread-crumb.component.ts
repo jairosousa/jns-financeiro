@@ -15,13 +15,13 @@ export class BreadCrumbComponent implements OnInit {
 
     isThelastItem(item: BreadCrumbItem): boolean {
         const index = this.items.indexOf(item);
-        return index + 1 == this.items.length;
+        return index + 1 === this.items.length;
     }
 
     translate(text: string, currentAction?: string) {
-        return currentAction == 'new'
+        return currentAction === 'new'
             ? `jnsFinanceiroApp.${text}.home.createLabel`
-            : currentAction == 'edit'
+            : currentAction === 'edit'
                 ? `jnsFinanceiroApp.${text}.home.editLabel`
                 : `jnsFinanceiroApp.${text}.home.title`;
     }

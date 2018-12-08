@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 import { JnsFinanceiroSharedModule } from 'app/shared';
 import {
@@ -15,7 +16,7 @@ import {
 const ENTITY_STATES = [...lancamentoRoute, ...lancamentoPopupRoute];
 
 @NgModule({
-    imports: [JnsFinanceiroSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [JnsFinanceiroSharedModule, RouterModule.forChild(ENTITY_STATES), CurrencyMaskModule],
     declarations: [
         LancamentoComponent,
         LancamentoDetailComponent,

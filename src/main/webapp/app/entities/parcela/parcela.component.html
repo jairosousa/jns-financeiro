@@ -1,7 +1,8 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="jnsFinanceiroApp.parcela.home.title">Parcelas</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-parcela" [routerLink]="['/parcela/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-parcela"
+                [routerLink]="['/parcela/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="d-none d-md-inline" jhiTranslate="jnsFinanceiroApp.parcela.home.createLabel">
             Create new Parcela
@@ -13,7 +14,8 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jnsFinanceiroApp.parcela.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                           name="currentSearch" placeholder="{{ 'jnsFinanceiroApp.parcela.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
@@ -29,40 +31,69 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="dataVencimento"><span jhiTranslate="jnsFinanceiroApp.parcela.dataVencimento">Data Vencimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="dataPagamento"><span jhiTranslate="jnsFinanceiroApp.parcela.dataPagamento">Data Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="numero"><span jhiTranslate="jnsFinanceiroApp.parcela.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="valor"><span jhiTranslate="jnsFinanceiroApp.parcela.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="juros"><span jhiTranslate="jnsFinanceiroApp.parcela.juros">Juros</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="total"><span jhiTranslate="jnsFinanceiroApp.parcela.total">Total</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.parcela.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="cartaoNome"><span jhiTranslate="jnsFinanceiroApp.parcela.cartao">Cartao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="pagamentoFormaPag"><span jhiTranslate="jnsFinanceiroApp.parcela.pagamento">Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="dataVencimento"><span jhiTranslate="jnsFinanceiroApp.parcela.dataVencimento">Data Vencimento</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="dataPagamento"><span
+                    jhiTranslate="jnsFinanceiroApp.parcela.dataPagamento">Data Pagamento</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="numero"><span jhiTranslate="jnsFinanceiroApp.parcela.numero">Numero</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="valor"><span jhiTranslate="jnsFinanceiroApp.parcela.valor">Valor</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="juros"><span jhiTranslate="jnsFinanceiroApp.parcela.juros">Juros</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="total"><span jhiTranslate="jnsFinanceiroApp.parcela.total">Total</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.parcela.status">Status</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="cartaoNome"><span jhiTranslate="jnsFinanceiroApp.parcela.cartao">Cartao</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="pagamentoFormaPag"><span
+                    jhiTranslate="jnsFinanceiroApp.parcela.pagamento">Pagamento</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let parcela of parcelas ;trackBy: trackId">
                 <td><a [routerLink]="['/parcela', parcela.id, 'view' ]">{{parcela.id}}</a></td>
-                <td>{{parcela.dataVencimento | date:'mediumDate'}}</td>
-                <td>{{parcela.dataPagamento | date:'mediumDate'}}</td>
+                <td>{{parcela.dataVencimento | date:'dd/MM/yyyy'}}</td>
+                <td>{{parcela.dataPagamento | date:'dd/MM/yyyy\''}}</td>
                 <td>{{parcela.numero}}</td>
-                <td>{{parcela.valor}}</td>
+                <td>{{parcela.valor | number:'1.2-2'}}</td>
                 <td>{{parcela.juros}}</td>
                 <td>{{parcela.total}}</td>
                 <td jhiTranslate="{{'jnsFinanceiroApp.Status.' + parcela.status}}">{{parcela.status}}</td>
                 <td>
                     <div *ngIf="parcela.cartaoId">
-                        <a [routerLink]="['../cartao', parcela.cartaoId , 'view' ]" >{{parcela.cartaoNome}}</a>
+                        <a [routerLink]="['../cartao', parcela.cartaoId , 'view' ]">
+                            {{parcela.cartaoNome}}
+                        </a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="parcela.pagamentoId">
-                        <a [routerLink]="['../pagamento', parcela.pagamentoId , 'view' ]" >{{parcela.pagamentoFormaPag}}</a>
+                        <span class="font-weight-bold">
+                            <a [routerLink]="['../pagamento', parcela.pagamentoId , 'view' ]"
+                               [style.color]="parcela.pagamentoFormaPag === 'DINHEIRO' ? 'blue' : parcela.pagamentoFormaPag === 'CREDITO' ? 'red' : 'black'">
+                                {{parcela.pagamentoFormaPag}}
+                            </a>
+                        </span>
                     </div>
                 </td>
-                <td class="text-right">
+                <td class=" text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/parcela', parcela.id, 'view' ]"
@@ -76,14 +107,14 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'parcela/'+ parcela.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                        <!--<button type="submit"-->
+                                <!--[routerLink]="['/', { outlets: { popup: 'parcela/'+ parcela.id + '/delete'} }]"-->
+                                <!--replaceUrl="true"-->
+                                <!--queryParamsHandling="merge"-->
+                                <!--class="btn btn-danger btn-sm">-->
+                            <!--<fa-icon [icon]="'times'"></fa-icon>-->
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
+                        <!--</button>-->
                     </div>
                 </td>
             </tr>
@@ -92,10 +123,12 @@
     </div>
     <div *ngIf="parcelas && parcelas.length">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                            [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                            [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

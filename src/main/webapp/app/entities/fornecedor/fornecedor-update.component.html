@@ -81,7 +81,11 @@
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.cnpj"
                                    for="field_cnpj">Cnpj</label>
                             <input type="text" class="form-control" name="cnpj" id="field_cnpj"
-                                   [(ngModel)]="fornecedor.cnpj"/>
+                                   [(ngModel)]="fornecedor.cnpj"
+                                   jhiCnpj jhiMask="99.999.999/9999-99"/>
+                        <div class="text-danger m-0" *ngIf="editForm.controls.cnpj.errors && !editForm.controls.cnpj.pristine">
+                            <small class="form-text text-danger">CNPJ inválido.</small>
+                        </div>
                         </div>
                     </div>
 
@@ -91,7 +95,11 @@
                     <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.cpf"
                            for="field_cpf">Cpf</label>
                     <input type="text" class="form-control" name="cpf" id="field_cpf"
-                           [(ngModel)]="fornecedor.cpf"/>
+                           [(ngModel)]="fornecedor.cpf"
+                           jhiCpf jhiMask="999.999.999-99"/>
+                    <div class="text-danger m-0" *ngIf="editForm.controls.cpf.errors && !editForm.controls.cpf.pristine">
+                        <small class="form-text text-danger">CPF inválido.</small>
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -100,7 +108,7 @@
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.telefoneFixo"
                                    for="field_telefoneFixo">Telefone Fixo</label>
                             <input type="text" class="form-control" name="telefoneFixo" id="field_telefoneFixo"
-                                   [(ngModel)]="fornecedor.telefoneFixo"/>
+                                   [(ngModel)]="fornecedor.telefoneFixo" jhiMask="(99)9999-9999"/>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -108,7 +116,7 @@
                             <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.fornecedor.telefoneCel"
                                    for="field_telefoneCel">Telefone Cel</label>
                             <input type="text" class="form-control" name="telefoneCel" id="field_telefoneCel"
-                                   [(ngModel)]="fornecedor.telefoneCel"/>
+                                   [(ngModel)]="fornecedor.telefoneCel" jhiMask="(99)99999-9999"/>
                         </div>
                     </div>
 

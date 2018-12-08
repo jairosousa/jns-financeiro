@@ -60,7 +60,9 @@
                         {{lancamento.tipo}}
                     </div>
                 </td>
-                <td class="text-right"><span class="h5">{{lancamento.valor}}</span></td>
+
+                <td class="text-right"><span class="h5"  [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{lancamento.valor | number:'1.2-2'}}</span></td>
+
                 <td class="text-center">
                     <div *ngIf="lancamento.pagamentoId">
                         <a [routerLink]="['../pagamento', lancamento.pagamentoId , 'view' ]" >{{lancamento.pagamentoTipoPagamento}}</a>

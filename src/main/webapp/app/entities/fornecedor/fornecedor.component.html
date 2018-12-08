@@ -6,9 +6,10 @@
     <h2 id="page-heading">
         <span class="text-primary"><fa-icon [icon]="faForn"></fa-icon></span>
         <span jhiTranslate="jnsFinanceiroApp.fornecedor.home.title">Fornecedors</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-fornecedor" [routerLink]="['/fornecedor/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-fornecedor"
+                [routerLink]="['/fornecedor/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="d-none d-md-inline"  jhiTranslate="jnsFinanceiroApp.fornecedor.home.adicionar">
+            <span class="d-none d-md-inline" jhiTranslate="jnsFinanceiroApp.fornecedor.home.adicionar">
             Create new Fornecedor
             </span>
         </button>
@@ -18,7 +19,9 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jnsFinanceiroApp.fornecedor.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                           name="currentSearch"
+                           placeholder="{{ 'jnsFinanceiroApp.fornecedor.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
@@ -34,16 +37,25 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="nome"><span jhiTranslate="jnsFinanceiroApp.fornecedor.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="razaoSocial"><span jhiTranslate="jnsFinanceiroApp.fornecedor.razaoSocial">Razao Social</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="telefoneFixo"><span jhiTranslate="jnsFinanceiroApp.fornecedor.telefoneFixo">Telefone Fixo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="telefoneCel"><span jhiTranslate="jnsFinanceiroApp.fornecedor.telefoneCel">Telefone Cel</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="pessoa"><span jhiTranslate="jnsFinanceiroApp.fornecedor.pessoa">Pessoa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="cnpj"><span jhiTranslate="jnsFinanceiroApp.fornecedor.cnpj">Cnpj</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <!--<th jhiSortBy="cpf"><span jhiTranslate="jnsFinanceiroApp.fornecedor.cpf">Cpf</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="enderecoId"><span jhiTranslate="jnsFinanceiroApp.fornecedor.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
+                <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th jhiSortBy="nome"><span jhiTranslate="jnsFinanceiroApp.fornecedor.nome">Nome</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <!--<th jhiSortBy="razaoSocial"><span jhiTranslate="jnsFinanceiroApp.fornecedor.razaoSocial">Razao Social</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th jhiSortBy="telefoneFixo"><span
+                    jhiTranslate="jnsFinanceiroApp.fornecedor.telefoneFixo">Telefone Fixo</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <!--<th jhiSortBy="telefoneCel"><span jhiTranslate="jnsFinanceiroApp.fornecedor.telefoneCel">Telefone Cel</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th jhiSortBy="pessoa" class="text-center"><span jhiTranslate="jnsFinanceiroApp.fornecedor.pessoa">Pessoa</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <!--<th jhiSortBy="cnpj"><span jhiTranslate="jnsFinanceiroApp.fornecedor.cnpj">Cnpj</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <!--<th jhiSortBy="cpf"><span jhiTranslate="jnsFinanceiroApp.fornecedor.cpf">Cpf</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th jhiSortBy="enderecoId"><span jhiTranslate="jnsFinanceiroApp.fornecedor.endereco">Endereco</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -51,22 +63,30 @@
                 <!--<td><a [routerLink]="['/fornecedor', fornecedor.id, 'view' ]">{{fornecedor.id}}</a></td>-->
                 <td>
                     <div><span class="h4">{{fornecedor.nome}}</span></div>
-                    <span *ngIf="fornecedor.razaoSocial">{{fornecedor.razaoSocial}} - </span>
-                    <span *ngIf="fornecedor.cpf">{{fornecedor.cpf}}</span>
-                    <span *ngIf="fornecedor.cnpj">{{fornecedor.cnpj}}</span>
+                    <div class="h6 m-0" *ngIf="fornecedor.razaoSocial">{{fornecedor.razaoSocial}}</div>
+                    <span class="h6 badge badge-secondary" *ngIf="fornecedor.cpf">{{fornecedor.cpf | cpf }}</span>
+                    <span class="h6 badge badge-secondary" *ngIf="fornecedor.cnpj">{{fornecedor.cnpj | cnpj}}</span>
                 </td>
                 <td>
-                    <div><span>{{fornecedor.telefoneFixo}}</span></div>
-                    <span>{{fornecedor.telefoneCel}}</span>
+                    <div><span>{{fornecedor.telefoneFixo | telefone}}</span></div>
+                    <span>{{fornecedor.telefoneCel | telefone}}</span>
                 </td>
-                <td jhiTranslate="{{'jnsFinanceiroApp.Pessoa.' + fornecedor.pessoa}}">{{fornecedor.pessoa}}</td>
+                <td class="text-center">
+                    <span [ngClass]="(fornecedor.pessoa=='JURIDICA') ? 'badge-primary' : 'badge-success'"
+                            class="badge">
+                        {{fornecedor.pessoa}}
+
+                    </span>
+                </td>
                 <!--<td>{{fornecedor.cnpj}}</td>-->
                 <!--<td>{{fornecedor.cpf}}</td>-->
                 <td class="text-left">
                     <div *ngIf="fornecedor.enderecoId">
                         <!--<a [routerLink]="['../endereco', fornecedor.enderecoId , 'view' ]" >{{fornecedor.enderecoId}}</a>-->
-                        <div><span>{{fornecedor.endereco.logradouro}}</span> <span>{{fornecedor.endereco.numero}}</span></div>
-                        <span>{{fornecedor.endereco.bairro}},</span> <span>{{fornecedor.endereco.cidade}}-</span> <span>{{fornecedor.endereco.uf}}</span>
+                        <div><span>{{fornecedor.endereco.logradouro}}</span> <span>{{fornecedor.endereco.numero}}</span>
+                        </div>
+                        <span>{{fornecedor.endereco.bairro}},</span> <span>{{fornecedor.endereco.cidade}}-</span>
+                        <span>{{fornecedor.endereco.uf}}</span>
                     </div>
                 </td>
                 <td class="text-right">
@@ -99,10 +119,12 @@
     </div>
     <div *ngIf="fornecedors && fornecedors.length">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                            [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                            [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>
