@@ -16,10 +16,10 @@
             "detail": {
                 "title": "Parcela"
             },
-            "dataVencimento": "Data Vencimento",
+            "dataVencimento": "Datas",
             "dataPagamento": "Data Pagamento",
             "numero": "Número",
-            "valor": "Valor",
+            "valor": "Valor R$",
             "juros": "Juros",
             "total": "Total",
             "forma": "Forma",

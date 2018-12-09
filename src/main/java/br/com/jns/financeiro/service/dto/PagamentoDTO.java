@@ -3,7 +3,12 @@ package br.com.jns.financeiro.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
+import br.com.jns.financeiro.domain.Parcela;
 import br.com.jns.financeiro.domain.enumeration.FormaPagamento;
 import br.com.jns.financeiro.domain.enumeration.Status;
 import br.com.jns.financeiro.domain.enumeration.TipoPagamento;
@@ -29,6 +34,12 @@ public class PagamentoDTO implements Serializable {
 
     @NotNull
     private TipoPagamento tipoPagamento;
+
+    private Long lancamentoId;
+
+    private String lancamentoNome;
+
+    private Set<ParcelaDTO> parcelas = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -76,6 +87,30 @@ public class PagamentoDTO implements Serializable {
 
     public void setTipoPagamento(TipoPagamento tipoPagamento) {
         this.tipoPagamento = tipoPagamento;
+    }
+
+    public Long getLancamentoId() {
+        return lancamentoId;
+    }
+
+    public void setLancamentoId(Long lancamentoId) {
+        this.lancamentoId = lancamentoId;
+    }
+
+    public String getLancamentoNome() {
+        return lancamentoNome;
+    }
+
+    public void setLancamentoNome(String lancamentoNome) {
+        this.lancamentoNome = lancamentoNome;
+    }
+
+    public Set<ParcelaDTO> getParcelas() {
+        return parcelas;
+    }
+
+    public void setParcelas(Set<ParcelaDTO> parcelas) {
+        this.parcelas = parcelas;
     }
 
     @Override

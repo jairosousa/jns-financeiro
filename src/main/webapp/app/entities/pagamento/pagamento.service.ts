@@ -39,6 +39,12 @@ export class PagamentoService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
+    findLancamento(id: number): Observable<EntityResponseType> {
+        return this.http
+            .get<IPagamento>(`${this.resourceUrl}/lancamento/${id}`, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http

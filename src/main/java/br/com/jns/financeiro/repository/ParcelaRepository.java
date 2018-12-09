@@ -1,8 +1,10 @@
 package br.com.jns.financeiro.repository;
 
 import br.com.jns.financeiro.domain.Parcela;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**
@@ -12,4 +14,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ParcelaRepository extends JpaRepository<Parcela, Long> {
 
+    List<Parcela> findAllByPagamento_Id(Long id);
 }

@@ -2,7 +2,7 @@
     "jnsFinanceiroApp": {
         "Status": {
             "null": "",
-            "PAGO": "pago",
+            "PAGO": "Pago",
             "PENDENTE": "Pendente",
             "CANCELADO": "Cancelado"
         }

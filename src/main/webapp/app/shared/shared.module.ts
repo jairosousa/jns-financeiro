@@ -12,6 +12,7 @@ import { CpfDirective } from './diretivas/cpf.directive';
 import { CnpjDirective } from './diretivas/cnpj.directive';
 import { MaskDirective } from './diretivas/mask.directive';
 import { TelefonePipe } from './pipes/telefone.pipe';
+import { CapitalLetterPipe } from './pipes/capital-letter.pipe';
 
 @NgModule({
     imports: [JnsFinanceiroSharedLibsModule, JnsFinanceiroSharedCommonModule, RouterModule],
@@ -24,7 +25,8 @@ import { TelefonePipe } from './pipes/telefone.pipe';
         CpfDirective,
         CnpjDirective,
         MaskDirective,
-        TelefonePipe
+        TelefonePipe,
+        CapitalLetterPipe
     ],
     providers: [
         { provide: NgbDateAdapter, useClass: NgbDateMomentAdapter },
@@ -39,6 +41,7 @@ import { TelefonePipe } from './pipes/telefone.pipe';
         RouterModule,
         CnpjPipe,
         CpfPipe,
+        CapitalLetterPipe,
         CpfDirective,
         CnpjDirective,
         MaskDirective,

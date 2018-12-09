@@ -162,6 +162,7 @@ export class PagamentoComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.pagamentos = data;
+        console.log(this.pagamentos);
     }
 
     private onError(errorMessage: string) {

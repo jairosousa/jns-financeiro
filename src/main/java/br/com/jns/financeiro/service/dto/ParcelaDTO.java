@@ -35,6 +35,8 @@ public class ParcelaDTO implements Serializable {
 
     private String pagamentoFormaPag;
 
+    private Long totalParc;
+
     public Long getId() {
         return id;
     }
@@ -129,6 +131,14 @@ public class ParcelaDTO implements Serializable {
 
     public void setPagamentoFormaPag(String pagamentoFormaPag) {
         this.pagamentoFormaPag = pagamentoFormaPag;
+    }
+
+    public Long getTotalParc() {
+        return totalParc;
+    }
+
+    public void setTotalParc(Long totalParc) {
+        this.totalParc = totalParc;
     }
 
     @Override

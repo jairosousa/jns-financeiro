@@ -18,6 +18,7 @@ import br.com.jns.financeiro.service.mapper.PagamentoMapper;
 import br.com.jns.financeiro.service.mapper.ParcelaMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -120,10 +121,10 @@ public class LancamentoServiceImpl implements LancamentoService {
             BigDecimal valorParcela = lancamento.getValor().divide(new BigDecimal(numParcela), 2 , RoundingMode.UP);
             LocalDate dataInicial = lancamento.getPagamento().getDataPrimeiroVencimento();
             for (int i = 0; i < lancamento.getPagamento().getQuantidadeParcelas(); i++) {
-                dataInicial = this.gerarDataVencimento(dataInicial, i);
+                LocalDate dataParc = this.gerarDataVencimento(dataInicial, i);
 
                 Parcela parcela = new Parcela(
-                    dataInicial,
+                    dataParc,
                     (long) (i + 1),
                     valorParcela,
                     Status.PENDENTE,

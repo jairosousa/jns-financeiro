@@ -14,7 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -111,4 +114,12 @@ public class ParcelaServiceImpl implements ParcelaService {
         return parcelaSearchRepository.search(queryStringQuery(query), pageable)
             .map(parcelaMapper::toDto);
     }
+
+    @Override
+    public List<ParcelaDTO> findByPagamento(Long id) {
+        return parcelaRepository.findAllByPagamento_Id(id).stream()
+            .map(parcelaMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
 }

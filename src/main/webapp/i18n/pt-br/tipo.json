@@ -2,8 +2,8 @@
     "jnsFinanceiroApp": {
         "Tipo": {
             "null": "",
-            "DESPESA": "DESPESA",
-            "RECEITA": "RECEITA"
+            "DESPESA": "Despesa",
+            "RECEITA": "Receita"
         }
     }
 }

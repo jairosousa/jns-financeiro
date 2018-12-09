@@ -31,11 +31,11 @@
                         <label class="form-control-label"
                                jhiTranslate="jnsFinanceiroApp.lancamento.tipo">Tipo Lançamento</label>
                         <div class="btn-block btn-group">
-                            <label (click)="lancamento.tipo='RECEITA'" [class.active]="lancamento.tipo == 'RECEITA'"
-                                   jhiTranslate="jnsFinanceiroApp.Tipo.RECEITA" name="tipo"
-                                   class="btn btn-outline-info">RECEITA</label>
                             <label (click)="lancamento.tipo='DESPESA'" [class.active]="lancamento.tipo == 'DESPESA'"
                                    jhiTranslate="jnsFinanceiroApp.Tipo.DESPESA" name="tipo"
+                                   class="btn btn-outline-info">RECEITA</label>
+                            <label (click)="lancamento.tipo='RECEITA'" [class.active]="lancamento.tipo == 'RECEITA'"
+                                   jhiTranslate="jnsFinanceiroApp.Tipo.RECEITA" name="tipo"
                                    class="btn btn-outline-info">RECEITA</label>
                         </div>
                     </div>
@@ -238,7 +238,7 @@
 
                     <div class="form-group col-sm-12 col-md-4" *ngIf="pagamento && currentAction === 'new'">
                         <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.dataVencimento"
+                            <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.pagamento.dataPrimeiroVencimento"
                                    for="field_dataPrimeiroVencimento-p">Data</label>
                             <div class="input-group">
                                 <input id="field_dataPrimeiroVencimento-p" type="text" class="form-control"

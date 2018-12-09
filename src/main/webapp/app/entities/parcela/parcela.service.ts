@@ -17,7 +17,13 @@ export class ParcelaService {
     public resourceUrl = SERVER_API_URL + 'api/parcelas';
     public resourceSearchUrl = SERVER_API_URL + 'api/_search/parcelas';
 
+    parcelas: IParcela[] = [];
+
     constructor(private http: HttpClient) {}
+
+    adcList(parcela: IParcela) {
+        this.parcelas.push(parcela);
+    }
 
     create(parcela: IParcela): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(parcela);
@@ -37,6 +43,12 @@ export class ParcelaService {
         return this.http
             .get<IParcela>(`${this.resourceUrl}/${id}`, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    findByPagamento(id: number): Observable<EntityArrayResponseType> {
+        return this.http
+            .get<IParcela[]>(`${this.resourceUrl}/pagamento/${id}`, { observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {

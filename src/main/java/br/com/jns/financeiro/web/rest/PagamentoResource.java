@@ -1,11 +1,11 @@
 package br.com.jns.financeiro.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import br.com.jns.financeiro.service.PagamentoService;
+import br.com.jns.financeiro.service.dto.PagamentoDTO;
 import br.com.jns.financeiro.web.rest.errors.BadRequestAlertException;
 import br.com.jns.financeiro.web.rest.util.HeaderUtil;
 import br.com.jns.financeiro.web.rest.util.PaginationUtil;
-import br.com.jns.financeiro.service.dto.PagamentoDTO;
+import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Pagamento.
@@ -89,7 +85,7 @@ public class PagamentoResource {
      * GET  /pagamentos : get all the pagamentos.
      *
      * @param pageable the pagination information
-     * @param filter the filter of the request
+     * @param filter   the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of pagamentos in body
      */
     @GetMapping("/pagamentos")
@@ -98,7 +94,7 @@ public class PagamentoResource {
         if ("lancamento-is-null".equals(filter)) {
             log.debug("REST request to get all Pagamentos where lancamento is null");
             return new ResponseEntity<>(pagamentoService.findAllWhereLancamentoIsNull(),
-                    HttpStatus.OK);
+                HttpStatus.OK);
         }
         log.debug("REST request to get a page of Pagamentos");
         Page<PagamentoDTO> page = pagamentoService.findAll(pageable);
@@ -138,7 +134,7 @@ public class PagamentoResource {
      * SEARCH  /_search/pagamentos?query=:query : search for the pagamento corresponding
      * to the query.
      *
-     * @param query the query of the pagamento search
+     * @param query    the query of the pagamento search
      * @param pageable the pagination information
      * @return the result of the search
      */

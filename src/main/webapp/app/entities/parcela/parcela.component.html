@@ -1,13 +1,18 @@
 <div>
+
+    <jhi-bread-crumb
+        [items]="[{text: 'parcela', currentAction: ''}]"
+    ></jhi-bread-crumb>
     <h2 id="page-heading">
+        <span class="text-primary"><fa-icon [icon]="faPag" class="fa"></fa-icon></span>
         <span jhiTranslate="jnsFinanceiroApp.parcela.home.title">Parcelas</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-parcela"
-                [routerLink]="['/parcela/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="d-none d-md-inline" jhiTranslate="jnsFinanceiroApp.parcela.home.createLabel">
-            Create new Parcela
-            </span>
-        </button>
+        <!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-parcela"-->
+                <!--[routerLink]="['/parcela/new']">-->
+            <!--<fa-icon [icon]="'plus'"></fa-icon>-->
+            <!--<span class="d-none d-md-inline" jhiTranslate="jnsFinanceiroApp.parcela.home.createLabel">-->
+            <!--Create new Parcela-->
+            <!--</span>-->
+        <!--</button>-->
     </h2>
     <jhi-alert></jhi-alert>
     <div class="row">
@@ -31,28 +36,28 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
+                <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>-->
+                    <!--<fa-icon [icon]="'sort'"></fa-icon>-->
+                <!--</th>-->
                 <th jhiSortBy="dataVencimento"><span jhiTranslate="jnsFinanceiroApp.parcela.dataVencimento">Data Vencimento</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
-                <th jhiSortBy="dataPagamento"><span
-                    jhiTranslate="jnsFinanceiroApp.parcela.dataPagamento">Data Pagamento</span>
+                <!--<th jhiSortBy="dataPagamento"><span-->
+                    <!--jhiTranslate="jnsFinanceiroApp.parcela.dataPagamento">Data Pagamento</span>-->
+                    <!--<fa-icon [icon]="'sort'"></fa-icon>-->
+                <!--</th>-->
+                <th jhiSortBy="numero"  class="text-center"><span jhiTranslate="jnsFinanceiroApp.parcela.numero">Numero</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
-                <th jhiSortBy="numero"><span jhiTranslate="jnsFinanceiroApp.parcela.numero">Numero</span>
+                <th jhiSortBy="valor" class="text-right"><span jhiTranslate="jnsFinanceiroApp.parcela.valor">Valor</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
-                <th jhiSortBy="valor"><span jhiTranslate="jnsFinanceiroApp.parcela.valor">Valor</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="juros"><span jhiTranslate="jnsFinanceiroApp.parcela.juros">Juros</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="total"><span jhiTranslate="jnsFinanceiroApp.parcela.total">Total</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
+                <!--<th jhiSortBy="juros"><span jhiTranslate="jnsFinanceiroApp.parcela.juros">Juros</span>-->
+                    <!--<fa-icon [icon]="'sort'"></fa-icon>-->
+                <!--</th>-->
+                <!--<th jhiSortBy="total"><span jhiTranslate="jnsFinanceiroApp.parcela.total">Total</span>-->
+                    <!--<fa-icon [icon]="'sort'"></fa-icon>-->
+                <!--</th>-->
                 <th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.parcela.status">Status</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
@@ -68,13 +73,25 @@
             </thead>
             <tbody>
             <tr *ngFor="let parcela of parcelas ;trackBy: trackId">
-                <td><a [routerLink]="['/parcela', parcela.id, 'view' ]">{{parcela.id}}</a></td>
-                <td>{{parcela.dataVencimento | date:'dd/MM/yyyy'}}</td>
-                <td>{{parcela.dataPagamento | date:'dd/MM/yyyy\''}}</td>
-                <td>{{parcela.numero}}</td>
-                <td>{{parcela.valor | number:'1.2-2'}}</td>
-                <td>{{parcela.juros}}</td>
-                <td>{{parcela.total}}</td>
+                <!--<td><a [routerLink]="['/parcela', parcela.id, 'view' ]">{{parcela.id}}</a></td>-->
+                <td>
+                    <dl>
+                        <dt class="text-info">Vencimento:</dt>
+                        <dt class="text-dark">{{parcela.dataVencimento | date:'dd/MM/yyyy'}}</dt>
+                        <dt class="text-primary">Pagamento:</dt>
+                        <dt class="text-dark">{{parcela.dataPagamento | date:'dd/MM/yyyy'}}</dt>
+                    </dl>
+
+
+                </td>
+                <!--<td>{{parcela.dataPagamento | date:'dd/MM/yyyy\''}}</td>-->
+                <td class="text-center">{{parcela.numero}}/{{parcela.totalParc}}
+                </td>
+                <td class="text-right">
+                    <div>{{parcela.valor | number:'1.2-2'}}</div>
+                    <div>{{parcela.juros | number:'1.2-2'}}</div>
+                    <div>{{parcela.total | number:'1.2-2'}}</div>
+                    </td>
                 <td jhiTranslate="{{'jnsFinanceiroApp.Status.' + parcela.status}}">{{parcela.status}}</td>
                 <td>
                     <div *ngIf="parcela.cartaoId">

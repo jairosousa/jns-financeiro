@@ -144,4 +144,11 @@ public class ParcelaResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/parcelas/pagamento/{id}")
+    @Timed
+    public List<ParcelaDTO> getAllParcelasByPagamento(@PathVariable Long id) {
+        log.debug("REST request to get all Emails");
+        return parcelaService.findByPagamento(id);
+    }
+
 }

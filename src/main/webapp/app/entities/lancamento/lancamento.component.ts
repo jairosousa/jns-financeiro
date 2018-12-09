@@ -10,6 +10,7 @@ import { Principal } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { LancamentoService } from './lancamento.service';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { PagamentoService } from 'app/entities/pagamento';
 
 @Component({
     selector: 'jhi-lancamento',
@@ -38,6 +39,7 @@ export class LancamentoComponent implements OnInit, OnDestroy {
         private lancamentoService: LancamentoService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
+        private pagamentoService: PagamentoService,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,

@@ -3,7 +3,7 @@
         "TipoPagamento": {
             "null": "",
             "AVISTA": "A Vista",
-            "PARCELADO": "A Prazo"
+            "PARCELADO": "Parcelado"
         }
     }
 }

@@ -1,36 +1,101 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="lancamento">
-            <h2><span jhiTranslate="jnsFinanceiroApp.lancamento.detail.title">Lancamento</span> {{lancamento.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.data">Data</span></dt>
+<div class="justify-content-center">
+    <div class="container">
+
+        <jhi-bread-crumb
+            [items]="[{text: 'Lançamentos', link: '/lancamento'}, {text: 'lancamento', currentAction: ''}]"
+        ></jhi-bread-crumb>
+
+        <div class="align-items-center">
+            <div *ngIf="lancamento">
+            <span class="h4">
+                <strong>{{lancamento.nome | uppercase}}</strong>
+            </span>
+                <span class="badge badge-pill badge-danger" *ngIf="lancamento.tipo == 'DESPESA'"
+                      jhiTranslate="{{'jnsFinanceiroApp.Tipo.' + lancamento.tipo}}">{{lancamento.tipo}}
+                </span>
+
+                <span class="badge badge-pill badge-success" *ngIf="lancamento.tipo == 'RECEITA'"
+                      jhiTranslate="{{'jnsFinanceiroApp.Tipo.' + lancamento.tipo}}">{{lancamento.tipo}}
+                </span>
+
+            </div>
+        </div>
+
+        <hr>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+
+            <div class="col-sm-12 col-md-3">
+                <dl class="row-md jh-entity-details">
+                    <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.data">Data</span></dt>
+                    <dd>
+                        <span>{{lancamento.data | date: 'dd/MM/yyyy'}}</span>
+                    </dd>
+
+                    <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.descricao">Descricao</span></dt>
+                    <dd>
+                        <span>{{lancamento.descricao}}</span>
+                    </dd>
+                    <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.valor">Valor</span></dt>
+                    <dd>
+                        <span>R$ {{lancamento.valor | number:'1.2-2'}}</span>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="col-sm-12 col-md-3">
+                <dl>
+                    <dt><span
+                        jhiTranslate="jnsFinanceiroApp.pagamento.dataPrimeiroVencimento">Data Primeiro Vencimento</span>
+                    </dt>
+                    <dd><span>{{lancamento.pagamento.dataPrimeiroVencimento | date: 'dd/MM/yyyy'}}</span></dd>
+
+                    <dt *ngIf="lancamento.pagamento.quantidadeParcelas > 1"><span
+                        jhiTranslate="jnsFinanceiroApp.pagamento.quantidadeParcelas">Quantidade Parcelas</span></dt>
+                    <dd *ngIf="lancamento.pagamento.quantidadeParcelas > 1">
+                        <span>{{lancamento.pagamento.quantidadeParcelas}}</span>
+                    </dd>
+
+                    <!--<dt><span jhiTranslate="jnsFinanceiroApp.lancamento.tipo">Tipo</span></dt>-->
+                    <!--<dd>-->
+                    <!--<span-->
+                    <!--jhiTranslate="{{'jnsFinanceiroApp.Tipo.' + lancamento.tipo}}">{{lancamento.tipo}}</span>-->
+                    <!--</dd>-->
+                    <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.pagamento">Pagamento</span></dt>
+                    <dd>
+                        <div *ngIf="lancamento.pagamentoId">
+                            <a [routerLink]="['/pagamento', lancamento.pagamentoId, 'view']">{{lancamento.pagamentoTipoPagamento}}</a>
+                        </div>
+                    </dd>
+
+                </dl>
+            </div>
+
+            <div class="col-sm-12 col-md-3">
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.status">Status</span></dt>
                 <dd>
-                    <span>{{lancamento.data}}</span>
+                        <span *ngIf="lancamento.pagamento.status === 'PENDENTE'" class="badge badge-pill badge-info"
+                            jhiTranslate="{{'jnsFinanceiroApp.Status.' + lancamento.pagamento.status}}">{{lancamento.pagamento.status}}
+                        </span>
+                    <span *ngIf="lancamento.pagamento.status === 'PAGO'" class="badge badge-pill badge-success"
+                          jhiTranslate="{{'jnsFinanceiroApp.Status.' + lancamento.pagamento.status}}">{{lancamento.pagamento.status}}
+                        </span>
+                    <span *ngIf="lancamento.pagamento.status === 'CANCELADO'" class="badge badge-pill badge-warning"
+                          jhiTranslate="{{'jnsFinanceiroApp.Status.' + lancamento.pagamento.status}}">{{lancamento.pagamento.status}}
+                        </span>
                 </dd>
-                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.nome">Nome</span></dt>
+
+                <dt><span jhiTranslate="jnsFinanceiroApp.pagamento.formaPag">Forma Pag</span></dt>
+                <!--<dt><span jhiTranslate="jnsFinanceiroApp.pagamento.dataPrimeiroVencimento">Data Primeiro Vencimento</span></dt>-->
                 <dd>
-                    <span>{{lancamento.nome}}</span>
+                        <span
+                            jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + lancamento.pagamento.formaPag}}">{{lancamento.pagamento.formaPag}}</span>
                 </dd>
-                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.descricao">Descricao</span></dt>
-                <dd>
-                    <span>{{lancamento.descricao}}</span>
-                </dd>
-                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.valor">Valor</span></dt>
-                <dd>
-                    <span>{{lancamento.valor}}</span>
-                </dd>
-                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.tipo">Tipo</span></dt>
-                <dd>
-                    <span jhiTranslate="{{'jnsFinanceiroApp.Tipo.' + lancamento.tipo}}">{{lancamento.tipo}}</span>
-                </dd>
-                <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.pagamento">Pagamento</span></dt>
-                <dd>
-                    <div *ngIf="lancamento.pagamentoId">
-                        <a [routerLink]="['/pagamento', lancamento.pagamentoId, 'view']">{{lancamento.pagamentoTipoPagamento}}</a>
-                    </div>
-                </dd>
+
+
+            </div>
+
+            <div class="col-sm-12 col-md-3">
                 <dt><span jhiTranslate="jnsFinanceiroApp.lancamento.fornecedor">Fornecedor</span></dt>
                 <dd>
                     <div *ngIf="lancamento.fornecedorId">
@@ -43,19 +108,146 @@
                         <a [routerLink]="['/categoria', lancamento.categoriaId, 'view']">{{lancamento.categoriaNome}}</a>
                     </div>
                 </dd>
-            </dl>
+            </div>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/lancamento', lancamento.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
         </div>
+        <hr>
+
+        <!--PARCELAS-->
+        <div class="row">
+            <h2 id="page-heading">
+                <span class="text-primary"><fa-icon [icon]="faPag" class="fa"></fa-icon></span>
+                <span jhiTranslate="jnsFinanceiroApp.parcela.home.title">Parcelas</span>
+            </h2>
+            <div class="table-responsive" *ngIf="parcelas">
+                <table class="table table-striped">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
+                        <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>-->
+                        <!--<fa-icon [icon]="'sort'"></fa-icon>-->
+                        <!--</th>-->
+                        <th jhiSortBy="dataVencimento"><span jhiTranslate="jnsFinanceiroApp.parcela.dataVencimento">Data Vencimento</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <!--<th jhiSortBy="dataPagamento"><span-->
+                        <!--jhiTranslate="jnsFinanceiroApp.parcela.dataPagamento">Data Pagamento</span>-->
+                        <!--<fa-icon [icon]="'sort'"></fa-icon>-->
+                        <!--</th>-->
+                        <th jhiSortBy="numero"  class="text-center"><span jhiTranslate="jnsFinanceiroApp.parcela.numero">Numero</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th jhiSortBy="valor" class="text-right"><span jhiTranslate="jnsFinanceiroApp.parcela.valor">Valor</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th></th>
+                        <!--<th jhiSortBy="status"><span jhiTranslate="jnsFinanceiroApp.parcela.status">Status</span>-->
+                            <!--<fa-icon [icon]="'sort'"></fa-icon>-->
+                        <!--</th>-->
+                        <!--<th jhiSortBy="cartaoNome"><span jhiTranslate="jnsFinanceiroApp.parcela.cartao">Cartao</span>-->
+                            <!--<fa-icon [icon]="'sort'"></fa-icon>-->
+                        <!--</th>-->
+                        <th jhiSortBy="pagamentoFormaPag"><span
+                            jhiTranslate="jnsFinanceiroApp.parcela.pagamento">Pagamento</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let parcela of parcelas ;trackBy: trackId">
+                        <td>
+                            <dl>
+                                <dt class="text-info">Vencimento:</dt>
+                                <dt class="text-dark">{{parcela.dataVencimento | date:'dd/MM/yyyy'}}</dt>
+                                <dt class="text-primary">Pagamento:</dt>
+                                <dt class="text-dark">{{parcela.dataPagamento | date:'dd/MM/yyyy'}}</dt>
+                            </dl>
+
+
+                        </td>
+                        <td class="text-center">{{parcela.numero}}/{{parcela.totalParc}}
+                        </td>
+                        <td class="text-right">
+                            <div>{{parcela.valor | number:'1.2-2'}}</div>
+                            <div>{{parcela.juros | number:'1.2-2'}}</div>
+                            <div>{{parcela.total | number:'1.2-2'}}</div>
+                        </td>
+                        <td>
+                            <span *ngIf="parcela.status === 'PENDENTE'" class="badge badge-pill badge-info" jhiTranslate="{{'jnsFinanceiroApp.Status.' + parcela.status}}">{{parcela.status}}></span>
+
+                            <span *ngIf="parcela.status === 'PAGO'" class="badge badge-pill badge-success" jhiTranslate="{{'jnsFinanceiroApp.Status.' + parcela.status}}">{{parcela.status}}></span>
+                            <span *ngIf="parcela.status === 'CANCELADO'" class="badge badge-pill badge-warning" jhiTranslate="{{'jnsFinanceiroApp.Status.' + parcela.status}}">{{parcela.status}}></span>
+
+                        </td>
+
+                        <td>
+                            <div *ngIf="parcela.pagamentoId">
+
+                                <span *ngIf="parcela.pagamentoFormaPag === 'CREDITO'" class="text-primary font-weight-bold"
+                                    jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + parcela.pagamentoFormaPag}}">
+                                </span>
+                                <span *ngIf="parcela.pagamentoFormaPag === 'DINHEIRO'" class="text-success font-weight-bold"
+                                             jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + parcela.pagamentoFormaPag}}">
+                                </span>
+                                <span *ngIf="parcela.pagamentoFormaPag === 'DEBITO'" class="text-info font-weight-bold
+"
+                                      jhiTranslate="{{'jnsFinanceiroApp.FormaPagamento.' + parcela.pagamentoFormaPag}}">{{parcela.pagamentoFormaPag}}
+                                </span>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            <div *ngIf="parcela.cartaoId">
+                                <a [routerLink]="['../cartao', parcela.cartaoId , 'view' ]">
+                                    {{parcela.cartaoNome}}
+                                </a>
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <!--<button type="submit"-->
+                                        <!--[routerLink]="['/parcela', parcela.id, 'view' ]"-->
+                                        <!--class="btn btn-info btn-sm">-->
+                                    <!--<fa-icon [icon]="'eye'"></fa-icon>-->
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
+                                <!--</button>-->
+                                <button type="submit" *ngIf="parcela.status != 'PAGO'"
+                                        [routerLink]="['/parcela', parcela.id, 'edit']"
+                                        class="btn btn-light btn-sm" ngbTooltip="Pagar">
+                                    <fa-icon class="h5" [icon]="faPay"></fa-icon>
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.pay">Edit</span>-->
+                                </button>
+                                <!--<button type="submit"-->
+                                <!--[routerLink]="['/', { outlets: { popup: 'parcela/'+ parcela.id + '/delete'} }]"-->
+                                <!--replaceUrl="true"-->
+                                <!--queryParamsHandling="merge"-->
+                                <!--class="btn btn-danger btn-sm">-->
+                                <!--<fa-icon [icon]="'times'"></fa-icon>-->
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
+                                <!--</button>-->
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <hr>
+        <button type="submit"
+                (click)="previousState()"
+                class="btn btn-info">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </button>
+
+        <button type="button"
+                [routerLink]="['/lancamento', lancamento.id, 'edit']"
+                class="btn btn-primary">
+            <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+        </button>
     </div>
+
+</div>
 </div>

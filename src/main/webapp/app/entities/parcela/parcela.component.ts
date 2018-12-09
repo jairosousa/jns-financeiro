@@ -1,14 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { IParcela } from 'app/shared/model/parcela.model';
 import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ParcelaService } from './parcela.service';
+import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'jhi-parcela',
@@ -30,6 +31,7 @@ export class ParcelaComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    faPag = faHandHoldingUsd;
 
     constructor(
         private parcelaService: ParcelaService,
@@ -162,6 +164,7 @@ export class ParcelaComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.parcelas = data;
+        console.log(this.parcelas);
     }
 
     private onError(errorMessage: string) {

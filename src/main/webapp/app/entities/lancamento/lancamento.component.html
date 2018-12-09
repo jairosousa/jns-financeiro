@@ -7,9 +7,9 @@
         <span jhiTranslate="jnsFinanceiroApp.lancamento.home.title">Lancamentos</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-lancamento" [routerLink]="['/lancamento/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="d-none d-md-inline"  jhiTranslate="jnsFinanceiroApp.lancamento.home.adicionar">
-            Create new Lancamento
-            </span>
+            <!--<span class="d-none d-md-inline"  jhiTranslate="jnsFinanceiroApp.lancamento.home.adicionar">-->
+            <!--Create new Lancamento-->
+            <!--</span>-->
         </button>
     </h2>
     <jhi-alert></jhi-alert>
@@ -37,8 +37,9 @@
             <!--<th jhiSortBy="data"><span jhiTranslate="jnsFinanceiroApp.lancamento.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="nome" colspan="5"><span jhiTranslate="jnsFinanceiroApp.lancamento.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <!--<th jhiSortBy="descricao"><span jhiTranslate="jnsFinanceiroApp.lancamento.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th class="text-center" jhiSortBy="tipo"><span jhiTranslate="jnsFinanceiroApp.lancamento.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th class="text-center" jhiSortBy="tipo"><span jhiTranslate="jnsFinanceiroApp.lancamento.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th class="text-center" class="text-right" jhiSortBy="valor"><span jhiTranslate="jnsFinanceiroApp.lancamento.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th></th>
             <th class="text-center" jhiSortBy="pagamentoTipoPagamento"><span jhiTranslate="jnsFinanceiroApp.lancamento.pagamento">Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fornecedorNome"><span jhiTranslate="jnsFinanceiroApp.lancamento.fornecedor">Fornecedor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="categoriaNome"><span jhiTranslate="jnsFinanceiroApp.lancamento.categoria">Categoria</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -49,10 +50,11 @@
             <tr *ngFor="let lancamento of lancamentos ;trackBy: trackId">
                 <!--<td><a [routerLink]="['/lancamento', lancamento.id, 'view' ]">{{lancamento.id}}</a></td>-->
                 <td colspan="5">
-                    <div class="h5">{{lancamento.nome}}</div>
+                    <div class="h5">{{lancamento.nome | capitalLetter}}</div>
                     <div class="badge badge-secondary">{{lancamento.data | date:'dd/MM/yyyy'}}</div>
                     <div class="font-weight-light font-italic">{{lancamento.descricao}}</div>
                 </td>
+                <td class="text-right"><span class="h5">{{lancamento.valor | number:'1.2-2'}}</span></td>
                 <td class="text-center">
                     <div class="badge badge-pill"
                          [class.badge-danger]="lancamento.tipo == 'DESPESA' "
@@ -61,7 +63,6 @@
                     </div>
                 </td>
 
-                <td class="text-right"><span class="h5"  [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{lancamento.valor | number:'1.2-2'}}</span></td>
 
                 <td class="text-center">
                     <div *ngIf="lancamento.pagamentoId">
@@ -90,13 +91,13 @@
                                 [routerLink]="['/lancamento', lancamento.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
                         </button>
                         <button type="submit"
                                 [routerLink]="['/lancamento', lancamento.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'lancamento/'+ lancamento.id + '/delete'} }]"
@@ -104,7 +105,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
                         </button>
                     </div>
                 </td>

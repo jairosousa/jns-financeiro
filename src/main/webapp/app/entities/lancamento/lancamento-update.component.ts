@@ -52,7 +52,7 @@ export class LancamentoUpdateComponent implements OnInit {
         this.pagamentoService.query({ filter: 'lancamento-is-null' }).subscribe(
             (res: HttpResponse<IPagamento[]>) => {
                 if (!this.lancamento.pagamentoId) {
-                    this.lancamento.tipo = Tipo.RECEITA;
+                    this.lancamento.tipo = Tipo.DESPESA;
                     this.lancamento.data = moment();
                     this.pagamento = {};
                     this.pagamento.tipoPagamento = TipoPagamento.AVISTA;

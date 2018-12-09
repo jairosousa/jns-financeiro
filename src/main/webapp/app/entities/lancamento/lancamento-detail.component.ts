@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ILancamento } from 'app/shared/model/lancamento.model';
+import { IParcela } from 'app/shared/model/parcela.model';
+import { ParcelaService } from 'app/entities/parcela';
+import { HttpResponse } from '@angular/common/http';
+import { faCheckCircle, faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'jhi-lancamento-detail',
@@ -9,13 +13,24 @@ import { ILancamento } from 'app/shared/model/lancamento.model';
 })
 export class LancamentoDetailComponent implements OnInit {
     lancamento: ILancamento;
+    parcelas: IParcela[];
 
-    constructor(private activatedRoute: ActivatedRoute) {}
+    faPag = faHandHoldingUsd;
+
+    faPay = faCheckCircle;
+
+    constructor(private activatedRoute: ActivatedRoute, private parcelaService: ParcelaService) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ lancamento }) => {
             this.lancamento = lancamento;
+            this.parcelas = lancamento.pagamento.parcelas;
+            console.log(this.lancamento);
         });
+    }
+
+    trackId(index: number, item: IParcela) {
+        return item.id;
     }
 
     previousState() {

@@ -60,4 +60,5 @@ public interface PagamentoService {
      * @return the list of entities
      */
     Page<PagamentoDTO> search(String query, Pageable pageable);
+
 }
