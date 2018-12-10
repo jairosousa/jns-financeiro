@@ -39,7 +39,6 @@ public class PagamentoDTO implements Serializable {
 
     private String lancamentoNome;
 
-    private Set<ParcelaDTO> parcelas = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -103,14 +102,6 @@ public class PagamentoDTO implements Serializable {
 
     public void setLancamentoNome(String lancamentoNome) {
         this.lancamentoNome = lancamentoNome;
-    }
-
-    public Set<ParcelaDTO> getParcelas() {
-        return parcelas;
-    }
-
-    public void setParcelas(Set<ParcelaDTO> parcelas) {
-        this.parcelas = parcelas;
     }
 
     @Override

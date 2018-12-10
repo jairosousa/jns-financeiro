@@ -16,7 +16,7 @@ public interface PagamentoMapper extends EntityMapper<PagamentoDTO, Pagamento> {
     @Mapping(source = "lancamento.nome", target = "lancamentoNome")
     PagamentoDTO toDto(Pagamento pagamento);
 
-    @Mapping(target = "parcelas", ignore = false)
+    @Mapping(target = "parcelas", ignore = true)
     @Mapping(target = "lancamento", ignore = true)
     Pagamento toEntity(PagamentoDTO pagamentoDTO);
 

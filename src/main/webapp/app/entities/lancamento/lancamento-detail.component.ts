@@ -24,8 +24,9 @@ export class LancamentoDetailComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ lancamento }) => {
             this.lancamento = lancamento;
-            this.parcelas = lancamento.pagamento.parcelas;
-            console.log(this.lancamento);
+        });
+        this.parcelaService.findByPagamento(this.lancamento.pagamentoId).subscribe((res: HttpResponse<IParcela[]>) => {
+            this.parcelas = res.body;
         });
     }
 
