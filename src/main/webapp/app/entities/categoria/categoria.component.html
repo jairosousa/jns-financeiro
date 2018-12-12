@@ -6,11 +6,11 @@
     <h2 id="page-heading">
         <span class="text-primary"><fa-icon [icon]="faCat" class="fa"></fa-icon></span>
         <span jhiTranslate="jnsFinanceiroApp.categoria.home.title">Categorias</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-categoria" [routerLink]="['/categoria/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-categoria" [routerLink]="['/categoria/new']" ngbTooltip="Nova categoria">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="d-none d-md-inline"  jhiTranslate="jnsFinanceiroApp.categoria.home.adicionar">
-            Create new Categoria
-            </span>
+            <!--<span class="d-none d-md-inline"  jhiTranslate="jnsFinanceiroApp.categoria.home.adicionar">-->
+            <!--Create new Categoria-->
+            <!--</span>-->
         </button>
     </h2>
     <jhi-alert></jhi-alert>
@@ -19,7 +19,7 @@
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
                     <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jnsFinanceiroApp.categoria.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)" ngbTooltip="Pesquisar">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
                     <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
@@ -49,23 +49,24 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/categoria', categoria.id, 'view' ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-info btn-sm" ngbTooltip="Visualizar">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
                         </button>
                         <button type="submit"
                                 [routerLink]="['/categoria', categoria.id, 'edit']"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-primary btn-sm" ngbTooltip="Editar">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'categoria/'+ categoria.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
+                                class="btn btn-danger btn-sm"
+                                ngbTooltip="Excluir">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
                         </button>
                     </div>
                 </td>
