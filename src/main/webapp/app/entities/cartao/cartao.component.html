@@ -7,11 +7,11 @@
         <span class="text-primary"><fa-icon [icon]="faCard"></fa-icon></span>
         <span jhiTranslate="jnsFinanceiroApp.cartao.home.title">Cartaos</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cartao"
-                [routerLink]="['/cartao/new']">
+                [routerLink]="['/cartao/new']" ngbTooltip="Novo Cartão">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="d-none d-md-inline" jhiTranslate="jnsFinanceiroApp.cartao.home.adicionar">
-            Create new Cartao
-            </span>
+            <!--<span class="d-none d-md-inline" jhiTranslate="jnsFinanceiroApp.cartao.home.adicionar">-->
+            <!--Create new Cartao-->
+            <!--</span>-->
         </button>
     </h2>
 
@@ -23,7 +23,7 @@
                     <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
                            name="currentSearch" placeholder="{{ 'jnsFinanceiroApp.cartao.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon [icon]="'search'"></fa-icon>
+                        <fa-icon [icon]="'search'" ngbTooltip="Pesquisar"></fa-icon>
                     </button>
                     <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
@@ -67,25 +67,25 @@
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/cartao', cartao.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
+                        <!--<button type="submit"-->
+                                <!--[routerLink]="['/cartao', cartao.id, 'view' ]"-->
+                                <!--class="btn btn-info btn-sm" ngbTooltip="Visualizar">-->
+                            <!--<fa-icon [icon]="'eye'"></fa-icon>-->
+                            <!--&lt;!&ndash;<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>&ndash;&gt;-->
+                        <!--</button>-->
                         <button type="submit"
                                 [routerLink]="['/cartao', cartao.id, 'edit']"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-primary btn-sm" ngbTooltip="Editar">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'cartao/'+ cartao.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
+                                class="btn btn-danger btn-sm" ngbTooltip="Excluir">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
                         </button>
                     </div>
                 </td>
