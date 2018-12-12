@@ -18,6 +18,7 @@
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <!--<h2 id="jhi-fornecedor-heading" jhiTranslate="jnsFinanceiroApp.fornecedor.home.createOrEditLabel">Create or edit a Fornecedor</h2>-->
             <div>
+                <jhi-alert></jhi-alert>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="true">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
