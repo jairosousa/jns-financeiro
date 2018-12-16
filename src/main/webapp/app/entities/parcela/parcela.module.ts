@@ -11,11 +11,12 @@ import {
     parcelaRoute,
     parcelaPopupRoute
 } from './';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 const ENTITY_STATES = [...parcelaRoute, ...parcelaPopupRoute];
 
 @NgModule({
-    imports: [JnsFinanceiroSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [JnsFinanceiroSharedModule, RouterModule.forChild(ENTITY_STATES), CurrencyMaskModule],
     declarations: [
         ParcelaComponent,
         ParcelaDetailComponent,

@@ -7,6 +7,7 @@
                 <span class="text-primary font-weight-bold" *ngIf="item.currentAction == 'new'" [jhiTranslate]="translate(item.text, item.currentAction)">Create or edit </span>
                 <span class="text-primary font-weight-bold" *ngIf="item.currentAction == 'edit'" [jhiTranslate]="translate(item.text, item.currentAction)">Create or edit </span>
                 <span class="text-primary font-weight-bold" *ngIf="item.currentAction == ''" [jhiTranslate]="translate(item.text, item.currentAction)">Create or edit </span>
+                <span class="text-primary font-weight-bold" *ngIf="item.currentAction == 'pagamento'" [jhiTranslate]="translate(item.text, item.currentAction)">Create or edit </span>
             </span>
             <a *ngIf="!isThelastItem(item)" [routerLink]="item.link">{{item.text}}</a>
         </li>

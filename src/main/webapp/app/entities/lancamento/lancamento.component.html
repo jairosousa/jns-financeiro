@@ -5,7 +5,8 @@
     <h2 id="page-heading">
         <span class="text-primary"><fa-icon [icon]="faLanc" class="fa"></fa-icon></span>
         <span jhiTranslate="jnsFinanceiroApp.lancamento.home.title">Lancamentos</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-lancamento" [routerLink]="['/lancamento/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-lancamento" [routerLink]="['/lancamento/new']"
+                ngbTooltip="Novo Lançamento">
             <fa-icon [icon]="'plus'"></fa-icon>
             <!--<span class="d-none d-md-inline"  jhiTranslate="jnsFinanceiroApp.lancamento.home.adicionar">-->
             <!--Create new Lancamento-->
@@ -18,7 +19,7 @@
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
                     <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jnsFinanceiroApp.lancamento.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)" ngbTooltip="Pesquisar">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
                     <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
@@ -89,13 +90,13 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/lancamento', lancamento.id, 'view' ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-info btn-sm" ngbTooltip="Visualizar">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
                         </button>
                         <button type="submit"
                                 [routerLink]="['/lancamento', lancamento.id, 'edit']"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-primary btn-sm" ngbTooltip="Editar">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
                         </button>
@@ -103,7 +104,8 @@
                                 [routerLink]="['/', { outlets: { popup: 'lancamento/'+ lancamento.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
+                                class="btn btn-danger btn-sm"
+                                ngbTooltip="Excluir">
                             <fa-icon [icon]="'times'"></fa-icon>
                             <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
                         </button>

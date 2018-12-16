@@ -1,83 +1,154 @@
-<div class="row justify-content-center">
-    <div class="col-8">
+<div class="justify-content-center">
+    <div class="container">
+
+        <jhi-bread-crumb
+            [items]="[{text: 'Lançamentos', link: '/lancamento'}, {text: 'parcela', currentAction: currentAction}]"
+        ></jhi-bread-crumb>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <h1 class="h2 border-left pl-2">
+                    <h2 id="jhi-parcela-heading" jhiTranslate="jnsFinanceiroApp.parcela.home.editLabel">Create or edit a
+                        Parcela</h2>
+                </h1>
+            </div>
+
+        </div>
+
+        <div class="app-loading" *ngIf="isSaving">
+            <div class="lds-css ng-scope">
+                <div class="lds-pacman">
+                    <div><div></div><div></div><div></div></div>
+                    <div><div></div><div></div><div></div></div>
+                </div>
+            </div>
+        </div>
+
+
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-parcela-heading" jhiTranslate="jnsFinanceiroApp.parcela.home.createOrEditLabel">Create or edit a Parcela</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!parcela.id">
+                <div class="form-group" [hidden]="true">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="parcela.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.dataVencimento" for="field_dataVencimento">Data Vencimento</label>
-                    <div class="input-group">
-                        <input id="field_dataVencimento" type="text" class="form-control" name="dataVencimento" ngbDatepicker  #dataVencimentoDp="ngbDatepicker" [(ngModel)]="parcela.dataVencimento"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataVencimentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.dataPagamento" for="field_dataPagamento">Data Pagamento</label>
-                    <div class="input-group">
-                        <input id="field_dataPagamento" type="text" class="form-control" name="dataPagamento" ngbDatepicker  #dataPagamentoDp="ngbDatepicker" [(ngModel)]="parcela.dataPagamento"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataPagamentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.numero" for="field_numero">Numero</label>
-                    <input type="number" class="form-control" name="numero" id="field_numero"
-                           [(ngModel)]="parcela.numero" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.valor" for="field_valor">Valor</label>
-                    <input type="number" class="form-control" name="valor" id="field_valor"
-                           [(ngModel)]="parcela.valor" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.juros" for="field_juros">Juros</label>
-                    <input type="number" class="form-control" name="juros" id="field_juros"
-                           [(ngModel)]="parcela.juros" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.total" for="field_total">Total</label>
-                    <input type="number" class="form-control" name="total" id="field_total"
-                           [(ngModel)]="parcela.total" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.status" for="field_status">Status</label>
-                    <select class="form-control" name="status" [(ngModel)]="parcela.status" id="field_status" >
-                        <option value="PAGO">{{'jnsFinanceiroApp.Status.PAGO' | translate}}</option>
-                        <option value="PENDENTE">{{'jnsFinanceiroApp.Status.PENDENTE' | translate}}</option>
-                        <option value="CANCELADO">{{'jnsFinanceiroApp.Status.CANCELADO' | translate}}</option>
-                    </select>
+                           [(ngModel)]="parcela.id" readonly/>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.cartao" for="field_cartao">Cartao</label>
-                    <select class="form-control" id="field_cartao" name="cartao" [(ngModel)]="parcela.cartaoId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="cartaoOption.id" *ngFor="let cartaoOption of cartaos; trackBy: trackCartaoById">{{cartaoOption.nome}}</option>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group col-4 col-md-2">
+                        <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.numero"
+                               for="field_numero">Numero</label>
+                        <input type="number" class="form-control bg-primary text-light font-weight-bold text-center" name="numero" id="field_numero" disabled
+                               [(ngModel)]="parcela.numero"/>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.dataVencimento"
+                               for="field_dataVencimento">Data Vencimento</label>
+                        <div class="input-group">
+                            <input id="field_dataVencimento" type="text" class="form-control text-right" name="dataVencimento"
+                                   ngbDatepicker #dataVencimentoDp="ngbDatepicker" [(ngModel)]="parcela.dataVencimento"
+                            />
+                            <span class="input-group-append">
+                            <button type="button" class="btn btn-primary" (click)="dataVencimentoDp.toggle()"><fa-icon
+                                [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.dataPagamento"
+                               for="field_dataPagamento">Data Pagamento</label>
+                        <div class="input-group">
+                            <input id="field_dataPagamento" type="text" class="form-control text-right" name="dataPagamento"
+                                   ngbDatepicker #dataPagamentoDp="ngbDatepicker" [(ngModel)]="parcela.dataPagamento"
+                            />
+                            <span class="input-group-append">
+                            <button type="button" class="btn btn-primary" (click)="dataPagamentoDp.toggle()"><fa-icon
+                                [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.pagamento" for="field_pagamento">Pagamento</label>
-                    <select class="form-control" id="field_pagamento" name="pagamento" [(ngModel)]="parcela.pagamentoId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="pagamentoOption.id" *ngFor="let pagamentoOption of pagamentos; trackBy: trackPagamentoById">{{pagamentoOption.formaPag}}</option>
-                    </select>
+
+                <div class="row">
+
+                    <div class="form-group col-sm col-md-4">
+                        <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.valor"
+                               for="field_valor">Valor</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary text-light font-weight-bold text-center">R$</span>
+                            </div>
+                            <input type="text" class="form-control text-right" name="valor" id="field_valor"
+                                   currencyMask [options]="{ prefix: ' ', thousands: '.', decimal: ',' }"
+                                   [(ngModel)]="parcela.valor"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm col-md-4">
+                        <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.juros"
+                               for="field_juros">Juros</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary text-light font-weight-bold text-center">R$</span>
+                            </div>
+                            <input type="text" class="form-control text-right" name="juros" id="field_juros"
+                                   (blur)="atualizarTotal()"
+                                   currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                   [(ngModel)]="parcela.juros"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm col-md-4">
+                        <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.total"
+                               for="field_total">Total</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary text-light font-weight-bold text-center">R$</span>
+                            </div>
+                            <input type="text" class="form-control text-right" name="total" id="field_total"
+                                   currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                   [(ngModel)]="parcela.total"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.status"
+                               for="field_status">Status</label>
+                        <select class="form-control text-light font-weight-bold" [ngClass]="parcela.status === 'PENDENTE' ? 'bg-primary' : parcela.status === 'PAGO' ? 'bg-success' : 'bg-danger'" name="status" [(ngModel)]="parcela.status" id="field_status"
+                                disabled>
+                            <option value="PAGO">{{'jnsFinanceiroApp.Status.PAGO' | translate}}</option>
+                            <option value="PENDENTE">{{'jnsFinanceiroApp.Status.PENDENTE' | translate}}</option>
+                            <option value="CANCELADO">{{'jnsFinanceiroApp.Status.CANCELADO' | translate}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.cartao"
+                               for="field_cartao">Cartao</label>
+                        <select class="form-control" id="field_cartao" name="cartao" [(ngModel)]="parcela.cartaoId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="cartaoOption.id"
+                                    *ngFor="let cartaoOption of cartaos; trackBy: trackCartaoById">{{cartaoOption.nome}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="form-control-label" jhiTranslate="jnsFinanceiroApp.parcela.pagamento"
+                               for="field_pagamento">Pagamento</label>
+                        <select class="form-control" id="field_pagamento" name="pagamento"
+                                [(ngModel)]="parcela.pagamentoId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="pagamentoOption.id"
+                                    *ngFor="let pagamentoOption of pagamentos; trackBy: trackPagamentoById">{{pagamentoOption.formaPag}}</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
+                        class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

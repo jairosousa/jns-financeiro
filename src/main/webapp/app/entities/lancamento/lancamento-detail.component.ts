@@ -5,7 +5,7 @@ import { ILancamento } from 'app/shared/model/lancamento.model';
 import { IParcela } from 'app/shared/model/parcela.model';
 import { ParcelaService } from 'app/entities/parcela';
 import { HttpResponse } from '@angular/common/http';
-import { faCheckCircle, faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faHandHoldingUsd, faMoneyCheckAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'jhi-lancamento-detail',
@@ -17,7 +17,7 @@ export class LancamentoDetailComponent implements OnInit {
 
     faPag = faHandHoldingUsd;
 
-    faPay = faCheckCircle;
+    faPay = faMoneyCheckAlt;
 
     constructor(private activatedRoute: ActivatedRoute, private parcelaService: ParcelaService) {}
 

@@ -1,18 +1,16 @@
 package br.com.jns.financeiro.domain;
 
+import br.com.jns.financeiro.domain.enumeration.Status;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
-
-import br.com.jns.financeiro.domain.enumeration.Status;
 
 /**
  * A Parcela.
@@ -62,10 +60,11 @@ public class Parcela implements Serializable {
     public Parcela() {
     }
 
-    public Parcela(LocalDate dataVencimento, Long numero, BigDecimal valor, Status status, Pagamento pagamento) {
+    public Parcela(LocalDate dataVencimento, Long numero, BigDecimal valor, BigDecimal juros, Status status, Pagamento pagamento) {
         this.dataVencimento = dataVencimento;
         this.numero = numero;
         this.valor = valor;
+        this.juros = juros;
         this.status = status;
         this.pagamento = pagamento;
     }

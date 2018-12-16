@@ -4,7 +4,7 @@
             "home": {
                 "title": "Pagamentos",
                 "createLabel": "Criar novo Pagamento",
-                "createOrEditLabel": "Criar ou editar Pagamento",
+                "editLabel": "Editar Pagamento",
                 "search": "Pesquisar por Pagamento"
             },
             "created": "Um novo Pagamento foi criado com o identificador {{ param }}",

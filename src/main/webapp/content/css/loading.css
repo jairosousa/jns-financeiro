@@ -93,6 +93,7 @@
     align-items: center;
     justify-content: center;
     top: 10em;
+    z-index: initial;
 }
 .app-loading p {
     display: block;

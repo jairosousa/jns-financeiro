@@ -111,6 +111,7 @@ public class LancamentoServiceImpl implements LancamentoService {
                 lancamento.getPagamento().getDataPrimeiroVencimento(),
                 lancamento.getPagamento().getQuantidadeParcelas(),
                 lancamento.getValor(),
+                new BigDecimal(0),
                 Status.PENDENTE,
                 lancamento.getPagamento()
             );
@@ -127,6 +128,7 @@ public class LancamentoServiceImpl implements LancamentoService {
                     dataParc,
                     (long) (i + 1),
                     valorParcela,
+                    new BigDecimal(0),
                     Status.PENDENTE,
                     lancamento.getPagamento()
                 );

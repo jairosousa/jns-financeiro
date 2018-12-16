@@ -26,6 +26,8 @@ export class ParcelaUpdateComponent implements OnInit {
     dataVencimentoDp: any;
     dataPagamentoDp: any;
 
+    currentAction: string;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private parcelaService: ParcelaService,
@@ -36,8 +38,10 @@ export class ParcelaUpdateComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
+        this.setCurrentyAction();
         this.activatedRoute.data.subscribe(({ parcela }) => {
             this.parcela = parcela;
+            this.atualizarTotal();
         });
         this.cartaoService.query().subscribe(
             (res: HttpResponse<ICartao[]>) => {
@@ -51,6 +55,10 @@ export class ParcelaUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+    }
+
+    public atualizarTotal() {
+        this.parcela.total = this.parcela.valor + this.parcela.juros;
     }
 
     previousState() {
@@ -72,7 +80,7 @@ export class ParcelaUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
-        this.previousState();
+        // this.previousState();
     }
 
     private onSaveError() {
@@ -89,5 +97,13 @@ export class ParcelaUpdateComponent implements OnInit {
 
     trackPagamentoById(index: number, item: IPagamento) {
         return item.id;
+    }
+
+    private setCurrentyAction() {
+        if (this.activatedRoute.snapshot.url[1].path === 'new') {
+            this.currentAction = 'new';
+        } else {
+            this.currentAction = 'edit';
+        }
     }
 }
