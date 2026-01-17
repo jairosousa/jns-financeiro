@@ -39,7 +39,7 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@angular/cli": "7.0.2",
+    "@angular/cli": "7.3.10",
     "@angular/compiler-cli": "7.0.0",
     "@ngtools/webpack": "7.0.2",
     "@types/jest": "23.3.5",
@@ -60,7 +60,7 @@
     "html-loader": "0.5.5",
     "html-webpack-plugin": "3.2.0",
     "husky": "1.1.0",
-    "jest": "23.6.0",
+    "jest": "30.2.0",
     "jest-junit": "5.1.0",
     "jest-preset-angular": "6.0.1",
     "jest-sonar-reporter": "2.0.0",
